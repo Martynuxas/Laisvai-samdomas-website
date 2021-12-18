@@ -9,4 +9,5 @@ class Statusas extends Model
 {
     use HasFactory;
     protected $table = 'skelbimo_statusas';
+    public $timestamps = false;
 }

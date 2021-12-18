@@ -9,6 +9,7 @@ class Skelbimas extends Model
 {
     use HasFactory;
     protected $table = 'Skelbimai';
+    public $timestamps = false;
     public function kategorijos()
     {
         return $this->hasOne('App\Models\Kategorija', 'id', 'kategorijos_id');

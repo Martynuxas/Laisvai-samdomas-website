@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{{Session::put('link', '');}}
 <html lang="en">
     <head>
         @extends('layouts.head')

@@ -27,12 +27,12 @@
                 <td>{{$vartotojas->miestas}}</td>
                 <td>{{$vartotojas->created_at}}</td>
                 <td>{{$vartotojas->updated_at}}</td>
-                <td><a class="btn btn-primary" href='vartotojaiEdit/{{$vartotojas->id}}'>
+                <td><a class="btn btn-primary" href='/vartotojaiEdit/{{$vartotojas->id}}'>
                     <span>Redaguoti</span>
                     </a>
                 </td>
                 <td>
-                    <a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteVartotojus/{{$vartotojas->id}}'>
+                    <a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='/deleteVartotojus/{{$vartotojas->id}}'>
                     <span>Pašalinti</span>
                     </a>
                 </td>
@@ -59,40 +59,41 @@
             @endif
             @yield('content')
         </div>
-        <form class="form-style-5"role="form" method="POST" action="submitVartotojus"> 
+        <form class="form-style-5"role="form" method="POST" action="/updateVartotojus"> 
             @csrf   
             <fieldset>
-            <legend><span class="number">1</span> Duomenų pridėjimas</legend>
+            <legend><span class="number">1</span> Duomenų redagavimas</legend>
+            <input type="hidden" name="id" value="{{$data->id}}">
             <label for="katg">Vardas:</label>
-            <input type="text" class="form-control" name="name" value="" placeholder="Vardas">
+            <input type="text" class="form-control" name="name" value="{{$data->name}}" placeholder="Vardas">
             <label for="katg">Pavardė:</label>
-            <input type="text" class="form-control" name="lastname" value="" placeholder="Pavardė">
+            <input type="text" class="form-control" name="lastname" value="{{$data->lastname}}" placeholder="Pavardė">
             <label for="katg">El. paštas:</label>
-            <input type="text" class="form-control" name="email" value="" placeholder="El paštas">
+            <input type="text" class="form-control" name="email" value="{{$data->email}}" placeholder="El paštas">
             <label for="katg">Slaptažodis:</label>
-            <input type="text" class="form-control" name="password" value="" placeholder="Slaptažodis">
+            <input type="text" class="form-control" name="password" value="{{$data->password}}" placeholder="Slaptažodis">
             <label for="katg">Asmens tipas:</label>
                 <select id="name" name="asmens_tipas">
-                    <option selected="true" value="" disabled>Pasirinkite</option>
+                    <option value='{{$data->asmens_tipas}}'>{{$data->asmens_tipas}} </option>
                     <option value="Fizinis">Fizinis</option>
                     <option value="Juridinis">Juridinis</option>
                 </select>  
             <label for="katg">Role:</label>
                 <select id="name" name="role">
-                    <option selected="true" value="" disabled>Pasirinkite</option>
-                    <option value="Klientas">Klientas</option>
+                    <option value='{{$data->role}}'>{{$data->role}} </option>
                     <option value="Administratorius">Administratorius</option>
                     <option value="Moderatorius">Moderatorius</option>
+                    <option value="Klientas">Klientas</option>
                 </select>  
             <label for="katg">Miestas:</label>
                 <select id="name" name="miestas">
-                    <option selected="true" value="" disabled>Pasirinkite</option>
+                    <option value='{{$data->miestas}}'>{{$data->miestas}} </option>
                     <option value="Kaunas">Kaunas</option>
                     <option value="Vilnius">Vilnius</option>
                     <option value="Klaipeda">Klaipėda</option>
                     <option value="Alytus">Alytus</option>
                     <option value="Marijampole">Marijampole</option>
                 </select>  
-            <input type="submit" value="Pridėti" />
+            <input type="submit" value="Redaguoti" />
         </div>
     </div>

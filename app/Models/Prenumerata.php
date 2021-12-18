@@ -9,8 +9,9 @@ class Prenumerata extends Model
 {
     use HasFactory;
     protected $table = 'prenumerata';
+    public $timestamps = false;
     public function kategorijos()
     {
-        return $this->hasOne('App\Models\Kategorija', 'id', 'kategorijos_id');
+        return $this->hasMany('App\Models\Isiminti', 'id', 'vartotojo_id');
     }
 }

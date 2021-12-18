@@ -11,6 +11,7 @@ class Isiminti extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'Isiminti';
+    public $timestamps = false;
     public function isiminti()
     {
         return $this->hasMany(Isiminti::class);

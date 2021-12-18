@@ -9,4 +9,5 @@ class Kategorija extends Model
 {
     use HasFactory;
     protected $table = 'kategorijos';
+    public $timestamps = false;
 }
