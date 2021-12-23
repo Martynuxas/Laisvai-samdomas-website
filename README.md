@@ -1,3 +1,7 @@
+LaisvaiSamdomas.lt – tai yra puslapis kuriame yra du tipai klientų.
+Darbininkas šiame puslapyje gali pateikti kad atlieka tam tikras paslaugas, taip pat gali užsiprenumeruoti kategoriją, kada klientas pateiks užklausą į tam tikrą kategoriją, darbininkas gaus laišką į el. paštą, kad tam tikras žmogus ieško žmogaus/žmonių, kad atliktų darba tam tikroje kategorijoje.
+Klientas gali šiame puslapį teikti užklausas, kuriose nurodo kokiam darbui ieško žmogaus, bei sulaukti pasiūlymų iš darbininkų. Taip pat gali tiesiogiai susirasti darbininką, peržiurėjus visų darbininkų siūlomas paslaugas.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
