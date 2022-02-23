@@ -12,6 +12,6 @@ class Prenumerata extends Model
     public $timestamps = false;
     public function kategorijos()
     {
-        return $this->hasMany('App\Models\Isiminti', 'id', 'vartotojo_id');
+        return $this->hasOne('App\Models\Kategorija', 'id', 'kategorijos_id');
     }
 }
