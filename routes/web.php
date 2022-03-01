@@ -104,3 +104,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('kalendorius', [App\Http\Controllers\FullCalenderController::class, 'index']);
+
+Route::post('kalendorius/action', [App\Http\Controllers\FullCalenderController::class, 'action']);

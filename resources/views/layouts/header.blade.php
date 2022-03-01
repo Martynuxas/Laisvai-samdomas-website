@@ -13,29 +13,30 @@
             </div>
             
             @if (\Illuminate\Support\Facades\Auth::check())
-                <span class="inline-flex rounded-md">
-                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+            
+        <span class="inline-flex rounded-md">
+        <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
 		
 		<p>
-			{{ Auth::user()->name }}<br>
-			
+            <a href="{{ url('/vartotojai') }}">{{ Auth::user()->name }}<br></a>
 			<a href="{{ url('/vartotojai') }}">Valdyti</a> | 
+            <a href="{{ url('/kalendorius') }}">Kalendorius</a> 
 			<a href="{{ url('/logout') }}">Atsijungti</a>
 		</p>
                     </button>
                 </span>
             @else
-            <div class="loginregister">
-                <div class="ml-auto">
-                <div class="row">
+            <div class="row">
                     <div class="column">
-                        <a class="btn btn-custom" href="{{ route('login') }}">Prisijungti</a>
+                            <div class="ml-auto">
+                                <a class="btn btn-custom" href="{{ route('login') }}">Prisijungti</a>
+                            </div>
                     </div>
                     <div class="column">
-                        <a class="btn btn-custom" href="{{ route('register') }}">Registruotis</a>
+                            <div class="ml-auto">
+                                <a class="btn btn-custom" href="{{ route('register') }}">Registruotis</a>
+                            </div>
                     </div>
-                </div>
-                </div>
             </div>
             @endif
         </div>
@@ -67,6 +68,3 @@
         
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         
-        <div id="loader" class="show">
-            <div class="loader"></div>
-        </div>
