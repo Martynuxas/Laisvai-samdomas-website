@@ -3,22 +3,25 @@
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
         </x-slot>
-
+        @extends('layouts.head')
         <x-jet-validation-errors class="mb-4" />
 
         @if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">
                 {{ session('status') }}
             </div>
-        @endif
-
+        @endif   
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
-            <div>
+            <div class="form-group row">
+                <div class="col-md-6 offset-md-3">
+                    <a href="{{route('login.google')}}" class="btn btn-danger btn-block">Login with Google</a>
+                    <a href="{{route('login.facebook')}}" class="btn btn-primary btn-block">Login with Facebook</a>
+                </div>
+            </div>
+            <p style="text-align: center">OR</p>
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />

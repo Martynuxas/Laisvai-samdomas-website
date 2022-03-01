@@ -29,10 +29,7 @@ class VartotojaiController extends Controller
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'max:255'],
-        'lastname' => ['required', 'string', 'max:255'],
-        'name' => 'required|alpha_num',
-        'name' => 'required|alpha_num',
-        'name' => 'required|alpha_num'
+        'lastname' => ['required', 'string', 'max:255']
         ]
         );
     if ($validator->fails())

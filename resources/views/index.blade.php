@@ -5,14 +5,13 @@
     </head>
     <body>
         @include('layouts.header')
-        
         <!-- Slider -->
         <div class="carousel">
                     <div class="container-fluid">
                         <div class="owl-carousel">
                             <div class="carousel-item">
                                 <div class="carousel-img">
-                                    <img src="img/carousel-1.jpg" alt="Image">
+                                    <img src="img/carousel-1.png" alt="Image">
                                 </div>
                                 <div class="carousel-text">
                                     <h3>Greitai rask, kas suteiks paslaugą</h3>
@@ -56,7 +55,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="carousel-img">
-                                    <img src="img/carousel-3.jpg" alt="Image">
+                                    <img src="img/carousel-3.png" alt="Image">
                                 </div>
                                 <div class="carousel-text">
                                     <h3>Greitai rask, kas suteiks paslaugą</h3>
