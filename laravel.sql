@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2021 at 05:23 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- Generation Time: Mar 03, 2022 at 03:51 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `laravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `user_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`user_id`, `id`, `title`, `start`, `end`) VALUES
+(0, 3, 'erter', '2022-03-04 00:00:00', '2022-03-05 00:00:00'),
+(21, 25, 'rtyr', '2022-03-01 00:00:00', '2022-03-01 04:00:00'),
+(21, 26, 'fds', '2022-03-03 03:00:00', '2022-03-03 17:30:00'),
+(22, 28, 'reik kazka veikti', '2022-03-04 00:30:00', '2022-03-04 02:30:00'),
+(22, 29, 'fdsfsdf', '2022-03-01 00:00:00', '2022-03-02 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -54,7 +79,7 @@ CREATE TABLE `isiminti` (
 --
 
 INSERT INTO `isiminti` (`id`, `vartotojo_id`, `skelbimo_id`) VALUES
-(30, 7, 8),
+(30, 7, 2),
 (31, 7, 4);
 
 -- --------------------------------------------------------
@@ -76,7 +101,8 @@ INSERT INTO `kategorijos` (`id`, `pavadinimas`) VALUES
 (1, 'vidaus apdaila'),
 (2, 'lauko darbai'),
 (7, 'test'),
-(8, 'Autos');
+(8, 'Autos'),
+(10, 'test');
 
 -- --------------------------------------------------------
 
@@ -171,9 +197,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('6yYXrYyXnH7WW55qFDOWZEVeYAQQy4JttgCkI9bh', 7, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoieVY5Yk1BNTB0MGhTSUVKWnVhaEV0WlVlZXNOM0xYd29UTHRpYjE1ciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9za2VsYmltYWkiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo3O3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkaGZvTlpaQmJzVUp0a2dJeHd5dFpRT2xCODhhQ01QQ3J3U3ZtQVU0clRraGo5SHA4L1ZzcFciO30=', 1639585628),
-('hsmZi2GsKlThAtvId4MwwD2Q14OZyc8fyYERU0KT', 7, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoicDJ0bUpWWXJzT3RsNFpFY1JvRlNzaFB6N3VFM1ZYc2NzWWZ6T25jeiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9za2VsYmltYWkiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo3O3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkaGZvTlpaQmJzVUp0a2dJeHd5dFpRT2xCODhhQ01QQ3J3U3ZtQVU0clRraGo5SHA4L1ZzcFciO30=', 1639585449),
-('QbCFIZupv1bgAsRqu12wiuS4sqUjkwBV5nWf03rB', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoic2U4Z28yV2FhOUt3UUpFNW13UjFheng2TlVsd0xrNWd4Z09pS3BHayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1640016684);
+('CDY2zKkJlaZyuov1DVWmtfSsV9JftFOEwjmbu6Ee', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSDE2NXRqNkU3Y3FLYklyZTBaZzZiUTZJUDhVeUZUZUxrYlY0b1FPSyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbi9mYWNlYm9vayI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NToic3RhdGUiO3M6NDA6ImlDSWdCWEpiV1pXalBzYkNmRGhjdFkxM3VJeXBha2xmUkRTZ0JBUDYiO30=', 1646310476),
+('rhKTc6YXgphFJ5eLnY6upYbjZBt9E0y8mvO2P68Z', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiRGxaNkZvMHdoUVA1Skt3cURndGN2SWJmVVZKaVRTWXFsdTh6eGZQNCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9wYXNsYXVnb3MiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7Tjt9', 1646318520);
 
 -- --------------------------------------------------------
 
@@ -240,21 +265,27 @@ CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `asmens_tipas` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `miestas` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lastname` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+  `asmens_tipas` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `miestas` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastname` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apie` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `numeris` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`, `asmens_tipas`, `role`, `miestas`, `lastname`) VALUES
-(7, 'Arturassfd', 'martynas.martynas8@gmail.com', '$2y$10$hfoNZZBbsUJtkgIxwytZQOlB88aCMPCrwSvmAU4rTkhj9Hp8/VspW', '2021-12-14 16:29:57', '2021-12-15 13:57:55', 'Fizinis', 'Moderatorius', 'Vilnius', 'Smeletasis');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`, `asmens_tipas`, `role`, `miestas`, `lastname`, `provider_id`, `apie`, `numeris`, `avatar`) VALUES
+(7, 'Arturassfd', 'martynas.martynas8@gmail.com', '$2y$10$hfoNZZBbsUJtkgIxwytZQOlB88aCMPCrwSvmAU4rTkhj9Hp8/VspW', '2021-12-14 16:29:57', '2021-12-15 13:57:55', 'Fizinis', 'Moderatorius', 'Vilnius', 'Smeletasis', '0', NULL, '', 'default.jpg'),
+(21, 'Martynas Kemežys', 'martynas.martynas5@gmail.com', NULL, '2022-03-01 07:31:39', '2022-03-01 07:31:39', 'Fizinis', 'Administratorius', 'Kaunas', NULL, '104820952349998778186', 'Esu Martynas', '867464228', 'default.jpg'),
+(22, 'Martynas Kemežys', 'martynas.kemezys16@gmail.com', NULL, '2022-03-01 08:56:20', '2022-03-03 11:05:46', NULL, NULL, NULL, NULL, '3358590201132536', NULL, '', '1646312746.png');
 
 -- --------------------------------------------------------
 
@@ -286,6 +317,12 @@ INSERT INTO `vartotojai` (`vartotojo_id`, `vardas`, `pavarde`, `el_pastas`, `sla
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -376,6 +413,12 @@ ALTER TABLE `vartotojai`
 --
 
 --
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -391,7 +434,7 @@ ALTER TABLE `isiminti`
 -- AUTO_INCREMENT for table `kategorijos`
 --
 ALTER TABLE `kategorijos`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -427,7 +470,7 @@ ALTER TABLE `skelbimo_statusas`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `vartotojai`
