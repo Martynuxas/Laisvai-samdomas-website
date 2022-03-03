@@ -18,9 +18,8 @@
         <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
 		
 		<p>
-            <a href="{{ url('/vartotojai') }}">{{ Auth::user()->name }}<br></a>
-			<a href="{{ url('/vartotojai') }}">Valdyti</a> | 
-            <a href="{{ url('/kalendorius') }}">Kalendorius</a> 
+            <a href="{{ url('/profilis') }}/{{ Auth::user()->id }}">{{ Auth::user()->name }}<br></a>
+            <a href="{{ url('/kalendorius') }}">Kalendorius</a> |
 			<a href="{{ url('/logout') }}">Atsijungti</a>
 		</p>
                     </button>
@@ -50,7 +49,7 @@
                             </button>
                             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                 <div class="navbar-nav mr-auto">
-                                    <a href="{{ route('ieskoti') }}" class="nav-item nav-link">Ieškoti paslaugų</a>
+                                    <a href="{{ route('paslaugos') }}" class="nav-item nav-link">Ieškoti paslaugų</a>
                                     <a href="{{ route('pasiulymai') }}" class="nav-item nav-link">Gauti pasiūlymus</a>
                                     <a href="{{ route('uzklausa') }}" class="nav-item nav-link">Klientų užklausos</a>
                                     <a href="{{ route('klausti') }}" class="nav-item nav-link">Klausti profesionalų</a>

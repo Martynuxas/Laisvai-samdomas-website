@@ -104,6 +104,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('kalendorius', [App\Http\Controllers\FullCalenderController::class, 'index']);
 
+Route::get('kalendorius', [App\Http\Controllers\FullCalenderController::class, 'index']);
 Route::post('kalendorius/action', [App\Http\Controllers\FullCalenderController::class, 'action']);
+
+Route::post('fileUpload',[App\Http\Controllers\ProfilisEditController::class, 'profilisUpload']);
+Route::get('/profilis/{id}', [App\Http\Controllers\ProfilisController::class, 'index'])->name('profilis');
+Route::get('/profilisEdit', [App\Http\Controllers\ProfilisEditController::class, 'index'])->name('profilisEdit');
+
+Route::get('/paslaugos', [App\Http\Controllers\PaslaugosController::class, 'index'])->name('paslaugos');
