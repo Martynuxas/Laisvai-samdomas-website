@@ -2,59 +2,58 @@
 <html lang="en">
     <head>
         @include('layouts.head')
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/kurti.css') }}">
     </head>
-    <body>
     @include('layouts.header')
-        <!-- Form -->
-        <div class="contact">
-            <div class="container">
-                <div class="section-header text-center">
-                    <p>Puslapio kurimas</p>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="contact-info">
-                            <h2>Informacija</h2>
-                            <div class="contact-info-item">
-                                <div class="contact-info-text">
-                                    <h3>Pradžia</h3>
-                                    <p>Įveskite pagrindinę informaciją. Vėliau galėsite įvesti daugiau informacijos ir ją redaguoti.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="contact-form">
-                            <div id="success"></div>
-                            <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                                <div class="control-group">
-                                    <input type="text" class="form-control" id="name" placeholder="Puslapio antraštė" required="required" data-validation-required-message="Prašome įvesti puslapio antraštę" />
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="control-group">
-                                    <textarea class="form-control" class="form-control" id="subject" placeholder="Trumpas aprašymas" required="required" data-validation-required-message="Prašome įvesti aprašymą"></textarea>
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="control-group">
-                                    <input type="text" class="form-control" id="name" placeholder="Miestas" required="required" data-validation-required-message="Prašome įvesti miestą" />
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="control-group">
-                                    <input type="text" id="name" placeholder="Atstumas" required="required" data-validation-required-message="Prašome įvesti atstumą">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div>
-                                    <button class="btn btn-custom" type="submit" id="sendMessageButton">Tęsti</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <body>
+    <div class="col-12 col-md-9">
+            @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <p>{!! \Session::get('success') !!}</p>
             </div>
+            @endif
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <p>Klaidos:</p>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @yield('content')
         </div>
-        <!-- Form End -->
-        @include('layouts.footer')
+    <div class="container">
+        <form class="form-style-5"role="form" method="POST" action="kurtiUzklausa"> 
+            @csrf  
+            <label for="fname">Per kiek laiko norėtumėte kad būtų atlikta paslauga?</label><br>
+            <select id="laikas" name="laikas">
+                <option value="24 valandos">24 valandos</option>
+                <option value="3 dienos">3 dienos</option>
+                <option value="7 dienos">7 dienos</option>
+                <option value="14 dienų">14 dienų</option>
+                <option value="mėnesis">mėnesis</option>
+                <option value="nesvarbu">nesvarbu</option>
+            </select>
+            <label for="lname">Koks jūsų biudžetas šiai paslaugai?(eur)</label>
+            <input type="text" id="biudzetas" name="biudzetas" placeholder="000">
+            <label for="kategorija">Pasirinkite kategorija:</label>
+            <select id="kategorija" name="kategorija">
+            @foreach($kategorijos as $kategorija)
+            <option value="{{$kategorija->id}}">{{$kategorija->pavadinimas}}</option>
+            @endforeach
+            </select>
+
+            <label for="subject">Apibūdinkite paslauga kurios ieškote, prašome apibūdinti kuo įmanoma detaliau:</label>
+            <textarea id="aprasymas" name="aprasymas" placeholder="Aš ieškau.." style="height:200px"></textarea>
+
+            <input type="submit" value="Patvirtinti užklausa">
+
+        </form>
+    </div>
     </body>
+    @include('layouts.footer')
         <!-- JS Lib -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="js/main.js"></script>

@@ -111,57 +111,6 @@
                     </div>
                 </div>
                 <!-- Blog End --> 
-                <!-- Testimonial -->
-                <div class="testimonial">
-                    <div class="container">
-                        <div class="section-header text-center">
-                            <p>Naujausi atsiliepimai</p>
-                        </div>
-                        <div class="owl-carousel testimonials-carousel">
-                            <div class="testimonial-item">
-                                <img src="img/m.png" alt="Image">
-                                <div class="testimonial-text">
-                                    <h3>Tomas</h3>
-                                    <h4>Elektros darbai</h4>
-                                    <p>
-                                        "Greitai ir patikimai atliktas darbas"
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="testimonial-item">
-                                <img src="img/m.png" alt="Image">
-                                <div class="testimonial-text">
-                                    <h3>Jonas</h3>
-                                    <h4>Apdailos darbai</h4>
-                                    <p>
-                                        "Puikiai profesionaliai atliktas darbas!"
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="testimonial-item">
-                                <img src="img/m.png" alt="Image">
-                                <div class="testimonial-text">
-                                    <h3>Visgirdas</h3>
-                                    <h4>IT sritis</h4>
-                                    <p>
-                                        "Esu visiskai patenkinta logotipu sukurimu! Lengvas bendravimas , greitai pagaunama mintis, viskas lengvai derinama. Puikus lankstumas."
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="testimonial-item">
-                                <img src="img/m.png" alt="Image">
-                                <div class="testimonial-text">
-                                    <h3>Lukas</h3>
-                                    <h4>Transportas</h4>
-                                    <p>
-                                        "Greitai atvyko I ivykio vieta, puikiai atliko savo darba. Dar karta dekoju"
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Testimonial End -->
                 <!-- Facts -->
                 <div class="facts" data-parallax="scroll" data-image-src="img/facts.jpg">
                     <div class="container">

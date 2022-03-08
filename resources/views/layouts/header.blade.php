@@ -1,42 +1,42 @@
-        <!-- Top -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css/dropdown.css') }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Top -->
         <div class="top-bar">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 col-md-12">
                         <div class="logo">
                             <a href="{{ route('home') }}">
                                 <h1>Laisvai<span> Samdomas</span>.lt</h1>
                             </a>
                         </div>
+                </div>        
+            @if (\Illuminate\Support\Facades\Auth::check())
+            <div class="profile-dropdown">
+                <div class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img src="/uploads/avatars/{{Auth::user()->avatar}}" alt="Image" class="rounded-circle" width="50" height="50"> <b style="color: black;">{{ Auth::user()->name }} </b><b class="caret"></b></a>
+                    <div class="dropdown-menu">
+                    <a href="{{ url('/paslauga')}}" class="dropdown-item"><i class="fa fa-user"></i> Sukurti paslauga</a>
+                        <a href="{{ url('/kurti') }}" class="dropdown-item"><i class="fa fa-search"></i> Sukurti užklausą</a>
+                        <a href="{{ url('/profilis') }}/{{ Auth::user()->id }}" class="dropdown-item"><i class="fa fa-user"></i> Profilis</a>
+                        <a href="{{ url('/kalendorius') }}" class="dropdown-item"><i class="fa fa-calendar-o"></i> Kalendorius</a>
+                        <a href="{{ url('/zinutes') }}" class="dropdown-item"><i class="fa fa-envelope"></i> Žinutės</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a href="{{ url('/logout') }}" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Atsijungti</a>
                     </div>
                 </div>
             </div>
-            
-            @if (\Illuminate\Support\Facades\Auth::check())
-            
-        <span class="inline-flex rounded-md">
-        <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
-		
-		<p>
-            <a href="{{ url('/profilis') }}/{{ Auth::user()->id }}">{{ Auth::user()->name }}<br></a>
-            <a href="{{ url('/kalendorius') }}">Kalendorius</a> |
-			<a href="{{ url('/logout') }}">Atsijungti</a>
-		</p>
-                    </button>
-                </span>
             @else
-            <div class="row">
-                    <div class="column">
                             <div class="ml-auto">
                                 <a class="btn btn-custom" href="{{ route('login') }}">Prisijungti</a>
                             </div>
-                    </div>
-                    <div class="column">
                             <div class="ml-auto">
                                 <a class="btn btn-custom" href="{{ route('register') }}">Registruotis</a>
                             </div>
-                    </div>
-            </div>
             @endif
         </div>
         <!-- Top End -->
@@ -56,7 +56,7 @@
                                     <a href="{{ route('kontaktai') }}" class="nav-item nav-link">Kontaktai</a>
                                 </div>
                                 <div class="ml-auto">
-                                    <a class="btn btn-custom" href="{{ route('kurti') }}">Sukurti puslapį</a>
+                                    <a class="btn btn-custom" href="{{ route('kurti') }}">Sukurti užklausą</a>
                             
                                         <a class="btn btn-custom" href="{{ URL::previous() }}">Atgal</a>
                                 </div>

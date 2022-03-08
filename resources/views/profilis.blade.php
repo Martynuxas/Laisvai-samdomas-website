@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/profilis.css') }}">
+
 <head>
 @include('layouts.head')
 </head>

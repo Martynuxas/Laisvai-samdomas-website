@@ -40,6 +40,10 @@ return [
                 'useTLS' => true,
             ],
         ],
+        'options' => [
+            'cluster' => 'eu',
+            'useTLS' => true
+          ],
 
         'ably' => [
             'driver' => 'ably',

@@ -31,10 +31,6 @@ Route::get('/klausti', function () {
     return view('klausti');
 })->name('klausti');
 
-Route::get('/kurti', function () {
-    return view('kurti');
-})->name('kurti');
-
 Route::get('/pasiulymai', function () {
     return view('pasiulymai');
 })->name('pasiulymai');
@@ -105,7 +101,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('kalendorius', [App\Http\Controllers\FullCalenderController::class, 'index']);
+Route::get('/kalendorius', [App\Http\Controllers\FullCalenderController::class, 'index']);
 Route::post('kalendorius/action', [App\Http\Controllers\FullCalenderController::class, 'action']);
 
 Route::post('fileUpload',[App\Http\Controllers\ProfilisEditController::class, 'profilisUpload']);
@@ -113,3 +109,9 @@ Route::get('/profilis/{id}', [App\Http\Controllers\ProfilisController::class, 'i
 Route::get('/profilisEdit', [App\Http\Controllers\ProfilisEditController::class, 'index'])->name('profilisEdit');
 
 Route::get('/paslaugos', [App\Http\Controllers\PaslaugosController::class, 'index'])->name('paslaugos');
+Route::get('/vaizdo', [App\Http\Controllers\VaizdoController::class, 'index'])->name('vaizdo');
+
+Route::get('/kurti', [App\Http\Controllers\KurtiController::class, 'index'])->name('kurti');
+Route::post('kurtiUzklausa',[App\Http\Controllers\KurtiController::class, 'insertUzklausa']);
+
+Route::get('/paslauga', [App\Http\Controllers\PaslaugaController::class, 'index'])->name('paslauga');
