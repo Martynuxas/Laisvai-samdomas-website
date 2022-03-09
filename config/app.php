@@ -177,6 +177,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Yoeunes\Toastr\ToastrServiceProvider::class,
 
     ],
 

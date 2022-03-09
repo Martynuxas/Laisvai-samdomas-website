@@ -115,3 +115,12 @@ Route::get('/kurti', [App\Http\Controllers\KurtiController::class, 'index'])->na
 Route::post('kurtiUzklausa',[App\Http\Controllers\KurtiController::class, 'insertUzklausa']);
 
 Route::get('/paslauga', [App\Http\Controllers\PaslaugaController::class, 'index'])->name('paslauga');
+
+Route::get('/suma', function () {
+    return view('pasirinktiSuma');
+})->name('suma');
+
+Route::get('mokejimas','App\Http\Controllers\MokejimasController@mokejimas')->name('mokejimas');
+Route::post('mokejimas','App\Http\Controllers\MokejimasController@poMokejimo');
+Route::post('mokejimasRed','App\Http\Controllers\MokejimasController@mokejimasRed');
+Route::post('/process',[App\Http\Controllers\PaymentController::class, 'paymentAction'])->name('payment_process');
