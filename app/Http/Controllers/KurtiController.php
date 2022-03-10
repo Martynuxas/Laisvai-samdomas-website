@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\Kategorija;
 use App\Models\Uzklausa;
+use Auth;
 
 class KurtiController extends Controller
 {
@@ -42,6 +43,7 @@ class KurtiController extends Controller
     else
     {
         $uzklausa = new Uzklausa();
+        $uzklausa->vartotojo_id = Auth::user()->id;
         $uzklausa->laikas = $request->input('laikas');
         $uzklausa->biudzetas = $request->input('biudzetas');
         $uzklausa->kategorija = $request->input('kategorija');

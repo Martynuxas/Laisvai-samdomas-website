@@ -7,6 +7,7 @@ use Illuminate\Routing\Route;
 use App\Models\Vartotojas;
 use Auth;
 use App\Models\Mokejimas;
+use App\Models\Pranesimas;
 
 class MokejimasController extends Controller
 {
@@ -40,9 +41,10 @@ class MokejimasController extends Controller
         $data->valiuta=($data->valiuta)+($request->input('suma')-($request->input('suma')*0.03+0.3));
         $data->save();
 
+        $pilnasuma = $request->input('suma')-(($request->input('suma')*0.03)+0.3);
         $mokejimas = new Mokejimas();
         $mokejimas->kiekis = $request->input('suma');
-        $mokejimas->pomokesciu = $request->input('suma')-(($request->input('suma')*0.03)+0.3);
+        $mokejimas->pomokesciu = $pilnasuma;
         $mokejimas->data = date('Y-m-d H:i:s');
         $mokejimas->vartotojo_id = Auth::user()->id;
         $mokejimas->vardas = $request->input('name');
@@ -51,8 +53,9 @@ class MokejimasController extends Controller
         $mokejimas->salis = $request->input('country');
         $mokejimas->pasto_kodas = $request->input('post-code');
         $mokejimas->save();
+        
+        PranesimaiController::addMessage(Auth::user()->id, "Mokėjimas sėkmingai atliktas:  $pilnasuma € pridėta į piniginę.");
 
-        #toastr()->success('Apmokėjimas sėkmingai atliktas!');
-        return redirect('/home');
+        return redirect('/home')->with('message','Mokėjimas sėkmingai atliktas!');
     }
 }

@@ -134,6 +134,7 @@
 
             });
             function displayMessage(message) {
+             toastr.options.positionClass = 'toast-bottom-right';
              toastr.success(message, 'Kalendorius');
             }
             </script>

@@ -114,7 +114,7 @@ Route::get('/vaizdo', [App\Http\Controllers\VaizdoController::class, 'index'])->
 Route::get('/kurti', [App\Http\Controllers\KurtiController::class, 'index'])->name('kurti');
 Route::post('kurtiUzklausa',[App\Http\Controllers\KurtiController::class, 'insertUzklausa']);
 
-Route::get('/paslauga', [App\Http\Controllers\PaslaugaController::class, 'index'])->name('paslauga');
+Route::get('/paslauga', [App\Http\Controllers\PaslaugosController::class, 'index'])->name('paslauga');
 
 Route::get('/suma', function () {
     return view('pasirinktiSuma');
@@ -124,3 +124,7 @@ Route::get('mokejimas','App\Http\Controllers\MokejimasController@mokejimas')->na
 Route::post('mokejimas','App\Http\Controllers\MokejimasController@poMokejimo');
 Route::post('mokejimasRed','App\Http\Controllers\MokejimasController@mokejimasRed');
 Route::post('/process',[App\Http\Controllers\PaymentController::class, 'paymentAction'])->name('payment_process');
+
+Route::get('/pranesimai', [App\Http\Controllers\PranesimaiController::class, 'index'])->name('pranesimai');
+
+Route::get('/kurtiPaslauga', [App\Http\Controllers\PaslaugosController::class, 'indexKurti'])->name('kurtiPaslauga');

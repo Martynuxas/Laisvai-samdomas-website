@@ -14,6 +14,10 @@ class Skelbimas extends Model
     {
         return $this->hasOne('App\Models\Kategorija', 'id', 'kategorijos_id');
     }
+    public function users()
+    {
+        return $this->belongsTo('App\Models\User', 'vartotojo_id');
+    }
     public function statusai()
     {
         return $this->hasOne('App\Models\Statusas', 'id', 'statuso_id');

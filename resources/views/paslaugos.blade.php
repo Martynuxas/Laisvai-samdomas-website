@@ -8,8 +8,8 @@
   <div class="scrollable-container">
     <div class="scrollable-cards">
 
-
-    <div onclick="location.href='paslauga/1';" style="cursor: pointer;">
+    @foreach ($skelbimai as $skelbimas )
+    <div onclick="location.href='paslauga/{{$skelbimas->id}}';" style="cursor: pointer;">
       <div class="card-h">
         <div class="card-thumbnail">
           <img src="img/blog-1.jpg">
@@ -21,15 +21,15 @@
           </div>
           
           <div class="card-specialties">
-            Vardas Pavarde
+          {{$skelbimas->users->name ?? 'Nežinomas'}}
           </div>
         </div>
         <div class="card-body">
           <h3 class="card-title">
-            Sukursiu logotipa, pagal jūsų idėja
+            {{$skelbimas->pavadinimas}}
           </h3>
           <div class="card-name">
-            Nuo: <b>25eur</b>
+            Nuo: <b>{{$skelbimas->valandinis}}eur</b>
           </div>
         </div>
         <div class="card-foot">
@@ -56,180 +56,7 @@
         </div>
       </div>
     </div>
-
-
-    <div onclick="location.href='paslauga/2';" style="cursor: pointer;">
-      <div class="card-h">
-        <div class="card-thumbnail">
-          <img src="img/blog-1.jpg">
-          
-          <div class="card-specialties">
-            Vardas Pavarde
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">
-            Sukursiu logotipa, pagal jūsų idėja
-          </h3>
-          <div class="card-name">
-            Nuo: <b>25eur</b>
-          </div>
-        </div>
-        <div class="card-foot">
-          <div class="card-rating">
-            <div class="stars">
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-            </div>
-            7 komentarai
-          </div>
-        </div>
-      </div>
-  </div>
-
-  <div onclick="location.href='paslauga/3';" style="cursor: pointer;">
-      <div class="card-h">
-        <div class="card-thumbnail">
-          <img src="img/blog-1.jpg">
-          
-          <div class="card-specialties">
-            Vardas Pavarde
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">
-            Sukursiu logotipa, pagal jūsų idėja
-          </h3>
-          <div class="card-name">
-            Nuo: <b>25eur</b>
-          </div>
-        </div>
-        <div class="card-foot">
-          <div class="card-rating">
-            <div class="stars">
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-            </div>
-            7 komentarai
-          </div>
-        </div>
-      </div>
-  </div>
-
-  <div onclick="location.href='paslauga/4';" style="cursor: pointer;">
-      <div class="card-h">
-        <div class="card-thumbnail">
-          <img src="img/blog-1.jpg">
-          
-          <div class="card-specialties">
-            Vardas Pavarde
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">
-            Sukursiu logotipa, pagal jūsų idėja
-          </h3>
-          <div class="card-name">
-            Nuo: <b>25eur</b>
-          </div>
-        </div>
-        <div class="card-foot">
-          <div class="card-rating">
-            <div class="stars">
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-            </div>
-            7 komentarai
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div onclick="location.href='paslauga/5';" style="cursor: pointer;">
-      <div class="card-h">
-        <div class="card-thumbnail">
-          <img src="img/blog-1.jpg">
-          
-          <div class="card-specialties">
-            Vardas Pavarde
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">
-            Sukursiu logotipa, pagal jūsų idėja
-          </h3>
-          <div class="card-name">
-            Nuo: <b>25eur</b>
-          </div>
-        </div>
-        <div class="card-foot">
-          <div class="card-rating">
-            <div class="stars">
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-              <svg width="10px" viewBox="0 0 20 20" fill="#FFD100">
-                <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78">
-              </svg>
-            </div>
-            7 komentarai
-          </div>
-        </div>
-      </div>
-    </div>
-                
-    
-
-
-
+    @endforeach
     </div>
   </div>
 </div>

@@ -24,33 +24,53 @@
             @endif
             @yield('content')
         </div>
-    <div class="container">
-        <form class="form-style-5"role="form" method="POST" action="kurtiUzklausa"> 
-            @csrf  
-            <label for="fname">Per kiek laiko norėtumėte kad būtų atlikta paslauga?</label><br>
-            <select id="laikas" name="laikas">
-                <option value="24 valandos">24 valandos</option>
-                <option value="3 dienos">3 dienos</option>
-                <option value="7 dienos">7 dienos</option>
-                <option value="14 dienų">14 dienų</option>
-                <option value="mėnesis">mėnesis</option>
-                <option value="nesvarbu">nesvarbu</option>
-            </select>
-            <label for="lname">Koks jūsų biudžetas šiai paslaugai?(eur)</label>
-            <input type="text" id="biudzetas" name="biudzetas" placeholder="000">
-            <label for="kategorija">Pasirinkite kategorija:</label>
-            <select id="kategorija" name="kategorija">
-            @foreach($kategorijos as $kategorija)
-            <option value="{{$kategorija->id}}">{{$kategorija->pavadinimas}}</option>
-            @endforeach
-            </select>
-
-            <label for="subject">Apibūdinkite paslauga kurios ieškote, prašome apibūdinti kuo įmanoma detaliau:</label>
-            <textarea id="aprasymas" name="aprasymas" placeholder="Aš ieškau.." style="height:200px"></textarea>
-
-            <input type="submit" value="Patvirtinti užklausa">
-
-        </form>
+        <div class="container mt-5 px-5">
+        <div class="mb-4">
+            <h2>Užpildykite laukus ir patalpinkite užklausą!</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card p-3">
+                    <form action="kurtiUzklausa"  method="post" id="kurtiUzklausa">
+                    @csrf  
+                    <h6 class="text-uppercase">Per kiek laiko norėtumėte kad būtų atlikta paslauga?</h6>
+                        <div class="inputbox mt-3"> 
+                            <select id="laikas" name="laikas">
+                                <option value="24 valandos">24 valandos</option>
+                                <option value="3 dienos">3 dienos</option>
+                                <option value="7 dienos">7 dienos</option>
+                                <option value="14 dienų">14 dienų</option>
+                                <option value="mėnesis">mėnesis</option>
+                                <option value="nesvarbu">nesvarbu</option>
+                            </select>
+                        </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 class="text-uppercase">Koks jūsų biudžetas šiai paslaugai?(eur)</h6>
+                            <div class="inputbox mt-3 mr-2"> <input type="text" id="biudzetas" name="biudzetas" placeholder="000"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 class="text-uppercase">Pasirinkite kategorija:</h6>
+                            <div class="inputbox mt-3 mr-2"> <select id="kategorija" name="kategorija">
+                                @foreach($kategorijos as $kategorija)
+                                <option value="{{$kategorija->id}}">{{$kategorija->pavadinimas}}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 class="text-uppercase">Apibūdinkite paslauga kurios ieškote, prašome apibūdinti kuo įmanoma detaliau:</h6>
+                            <div class="inputbox mt-3 mr-2"> <textarea id="aprasymas" name="aprasymas" placeholder="Aš ieškau.." style="height:200px"></textarea></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 mb-4 d-flex justify-content-between"> <span></span> <button class="btn btn-success px-3" id="card-button" type="submit"">Patvirtinti užklausą</button></div>
+            </div>
+        </div>
     </div>
     </body>
     @include('layouts.footer')

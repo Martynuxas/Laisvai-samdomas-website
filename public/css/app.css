@@ -1337,7 +1337,9 @@ body {
     padding: 15px 0 0 0;
     background: transparent;
   }
-  
+  .toast-success {
+    background-color: #143314 !important;
+  }
   .sidebar .tab-post .tab-content .container {
     padding: 0;
   }

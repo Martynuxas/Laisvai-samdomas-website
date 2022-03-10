@@ -25,7 +25,9 @@
                         <a href="{{ url('/kurti') }}" class="dropdown-item"><i class="fa fa-search"></i> Sukurti užklausą</a>
                         <a href="{{ url('/profilis') }}/{{ Auth::user()->id }}" class="dropdown-item"><i class="fa fa-user"></i> Profilis</a>
                         <a href="{{ url('/kalendorius') }}" class="dropdown-item"><i class="fa fa-calendar-o"></i> Kalendorius</a>
-                        <a href="{{ url('/zinutes') }}" class="dropdown-item"><i class="fa fa-envelope"></i> Žinutės</a>
+                        <a href="{{ url('/zinutes') }}" class="dropdown-item"><i class="fa fa-envelope"></i> Žinutės<?php if(App\Http\Controllers\PranesimaiController::getMessagesSum()>0)
+                            echo '[' . App\Http\Controllers\PranesimaiController::getMessagesSum() . ']';
+                        ?></a>
                         <a href="{{ url('/pranesimai') }}" class="dropdown-item"><i class="fa fa-bell"></i> Pranešimai</a>
                         <a href="" class="dropdown-item" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-money"></i> Piniginė: {{ Auth::user()->valiuta }}€</a>
                         <div class="divider dropdown-divider"></div>
