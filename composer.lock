@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cad3ab99345e77bc10393dd6c6750b9",
+    "content-hash": "81e8a805e354948427d1e563fd18de46",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -662,6 +662,46 @@
             "time": "2020-12-29T14:50:06+00:00"
         },
         {
+            "name": "enyo/dropzone",
+            "version": "v5.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dropzone/dropzone-packagist.git",
+                "reference": "286b2dc1f1195bd12169e4c9d5f91cfbe46e245f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dropzone/dropzone-packagist/zipball/286b2dc1f1195bd12169e4c9d5f91cfbe46e245f",
+                "reference": "286b2dc1f1195bd12169e4c9d5f91cfbe46e245f",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matias Meno",
+                    "email": "m@tias.me",
+                    "homepage": "http://www.yesmeno.com"
+                }
+            ],
+            "description": "Handles drag and drop of files for you.",
+            "homepage": "http://www.dropzonejs.com",
+            "keywords": [
+                "drag and drop",
+                "dragndrop",
+                "file upload",
+                "upload"
+            ],
+            "support": {
+                "issues": "https://github.com/dropzone/dropzone-packagist/issues",
+                "source": "https://github.com/dropzone/dropzone-packagist/tree/v5.9.3"
+            },
+            "time": "2021-09-21T17:03:36+00:00"
+        },
+        {
             "name": "fruitcake/laravel-cors",
             "version": "v2.2.0",
             "source": {
@@ -1208,6 +1248,41 @@
                 }
             ],
             "time": "2021-12-16T16:49:26+00:00"
+        },
+        {
+            "name": "jakjr/dropzone",
+            "version": "1.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jakjr/dropzone.git",
+                "reference": "4a4fe885d89fefb83a835c6113a482e068fc9c2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jakjr/dropzone/zipball/4a4fe885d89fefb83a835c6113a482e068fc9c2a",
+                "reference": "4a4fe885d89fefb83a835c6113a482e068fc9c2a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jakjr\\Dropzone\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Integration between dropzone and laravel5.",
+            "keywords": [
+                "dropzone",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/jakjr/dropzone/issues",
+                "source": "https://github.com/jakjr/dropzone/tree/1.0.12"
+            },
+            "time": "2021-08-17T18:05:56+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",

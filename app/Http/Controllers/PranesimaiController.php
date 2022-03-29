@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\ChMessage;
 use App\Models\Pranesimas;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Notification;
+use App\Models\Vartotojas;
 
 class PranesimaiController extends Controller
 {
@@ -15,7 +18,7 @@ class PranesimaiController extends Controller
     {
         $pranesimai = Pranesimas::where('vartotojo_id', '=', Auth::user()->id)
                        ->orderBy('data', 'desc')
-                       ->get();
+                       ->paginate(10);
         return view('pranesimai',['pranesimai'=>$pranesimai]);
     }
     public function addMessage($vartotojo_id, $tekstas)
@@ -25,6 +28,9 @@ class PranesimaiController extends Controller
         $pranesimas->vartotojo_id = $vartotojo_id;
         $pranesimas->tekstas = $tekstas;
 
+        $elpastas = Vartotojas::find($vartotojo_id);
+        $elpastas = $elpastas->email;
+        Mail::to("$elpastas")->send(new Notification());
         $pranesimas->save();
     }
     public function getMessagesSum()

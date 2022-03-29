@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="container copyright">
-                <p>&copy; <a href="#">LAISVAISAMDOMAS</a>, Visos teisės saugomos @2021</p>
+                <p>&copy; <a href="#">LAISVAISAMDOMAS</a>, Visos teisės saugomos @ {{ date('Y') }}</p>
             </div>
         </div>
         <!-- Footer End -->

@@ -8,15 +8,76 @@ use Illuminate\Http\Request;
 use App\Models\Isiminti;
 use App\Models\Vartotojas;
 use App\Models\Skelbimas;
+use App\Models\IsimintasVartotojas;
+use App\Models\IsimintaPaslauga;
 
 class IsimintiController extends Controller
 {
-    public function index()
+    public function getLists(){
+        $isimintosPaslaugos = IsimintaPaslauga::with('paslaugos')
+        ->where('IsiminusioVartotojoId', '=', Auth::user()->id)
+        ->orderBy('data', 'desc')
+        ->paginate(10);
+
+        $isimintiVartotojai = IsimintasVartotojas::with('users')
+        ->where('IsiminusioVartotojoId', '=', Auth::user()->id)
+        ->orderBy('data', 'desc')
+        ->paginate(10);
+        return view('isimintuSarasas', ['isimintiVartotojai'=>$isimintiVartotojai,'isimintosPaslaugos'=>$isimintosPaslaugos]);
+    }
+    public function arPaslaugaIsiminta($vartotojoId, $paslaugosId){
+        $tikrinam = IsimintaPaslauga::all()
+        ->where('IsiminusioVartotojoId', '=', $vartotojoId)
+        ->where('isimintosPaslaugosId', '=', $paslaugosId);
+        if($tikrinam->count() == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    public function pamirstiPaslauga($id){
+        $pamirsti = IsimintaPaslauga::all()
+        ->where('isimintosPaslaugosId', '=', $id)
+        ->where('IsiminusioVartotojoId', '=', Auth::user()->id);
+        $pamirsti->each->delete();
+
+        return Redirect::back()->with('success', 'Paslauga pamiršta');
+    }
+    public function isimintiPaslauga(Request $request){
+        if($this->arPaslaugaIsiminta(Auth::user()->id, $request->id) == false){
+        $isiminta = new IsimintaPaslauga();
+
+        $isiminta->isimintosPaslaugosId = $request->id;
+        $isiminta->IsiminusioVartotojoId = Auth::user()->id;
+        $isiminta->data = date('Y-m-d H:i:s');
+        $isiminta->save();
+        return Redirect::back()->with('success', 'Paslauga įsiminta');
+        }
+        return Redirect::back()->with('alert', 'Jūs jau įsimines šią paslaugą!');
+    }
+    public function arVartotojasIsimintas($vartotojoId, $kasIsimineId)
     {
-        $isiminti = Isiminti::all();
-        $vartotojai = Vartotojas::all();
-        $skelbimai = Skelbimas::all();
-        return view('isiminti', ['isiminti'=>$isiminti,'vartotojai'=>$vartotojai,'skelbimai'=>$skelbimai]);
+        $tikrinam = IsimintasVartotojas::all()
+        ->where('isimintoVartotojoId', '=', $vartotojoId)
+        ->where('IsiminusioVartotojoId', '=', $kasIsimineId);
+        if($tikrinam->count() == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    public function isimintiVartotojaPrideti(Request $request)
+    {   
+        if($this->arVartotojasIsimintas($request->vartotojoid, $request->kuriisimineid) == false)
+        {
+            $isimine = new IsimintasVartotojas;
+            $isimine->isimintoVartotojoId = $request->vartotojoid;
+            $isimine->isiminusioVartotojoId = $request->kuriisimineid;
+            $isimine->data = date('Y-m-d H:i:s');
+            $isimine->save();
+            return Redirect::back()->with('success', 'Vartotojas įsimintas');
+        }
+        return Redirect::back()->with('alert', 'Jūs jau įsimines šį vartotoją!');
     }
     public function insertIsiminta($id)
     {
@@ -57,7 +118,19 @@ class IsimintiController extends Controller
     {
         $data=Isiminti::find($id);
         $data->delete();
-    return Redirect::to('/isiminti ')->with('success', 'Isiminimas pašalinta');
+    return Redirect::to('/isiminti ')->with('success', 'Isiminimas pašalintas');
+    }
+    public function deleteIsimintaPaslauga($id)
+    {
+        $data=IsimintaPaslauga::find($id);
+        $data->delete();
+    return Redirect::to('/tab1')->with('success', 'Isiminimas pašalintas');
+    }
+    public function deleteIsimintaVartotoja($id)
+    {
+        $data=IsimintasVartotojas::find($id);
+        $data->delete();
+    return Redirect::to('/tab2')->with('success', 'Isiminimas pašalintas');
     }
     function showData($id)
     {

@@ -12,6 +12,6 @@ class Uzklausa extends Model
     public $timestamps = false;
     public function kategorijos()
     {
-        return $this->hasOne('App\Models\Kategorija', 'id', 'kategorijos_id');
+        return $this->hasOne('App\Models\Kategorija', 'id', 'kategorija');
     }
 }

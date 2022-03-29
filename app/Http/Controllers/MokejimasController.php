@@ -8,11 +8,41 @@ use App\Models\Vartotojas;
 use Auth;
 use App\Models\Mokejimas;
 use App\Models\Pranesimas;
+use Illuminate\Support\Facades\Redirect;
 
 class MokejimasController extends Controller
 {
     public function mokejimasRed(Request $request){
         return $this->mokejimas($request->input('suma'));
+    }
+    public function pervedimas(Request $request){
+        $kurisVeda = Vartotojas::find(Auth::user()->id);
+        if(Vartotojas::find($request->input('vartotojoid'))==null){
+            return Redirect::to('/ ')->with('alert', 'Nėra tokio vartotojo!');
+        }
+        else{
+            if($request->input('sumaPervedimo') <= $kurisVeda->valiuta)
+            {
+                return $this->pervesti($request->input('sumaPervedimo'), $request->input('vartotojoid'));
+            }
+            else{
+                return Redirect::to('/ ')->with('alert', 'Neturite tiek valiutos!');
+            }
+        }
+    }
+    public function pervesti($suma, $vartotojoid)
+    {
+        $kurisVeda = Vartotojas::find(Auth::user()->id);
+        $kurisVeda->valiuta=($kurisVeda->valiuta)-$suma;
+        $kurisVeda->save();
+
+        $kuriamVeda = Vartotojas::find($vartotojoid);
+        $kuriamVeda->valiuta=($kuriamVeda->valiuta)+$suma;
+        $kuriamVeda->save();
+        PranesimaiController::addMessage($kurisVeda->id, "Jūs pervedėte $suma €, vartotojui: $kuriamVeda->name, kurio id: $kuriamVeda->id.");
+        PranesimaiController::addMessage($kuriamVeda->id, "Jūs gavote $suma €, iš vartotojo: $kurisVeda->name, kurio id: $kurisVeda->id.");
+        
+        return Redirect::to('/ ')->with('message', 'Valiuta pervesta!');
     }
     public function mokejimas($suma)
     {   

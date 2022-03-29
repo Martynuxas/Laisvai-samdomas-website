@@ -1340,6 +1340,9 @@ body {
   .toast-success {
     background-color: #143314 !important;
   }
+  .toast-error {
+    background-color: #b82828 !important;
+  }
   .sidebar .tab-post .tab-content .container {
     padding: 0;
   }

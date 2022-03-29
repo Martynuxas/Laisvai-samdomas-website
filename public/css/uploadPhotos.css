@@ -1,0 +1,43 @@
+
+form .select {
+	color: #5256ad;
+	margin-left: 7px;
+	cursor: pointer;
+}
+
+
+
+
+.container .image {
+	height: 85px;
+	width: 85px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	position: relative;
+	margin-bottom: 7px;
+	margin-right: 7px;
+}
+
+.container .image:nth-child(4n) {
+	margin-right: 0;
+}
+
+.container .image img {
+	height: 100%;
+	width: 100%;
+}
+
+
+.container .image span {
+	position: absolute;
+	top: -4px;
+	right: 5px;
+	cursor: pointer;
+	font-size: 22px;
+	color: #fff;
+}
+
+.container .image span:hover {
+	opacity: 0.8;
+}

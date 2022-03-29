@@ -14,6 +14,10 @@ class VartotojaiController extends Controller
     $vartotojai = Vartotojas::all();
     return view('vartotojai', ['vartotojai'=>$vartotojai]);
     }
+    public function getName($id){
+        $vartotojas = Vartotojas::find($id);
+        return $vartotojas->name;
+    }
     public function insertVartotojus(Request $request)
     {
         $validator = Validator::make(

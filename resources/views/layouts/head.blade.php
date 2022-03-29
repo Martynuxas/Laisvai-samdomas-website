@@ -4,7 +4,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link href="img/favicon.png" rel="icon">
-
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"> 
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -12,3 +11,23 @@
     <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <script>
+            @if(Session::has('message'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.success("{{ session('message') }}");
+            @endif
+            @if(Session::has('alert'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.error("{{ session('alert') }}");
+            @endif
+    </script>

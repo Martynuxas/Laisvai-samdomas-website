@@ -26,9 +26,17 @@
                     <div class="mt-3">
                       <h4>{{$data->name}}</h4>
                       <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                      <button class="btn btn-primary">Sekti</button>
-                      <button class="btn btn-outline-primary">Rašyti</button>
+                      <p class="text-muted font-size-sm">{{$data->miestas}}</p>
+                        @if(App\Http\Controllers\IsimintiController::arVartotojasIsimintas($data->id, Auth::user()->id) == false && $data->id != Auth::user()->id)
+                      <form action="/isimintiVartotojaPrideti">
+                        <input type="hidden" name="vartotojoid" id="vartotojoid" value="{{ $data->id }}">
+                        <input type="hidden" name="kuriisimineid" id="kuriisimineid" value="{{ Auth::user()->id }}">
+                          <button type="submit" class="btn btn-primary">Įsiminti</button>
+                        </form>
+                        @endif
+                        <form action="/zinutes/{{$data->id}}">
+                          <button class="btn btn-outline-primary">Rašyti</button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -162,6 +170,49 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="container mt-5 mb-5">
+                <div class="d-flex justify-content-center row">
+                    <div class="d-flex flex-column col-md-8">
+                        <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
+                            <div class="profile-image"><img class="rounded-circle" src="/uploads/avatars/{{$data->avatar}}" width="70"></div>
+                            <div class="d-flex flex-column ml-3">
+                                <div class="d-flex flex-row post-title">
+                                    <h5>Palikite man atsiliepimą!</h5>
+                                </div>
+                                <div class="d-flex flex-row align-items-center align-content-center post-title"><span class="bdge mr-1">Viso</span><span class="mr-2 comments"> {{App\Http\Controllers\ProfilisController::countAtsiliepimus( $data->id )}} atsiliepimai-(ų)&nbsp;</span></div>
+                            </div>
+                        </div>
+                        <form class="form-style-5"role="form" method="POST" action="/submitAtsiliepima"> 
+                        @csrf  
+                          <div class="coment-bottom bg-white p-2 px-4">
+                              <div class="d-flex flex-row add-comment-section mt-4 mb-4"><img class="img-fluid img-responsive rounded-circle mr-2" src="/uploads/avatars/{{Auth::user()->avatar}}" width="38">
+                              <input type="hidden" name="id" id="id" value="{{ $data->id }}">
+                              <input type="text" id="tekstas" name="tekstas" class="form-control mr-3" placeholder="Rašykite atsiliepimą">
+                              <button class="btn btn-primary" type="submitAtsiliepima">Pateikti</button>
+                          </div>
+                        </form>
+                          @foreach($atsiliepimai as $atsiliepimas)
+                            <div class="commented-section mt-2">
+                                <div class="d-flex flex-row align-items-center commented-user">
+                                    <h5 class="mr-2">{{$atsiliepimas->userKomentavo->name}}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">{{$atsiliepimas->data}}</span>
+                                    @if ($atsiliepimas->kas_komentavo == Auth::user()->id)
+                                    <form class="form-style-5"role="form" method="GET" action="/deleteAtsiliepima/{{$atsiliepimas->id}}"> 
+                                    @csrf  
+                                    <button type="submit" class="btn-close" onclick="javascript:return confirm('Ar tikrai norite pašalinti atsiliepimą?')" href='deleteAtsiliepima/{{$atsiliepimas->id}}'>
+                                    <span class="icon-cross"></span>
+                                    <span class="visually-hidden">Close</span>
+                                    </button>
+                                    </form>
+                                    @endif
+                                </div>
+                                <div class="comment-text-sm"><span>{{$atsiliepimas->tekstas}}.</span></div>
+                            </div>
+                            @endforeach
+                        </div>
+                        {{$atsiliepimai->links()}}
+                    </div>
+                </div>
             </div>
           </div>
         </div>

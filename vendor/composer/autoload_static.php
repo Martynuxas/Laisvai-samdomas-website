@@ -156,6 +156,7 @@ class ComposerStaticInitd299179b1d3ee41d01f2cd59ae51ad09
         array (
             'Jenssegers\\Agent\\' => 17,
             'Jaybizzle\\CrawlerDetect\\' => 24,
+            'Jakjr\\Dropzone\\' => 15,
         ),
         'I' => 
         array (
@@ -519,6 +520,10 @@ class ComposerStaticInitd299179b1d3ee41d01f2cd59ae51ad09
         array (
             0 => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src',
         ),
+        'Jakjr\\Dropzone\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jakjr/dropzone/src',
+        ),
         'Intervention\\Image\\' => 
         array (
             0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
@@ -685,12 +690,14 @@ class ComposerStaticInitd299179b1d3ee41d01f2cd59ae51ad09
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FullCalenderController' => __DIR__ . '/../..' . '/app/Http/Controllers/FullCalenderController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ImageUploadController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageUploadController.php',
         'App\\Http\\Controllers\\IsimintiController' => __DIR__ . '/../..' . '/app/Http/Controllers/IsimintiController.php',
         'App\\Http\\Controllers\\KategorijosController' => __DIR__ . '/../..' . '/app/Http/Controllers/KategorijosController.php',
         'App\\Http\\Controllers\\KurtiController' => __DIR__ . '/../..' . '/app/Http/Controllers/KurtiController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\MokejimasController' => __DIR__ . '/../..' . '/app/Http/Controllers/MokejimasController.php',
         'App\\Http\\Controllers\\PaslaugosController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaslaugosController.php',
+        'App\\Http\\Controllers\\PranesimaiController' => __DIR__ . '/../..' . '/app/Http/Controllers/PranesimaiController.php',
         'App\\Http\\Controllers\\PrenumeratosController' => __DIR__ . '/../..' . '/app/Http/Controllers/PrenumeratosController.php',
         'App\\Http\\Controllers\\ProfilisController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfilisController.php',
         'App\\Http\\Controllers\\ProfilisEditController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfilisEditController.php',
@@ -712,8 +719,11 @@ class ComposerStaticInitd299179b1d3ee41d01f2cd59ae51ad09
         'App\\Models\\ChFavorite' => __DIR__ . '/../..' . '/app/Models/ChFavorite.php',
         'App\\Models\\ChMessage' => __DIR__ . '/../..' . '/app/Models/ChMessage.php',
         'App\\Models\\Event' => __DIR__ . '/../..' . '/app/Models/Event.php',
+        'App\\Models\\ImageUpload' => __DIR__ . '/../..' . '/app/Models/ImageUpload.php',
         'App\\Models\\Isiminti' => __DIR__ . '/../..' . '/app/Models/Isiminti.php',
         'App\\Models\\Kategorija' => __DIR__ . '/../..' . '/app/Models/Kategorija.php',
+        'App\\Models\\Mokejimas' => __DIR__ . '/../..' . '/app/Models/Mokejimas.php',
+        'App\\Models\\Pranesimas' => __DIR__ . '/../..' . '/app/Models/Pranesimas.php',
         'App\\Models\\Prenumerata' => __DIR__ . '/../..' . '/app/Models/Prenumerata.php',
         'App\\Models\\Skelbimas' => __DIR__ . '/../..' . '/app/Models/Skelbimas.php',
         'App\\Models\\Statusas' => __DIR__ . '/../..' . '/app/Models/Statusas.php',
@@ -3191,6 +3201,10 @@ class ComposerStaticInitd299179b1d3ee41d01f2cd59ae51ad09
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
         'IntlDateFormatter' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/Resources/stubs/IntlDateFormatter.php',
+        'Jakjr\\Dropzone\\Dropzone' => __DIR__ . '/..' . '/jakjr/dropzone/src/Dropzone.php',
+        'Jakjr\\Dropzone\\DropzoneFacade' => __DIR__ . '/..' . '/jakjr/dropzone/src/DropzoneFacade.php',
+        'Jakjr\\Dropzone\\DropzoneServiceProvider' => __DIR__ . '/..' . '/jakjr/dropzone/src/DropzoneServiceProvider.php',
+        'Jakjr\\Dropzone\\Middleware\\Dropzone' => __DIR__ . '/..' . '/jakjr/dropzone/src/Middleware/Dropzone.php',
         'Jaybizzle\\CrawlerDetect\\CrawlerDetect' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/CrawlerDetect.php',
         'Jaybizzle\\CrawlerDetect\\Fixtures\\AbstractProvider' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/AbstractProvider.php',
         'Jaybizzle\\CrawlerDetect\\Fixtures\\Crawlers' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Crawlers.php',

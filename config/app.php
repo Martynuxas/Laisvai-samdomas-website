@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Vilnius',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +178,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
+        Jakjr\Dropzone\DropzoneServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Dropzone'  => Jakjr\Dropzone\DropzoneFacade::class,
 
     ],
 

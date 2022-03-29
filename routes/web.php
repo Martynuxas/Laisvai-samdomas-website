@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VartotojaiController;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\Notification;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +55,8 @@ Route::post('update',[App\Http\Controllers\KategorijosController::class, 'update
 //Isiminti
 Route::post('submitIsimintus',[App\Http\Controllers\IsimintiController::class, 'insertIsimintus']);
 Route::get('/deleteIsimintus/{id}', [App\Http\Controllers\IsimintiController::class, 'deleteIsimintus']);
+Route::get('/deleteIsimintaVartotoja/{id}', [App\Http\Controllers\IsimintiController::class, 'deleteIsimintaVartotoja']);
+Route::get('/deleteIsimintaPaslauga/{id}', [App\Http\Controllers\IsimintiController::class, 'deleteIsimintaPaslauga']);
 Route::get('/isimintiEdit/{id}',[App\Http\Controllers\IsimintiController::class, 'showData']);
 Route::post('updateIsimintus',[App\Http\Controllers\IsimintiController::class, 'update']);
 
@@ -109,7 +112,7 @@ Route::get('/profilis/{id}', [App\Http\Controllers\ProfilisController::class, 'i
 Route::get('/profilisEdit', [App\Http\Controllers\ProfilisEditController::class, 'index'])->name('profilisEdit');
 
 Route::get('/paslaugos', [App\Http\Controllers\PaslaugosController::class, 'index'])->name('paslaugos');
-Route::get('/vaizdo', [App\Http\Controllers\VaizdoController::class, 'index'])->name('vaizdo');
+Route::get('/manoKambarys', [App\Http\Controllers\VaizdoController::class, 'index'])->name('manoKambarys');
 
 Route::get('/kurti', [App\Http\Controllers\KurtiController::class, 'index'])->name('kurti');
 Route::post('kurtiUzklausa',[App\Http\Controllers\KurtiController::class, 'insertUzklausa']);
@@ -127,4 +130,49 @@ Route::post('/process',[App\Http\Controllers\PaymentController::class, 'paymentA
 
 Route::get('/pranesimai', [App\Http\Controllers\PranesimaiController::class, 'index'])->name('pranesimai');
 
-Route::get('/kurtiPaslauga', [App\Http\Controllers\PaslaugosController::class, 'indexKurti'])->name('kurtiPaslauga');
+Route::get('/kurtiPaslauga', [App\Http\Controllers\KurtiController::class, 'indexPaslauga'])->name('kurtiPaslauga');
+Route::post('kurtiPaslauga/upload', 'ImageUploadController@upload')->name('dropzone.upload');
+
+Route::get('kurtiPaslauga/fetch', 'ImageUploadController@fetch')->name('dropzone.fetch');
+
+Route::get('kurtiPaslauga/delete', 'ImageUploadController@delete')->name('dropzone.delete');
+
+Route::get('/isiminti', [App\Http\Controllers\IsimintiController::class, 'getLists'])->name('isiminti');
+
+Route::get('/tab1', [App\Http\Controllers\IsimintiController::class, 'getLists']);
+Route::get('/tab2', [App\Http\Controllers\IsimintiController::class, 'getLists']);
+
+Route::post('submitAtsiliepima',[App\Http\Controllers\ProfilisController::class, 'insertAtsiliepima']);
+Route::get('/deleteAtsiliepima/{id}', [App\Http\Controllers\ProfilisController::class, 'deleteAtsiliepima']);
+
+Route::get('/not', function () {
+    return new Notification();
+});
+
+Route::get('/isimintiVartotojaPrideti',[App\Http\Controllers\IsimintiController::class, 'isimintiVartotojaPrideti']);
+Route::get('/isimintiPaslauga/{id}', [App\Http\Controllers\IsimintiController::class, 'isimintiPaslauga']);
+Route::get('/deleteIsimintaPaslauga/{id}', [App\Http\Controllers\IsimintiController::class, 'deleteIsimintaPaslauga']);
+Route::get('/pamirstiPaslauga/{id}', [App\Http\Controllers\IsimintiController::class, 'pamirstiPaslauga']);
+
+Route::get('/uzsakymai', [App\Http\Controllers\UzsakymaiController::class, 'index'])->name('uzsakymai');
+Route::post('keistiProgresa',[App\Http\Controllers\UzsakymaiController::class, 'keistiProgresa']);
+Route::post('sukurtiUzsakyma',[App\Http\Controllers\UzsakymaiController::class, 'sukurtiUzsakyma']);
+
+Route::get('/deleteUzsakyma/{id}', [App\Http\Controllers\UzsakymaiController::class, 'deleteUzsakyma']);
+
+Route::get('/valdymas', [App\Http\Controllers\ValdymasController::class, 'index'])->name('valdymas');
+Route::get('kurtiKlausimus',[App\Http\Controllers\KlausimaiController::class, 'index']);
+
+Route::post('kurtiKlausima',[App\Http\Controllers\KlausimaiController::class, 'sukurtiKlausimus']);
+
+Route::get('/klausimaiEdit/{id}',[App\Http\Controllers\KlausimaiController::class, 'showData']);
+Route::get('/uzklausaEdit/{id}',[App\Http\Controllers\KurtiController::class, 'showData']);
+
+Route::post('/updateUzklausa',[App\Http\Controllers\KurtiController::class, 'updateUzklausa']);
+Route::post('/updateKlausimus',[App\Http\Controllers\KlausimaiController::class, 'updateKlausimus']);
+
+Route::get('/deleteKlausima/{id}', [App\Http\Controllers\KlausimaiController::class, 'deleteKlausima']);
+Route::get('/deleteUzklausa/{id}', [App\Http\Controllers\KurtiController::class, 'deleteUzklausa']);
+
+
+Route::post('sveciasKambario','App\Http\Controllers\VaizdoController@sveciasKambario');

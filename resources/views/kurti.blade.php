@@ -63,6 +63,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
+                            <h6 class="text-uppercase">Užklausos antraštė</h6>
+                            <div class="inputbox mt-3 mr-2"> <input type="text" id="pavadinimas" name="pavadinimas" placeholder="..."></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
                             <h6 class="text-uppercase">Apibūdinkite paslauga kurios ieškote, prašome apibūdinti kuo įmanoma detaliau:</h6>
                             <div class="inputbox mt-3 mr-2"> <textarea id="aprasymas" name="aprasymas" placeholder="Aš ieškau.." style="height:200px"></textarea></div>
                         </div>

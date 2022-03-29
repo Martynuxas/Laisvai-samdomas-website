@@ -1,102 +1,91 @@
-<script>
-         $(document).ready(function () {
-            
-         var SITEURL = "{{ url('/') }}";
-           
-         $.ajaxSetup({
-             headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             }
-         });
-           
-         var calendar = $('#calendar').fullCalendar({
-                             editable: true,
-                             events: SITEURL + "/fullcalender",
-                             displayEventTime: false,
-                             editable: true,
-                             eventRender: function (event, element, view) {
-                                 if (event.allDay === 'true') {
-                                         event.allDay = true;
-                                 } else {
-                                         event.allDay = false;
-                                 }
-                             },
-                             selectable: true,
-                             selectHelper: true,
-                             select: function (start, end, allDay) {
-                                 var title = prompt('Įrašo pavadinimas:');
-                                 if (title) {
-                                     var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-                                     var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
-                                     $.ajax({
-                                         url: SITEURL + "/fullcalenderAjax",
-                                         data: {
-                                             title: title,
-                                             start: start,
-                                             end: end,
-                                             type: 'add'
-                                         },
-                                         type: "POST",
-                                         success: function (data) {
-                                             displayMessage("Įrašas sukūrtas");
-           
-                                             calendar.fullCalendar('renderEvent',
-                                                 {
-                                                     id: data.id,
-                                                     title: title,
-                                                     start: start,
-                                                     end: end,
-                                                     allDay: allDay
-                                                 },true);
-           
-                                             calendar.fullCalendar('unselect');
-                                         }
-                                     });
-                                 }
-                             },
-                             eventDrop: function (event, delta) {
-                                 var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
-                                 var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
-           
-                                 $.ajax({
-                                     url: SITEURL + '/fullcalenderAjax',
-                                     data: {
-                                         title: event.title,
-                                         start: start,
-                                         end: end,
-                                         id: event.id,
-                                         type: 'update'
-                                     },
-                                     type: "POST",
-                                     success: function (response) {
-                                         displayMessage("Įrašas atnaujintas sėkmingai");
-                                     }
-                                 });
-                             },
-                             eventClick: function (event) {
-                                 var deleteMsg = confirm("Ar tikrai norite įrašą ištrinti?");
-                                 if (deleteMsg) {
-                                     $.ajax({
-                                         type: "POST",
-                                         url: SITEURL + '/fullcalenderAjax',
-                                         data: {
-                                                 id: event.id,
-                                                 type: 'delete'
-                                         },
-                                         success: function (response) {
-                                             calendar.fullCalendar('removeEvents', event.id);
-                                             displayMessage("Įrašas ištrintas sėkmingai");
-                                         }
-                                     });
-                                 }
-                             }
+
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Upload in Laravel using Dropzone</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+ </head>
+ <body>
+  <div class="container-fluid">
+      <br />
+    <br />
+        
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Select Image</h3>
+        </div>
+        <div class="panel-body">
+          <form id="dropzoneForm" class="dropzone" action="{{ route('dropzone.upload') }}">
+            @csrf
+          </form>
+            <button type="button" class="btn btn-info" id="submit-all">Upload</button>
+        </div>
+      </div>
+      <br />
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Uploaded Image</h3>
+        </div>
+        <div class="panel-body" id="uploaded_image">
           
-                         });
-          
-         });
-          
-         function displayMessage(message) {
-             toastr.success(message, 'Kalendorius');
-         } 
-           
-      </script>
+        </div>
+      </div>
+    </div>
+ </body>
+</html>
+
+<script type="text/javascript">
+
+  Dropzone.options.dropzoneForm = {
+    autoProcessQueue : false,
+    acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
+
+    init:function(){
+      var submitButton = document.querySelector("#submit-all");
+      myDropzone = this;
+
+      submitButton.addEventListener('click', function(){
+        myDropzone.processQueue();
+      });
+
+      this.on("complete", function(){
+        if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+        {
+          var _this = this;
+          _this.removeAllFiles();
+        }
+        load_images();
+      });
+
+    }
+
+  };
+
+  load_images();
+
+  function load_images()
+  {
+    $.ajax({
+      url:"{{ route('dropzone.fetch') }}",
+      success:function(data)
+      {
+        $('#uploaded_image').html(data);
+      }
+    })
+  }
+
+  $(document).on('click', '.remove_image', function(){
+    var name = $(this).attr('id');
+    $.ajax({
+      url:"{{ route('dropzone.delete') }}",
+      data:{name : name},
+      success:function(data){
+        load_images();
+      }
+    })
+  });
+
+</script>

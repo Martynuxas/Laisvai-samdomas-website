@@ -14,10 +14,4 @@ class PaslaugosController extends Controller
     $skelbimai = Skelbimas::with('kategorijos')->with('users')->get();
     return view('paslaugos', ['skelbimai'=>$skelbimai]);
     }
-
-    public function indexKurti()
-    {
-    return view('kurtiPaslauga');
-    }
-
 }

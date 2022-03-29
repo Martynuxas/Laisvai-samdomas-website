@@ -167,17 +167,6 @@
                 </div>
                 <!-- Facts End -->
                 @include('layouts.footer')
-        <script>
-            @if(Session::has('message'))
-            toastr.options =
-            {
-                "closeButton" : true,
-                "progressBar" : true
-            }
-                    toastr.options.positionClass = 'toast-bottom-right';
-                    toastr.success("{{ session('message') }}");
-            @endif
-        </script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="lib/owlcarousel/owl.carousel.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
