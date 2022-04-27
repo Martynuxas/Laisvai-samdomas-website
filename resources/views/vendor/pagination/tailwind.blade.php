@@ -25,13 +25,13 @@
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
                 <p class="text-sm text-gray-700 leading-5">
-                    {!! __('Showing') !!}
+                    {!! __('Rodoma nuo') !!}
                     <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                    {!! __('to') !!}
+                    {!! __('iki') !!}
                     <span class="font-medium">{{ $paginator->lastItem() }}</span>
-                    {!! __('of') !!}
+                    {!! __('iš') !!}
                     <span class="font-medium">{{ $paginator->total() }}</span>
-                    {!! __('results') !!}
+                    {!! __('rezultatų') !!}
                 </p>
             </div>
 

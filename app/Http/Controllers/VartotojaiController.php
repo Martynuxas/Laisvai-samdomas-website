@@ -21,13 +21,10 @@ class VartotojaiController extends Controller
     public function insertVartotojus(Request $request)
     {
         $validator = Validator::make(
-        ['name' => $request->input('name'),
+        ['name' => [$request->input('name'), $request->input('miestas'), $request->input('role'), $request->input('asmens_tipas')],
         'lastname' => $request->input('lastname'),
         'email' => $request->input('email'),
-        'password' => $request->input('password'),
-        'name' => $request->input('miestas'),
-        'name' => $request->input('role'),
-        'name' => $request->input('asmens_tipas')
+        'password' => $request->input('password')
         ],
         [ 
         'name' => ['required', 'string', 'max:255'],

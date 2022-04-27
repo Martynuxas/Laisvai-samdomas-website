@@ -29,6 +29,17 @@ class UzsakymaiController extends Controller
     }
     public function keistiProgresa(Request $request)
     {
+        $progresas = Progresas::find($request->progresas);
+        if($progresas->pavadinimas == 'Baigta')
+        {
+            $uzsakovas = Vartotojas::find(Auth::user()->id);
+            $uzsakovas->uzsakymuKiekis = $uzsakovas->uzsakymuKiekis + 1;
+            if($uzsakovas->uzsakymuKiekis == 11){$uzsakovas->lygis = 4;}
+            if($uzsakovas->uzsakymuKiekis == 41){$uzsakovas->lygis = 5;}
+            if($uzsakovas->uzsakymuKiekis == 77){$uzsakovas->lygis = 6;}
+            if($uzsakovas->uzsakymuKiekis == 101){$uzsakovas->lygis = 3;}
+            $uzsakovas->save();
+        }
         $data = Uzsakymas::find($request->id);
         $data->progresas=$request->progresas;
         $data->data=date('Y-m-d H:i:s');
@@ -37,13 +48,28 @@ class UzsakymaiController extends Controller
     }
     public function sukurtiUzsakyma(Request $request)
     {
+        if($request->vartotojoid == Auth::user()->id)
+        {
+            return Redirect::back()->with('alert', 'Negalite sau užsakymo suteikti!');
+        }
+        else{
         $uzsakymas = new Uzsakymas();
-        $uzsakymas->progresas=2;
+        $uzsakymas->progresas=1;
         $uzsakymas->uzsakovo_id=$request->vartotojoid;
+        $uzsakymas->tema=$request->tema;
         $uzsakymas->specialisto_id=Auth::user()->id;
         $uzsakymas->data=date('Y-m-d H:i:s');
         $uzsakymas->save();
         return Redirect::back()->with('success', 'Užsakymas sukurtas!');
+        }
+    }
+    public function patvirtintiUzsakyma(Request $request)
+    {
+        $uzsakymas = Uzsakymas::find($request->uzsakymoid);
+        $uzsakymas->progresas=2;
+        $uzsakymas->data=date('Y-m-d H:i:s');
+        $uzsakymas->save();
+        return Redirect::back()->with('success', 'Užsakymas patvirtintas!');
     }
     public function deleteUzsakyma($id)
     {

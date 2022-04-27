@@ -1,0 +1,29 @@
+
+.container2 {
+    background-color: #fff;
+    width: 580px;
+    height: 420px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    line-height: 1.5;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.185);
+}
+
+.container2 img {
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+.container2-text {
+    padding: 10px 40px 10px 10px;
+}
+
+.container2-text span {
+
+    width: 240px;
+    color: #000000;
+    font-size: 18px;
+}

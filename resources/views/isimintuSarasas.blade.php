@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    @include('layouts.head')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
-    <body>
     @include('layouts.header')
     <body class="hm-gradient">
-    <main>
         <div class="container mt-4">
             <div class="card mb-4">
                 <div class="card-body">
@@ -84,10 +82,6 @@
                 </div>
             </div>
         </div>
-    </main>
-</body>
         @include('layouts.footer')
     </body>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="js/main.js"></script>
 </html>

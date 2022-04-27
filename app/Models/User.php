@@ -29,6 +29,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'kambarioSlaptazodis',
         'password',
     ];
 
@@ -61,4 +62,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function lygiai()
+    {
+        return $this->belongsTo('App\Models\Lygis', 'id');
+    }
 }

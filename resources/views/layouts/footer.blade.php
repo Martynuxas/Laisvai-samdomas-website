@@ -1,4 +1,3 @@
-<!-- Footer -->
 <div class="footer">
             <div class="container">
                 <div class="row">
@@ -40,7 +39,7 @@
                             <form>
                                 <input class="form-control" placeholder="Elektroninis paštas">
                                 <div class="nav-item dropdown">
-                                    <a1 href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Kategorija</a1>
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Kategorija</a>
                                     <div class="dropdown-menu">
                                         <a href="#" class="dropdown-item">Pirma</a>
                                         <a href="#" class="dropdown-item">Antra</a>
@@ -58,4 +57,3 @@
                 <p>&copy; <a href="#">LAISVAISAMDOMAS</a>, Visos teisės saugomos @ {{ date('Y') }}</p>
             </div>
         </div>
-        <!-- Footer End -->

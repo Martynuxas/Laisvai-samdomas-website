@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        @include('layouts.head')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
-    <body>
-        @include('layouts.header')
-        <!-- Suggestions Start -->
-        <div class="location">
-            <div class="container">
-                        <div class="section-header text-center">
-                            <p>Greitai rask, kas suteiks paslaugą</p>
-                        </div>
-                        <div class="location-form">
-                            <h3>Siųsk užklausą, gauk pasiūlymus, išsirink tinkamiausią.</h3>
-                            <form>
-                                <div class="control-group">
-                                    <input type="text" class="form-control" placeholder="Įrašykite kokios paslaugos ieškai (trumpai)" required="required" />
+    @include('layouts.header')
+    <body class="hm-gradient">
+            <main>
+                <div class="container mt-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Konkurso pasiūlymai</h2>
                                 </div>
-                                <h6>Pvz. nufotografuoti vestuves, pastatyti namą, nuvalyti langus.</h6>
-                                <div>
-                                    <button class="btn btn-custom" type="submit">Tęsti</button>
-                                </div>
-                            </form>
+                            </div>
+                                    @if (count($gautiPasiulymai) > 0)
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Vartotojas</th>
+                                                    <th>Suma</th>
+                                                    <th>Už dienų galėtų pradėti</th>
+                                                    <th>Data</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($gautiPasiulymai as $pasiulymas)
+                                                    <tr>
+                                                        <th scope="row">{{$pasiulymas->id}}</th>
+                                                        <td>[{{$pasiulymas->vartotojo_id}}]{{$pasiulymas->vartotojas->name}}</td>
+                                                        <td>{{$pasiulymas->suma}}</td>
+                                                        <td>{{$pasiulymas->dienuSkaicius}}</td>
+                                                        <td>{{$pasiulymas->data}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    {{$gautiPasiulymai->links()}}
+                                    @else
+                                    Jūs dar pasiūlymų neturite
+                                    @endif
+                                </nav>
+                            </div>
                         </div>
-                
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- Suggestions End -->
+            </main>
         @include('layouts.footer')
     </body>
-        <!-- JS Lib -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="js/main.js"></script>
 </html>

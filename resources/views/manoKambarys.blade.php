@@ -21,12 +21,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        @include('layouts.head')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
+    @include('layouts.header')
     <body>
-        @include('layouts.header')
         <div class="meetCard">
             <div id="meet"></div>
         </div>
+        @include('layouts.footer')
     </body>
 </html>

@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        @include('layouts.head')
-    </head>
 @include('layouts.header')
 @include('Chatify::layouts.headLinks')
 <div class="messenger">

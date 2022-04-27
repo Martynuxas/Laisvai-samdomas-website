@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    @include('layouts.head')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
-    <body>
     @include('layouts.header')
+    <body>
         <!-- Contact -->
         <div class="contact">
             <div class="container">
@@ -77,7 +77,4 @@
         <!-- Contact End -->
         @include('layouts.footer')
     </body>
-        <!-- JS Lib -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="js/main.js"></script>
 </html>

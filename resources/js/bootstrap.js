@@ -11,7 +11,7 @@ try {
  */
 
 window.axios = require('axios');
-require('bootstrap/dist/js/bootstrap.bundle');
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

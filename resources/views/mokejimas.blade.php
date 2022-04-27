@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  @include('layouts.head')
   <link rel="stylesheet" type="text/css" href="{{ asset('css/mokejimas.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+@include('layouts.header')
 <body>
-    @include('layouts.header')
     @php
     $stripe_key = 'pk_test_51Kb1UtJjjYTuymbzvuD2CdgDIoyLZVD3WZw07zKEyXIEQXnDQLuRezb2BSAPrQ3QWodSuR8J6skxSIzQIIaVu9KF00qvKDaXn8';
     @endphp

@@ -1,8 +1,8 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <head>
-@include('layouts.head')
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/profilisEdit.css') }}">
+  <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<link rel="stylesheet" type="text/css" href="{{ asset('css/profilisEdit.css') }}">
 @include('layouts.header')
 <body>
 <div class="container">
@@ -16,7 +16,7 @@
               <div class="row">
                 <div class="col-12 col-sm-auto mb-3">
                   <div class="mx-auto" style="width: 140px;">
-                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px;">
                         <img src="/uploads/avatars/{{ Auth::user()->avatar }}" alt="Image" class="rounded-circle" width="150">
                     </div>
                   </div>
@@ -35,7 +35,6 @@
                     </div>
                   </div>
                   <div class="text-center text-sm-right">
-                    <span class="badge badge-secondary">vartotojas</span>
                     <div class="text-muted"><small>Sukurtas {{ Auth::user()->created_at }}</small></div>
                     <div class="text-muted"><small>Atnaujintas {{ Auth::user()->updated_at }}</small></div>
                   </div>
@@ -52,13 +51,13 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Vardas</label>
-                              <input class="form-control" type="text" name="name" placeholder="Vardenis pavardenis" value="{{ Auth::user()->name }}">
+                              <input class="form-control" type="text" name="name" id="name" placeholder="Vardenis Pavardenis" value="{{ Auth::user()->name }}">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
                               <label>Miestas</label>
-                              <input class="form-control" type="text" name="miestas" placeholder="Kaunas" value="{{ Auth::user()->miestas }}">
+                              <input class="form-control" type="text" name="miestas" id="miestas" placeholder="Kaunas" value="{{ Auth::user()->miestas }}">
                             </div>
                           </div>
                         </div>
@@ -66,14 +65,15 @@
                           <div class="col">
                             <div class="form-group">
                               <label>El. paštas</label>
-                              <input class="form-control" type="text" placeholder="pvz@pvz.lt" value="{{ Auth::user()->email }}">
+                              <input class="form-control" type="text" name="elpastas" id="elpastas" placeholder="pvz@pvz.lt" value="{{ Auth::user()->email }}">
                             </div>
                           </div>
                           <div class="col">
-                          <div class="form-group">
+                            <div class="form-group">
                             <label>Asmens tipas:</label>
-                                <select id="name" name="asmens_tipas">
-                                    <option value='{{ Auth::user()->asmens_tipas }}'>{{ Auth::user()->asmens_tipas }} </option>
+                            <br>
+                                <select id="asmens_tipas" name="asmens_tipas" class="form-select" aria-label="Default select example">
+                                    <option disabled value='{{ Auth::user()->asmens_tipas }}'>{{ Auth::user()->asmens_tipas }} </option>
                                     <option value="Fizinis">Fizinis</option>
                                     <option value="Juridinis">Juridinis</option>
                                 </select>  
@@ -81,42 +81,39 @@
                           </div>
                         </div>
                         <div class="row">
+                          <div class="col-12 col-sm-auto mb-3">
+                            <div class="form-group">
+                              <label>Telefonas</label>
+                              <input class="form-control" type="text" name="numeris" id="numeris" placeholder="860000000" value="{{ Auth::user()->numeris }}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
                           <div class="col mb-3">
                             <div class="form-group">
                               <label>Apie mane</label>
-                              <textarea class="form-control" rows="5" placeholder="Gyvenimo aprašymas" value="{{ Auth::user()->apie }}"></textarea>
+                              <textarea class="form-control" id="editor" name="editor"rows="5">{{ Auth::user()->apie }}</textarea>
+                              <script>
+                                  ClassicEditor
+                                      .create( document.querySelector( '#editor' ) )
+                                      .catch( error => {
+                                          console.error( error );
+                                      } );
+                              </script>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12 col-sm-6 mb-3">
-                        <div class="mb-2"><b>Keisti slaptažodį</b></div>
-                        <div class="row">
                           <div class="col">
+                              <div class="form-group">
+                                <label>Github</label>
+                                <input class="form-control" type="text" id="github" name="github" placeholder="pvz.lt" value="{{ Auth::user()->github }}">
+                            </div>
                             <div class="form-group">
-                              <label>Dabartinis slaptažodis</label>
-                              <input class="form-control" type="password" placeholder="••••••">
+                              <label>Puslapis</label>
+                              <input class="form-control" type="text" id="puslapis" name="puslapis" placeholder="pvz.lt" value="{{ Auth::user()->puslapis }}">
                             </div>
                           </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Naujas slaptažodis</label>
-                              <input class="form-control" type="password" placeholder="••••••">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Patvirtinti <span class="d-none d-xl-inline">slaptažodį</span></label>
-                              <input class="form-control" type="password" placeholder="••••••"></div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
@@ -131,7 +128,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 </div>

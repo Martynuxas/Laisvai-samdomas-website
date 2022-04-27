@@ -67,12 +67,14 @@ class LoginController extends Controller
 
     protected function _registerOrLoginUser($data)
     {
+        $FourDigitRandomNumber = rand(1231,7879);
         $user = User::where('email', '=', $data->email)->first();
         if (!$user) {
             $user = new User();
             $user->name = $data->name;
             $user->email = $data->email;
             $user->provider_id = $data->id;
+            $user->kambarioSlaptazodis = $FourDigitRandomNumber;
             $user->save();
         }
 

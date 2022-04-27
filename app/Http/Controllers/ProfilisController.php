@@ -15,7 +15,7 @@ class ProfilisController extends Controller
         $atsiliepimai = Atsiliepimas::with('userKomentavo')
         ->where('vartotojo_id', '=', $id)
         ->orderBy('data', 'desc')
-        ->paginate(10);
+        ->paginate(5);
         return view('profilis',['data'=>$data, 'atsiliepimai'=>$atsiliepimai]);
     }
     public function deleteAtsiliepima($id){
@@ -27,7 +27,7 @@ class ProfilisController extends Controller
         }
         return Redirect::back();
     }
-    public function countAtsiliepimus($id){
+    public static function countAtsiliepimus($id){
         $countAtsiliepimus = Atsiliepimas::all()
         ->where('vartotojo_id', '=', $id)
         ->count();

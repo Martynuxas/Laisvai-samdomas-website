@@ -25,7 +25,7 @@ class IsimintiController extends Controller
         ->paginate(10);
         return view('isimintuSarasas', ['isimintiVartotojai'=>$isimintiVartotojai,'isimintosPaslaugos'=>$isimintosPaslaugos]);
     }
-    public function arPaslaugaIsiminta($vartotojoId, $paslaugosId){
+    public static function arPaslaugaIsiminta($vartotojoId, $paslaugosId){
         $tikrinam = IsimintaPaslauga::all()
         ->where('IsiminusioVartotojoId', '=', $vartotojoId)
         ->where('isimintosPaslaugosId', '=', $paslaugosId);
@@ -55,7 +55,7 @@ class IsimintiController extends Controller
         }
         return Redirect::back()->with('alert', 'Jūs jau įsimines šią paslaugą!');
     }
-    public function arVartotojasIsimintas($vartotojoId, $kasIsimineId)
+    public static function arVartotojasIsimintas($vartotojoId, $kasIsimineId)
     {
         $tikrinam = IsimintasVartotojas::all()
         ->where('isimintoVartotojoId', '=', $vartotojoId)
@@ -94,11 +94,9 @@ class IsimintiController extends Controller
     public function insertIsimintus(Request $request)
     {
         $validator = Validator::make(
-        ['name' => $request->input('vartotojo_id'),
-        'name' => $request->input('skelbimo_id')
+        ['id' => [$request->input('vartotojo_id'),$request->input('skelbimo_id')]
         ],
-        [ 'name' => 'required|alpha_num',
-            'name' => 'required|alpha_num'
+        [ 'id' => 'required|alpha_num'
         ]
         );
     if ($validator->fails())

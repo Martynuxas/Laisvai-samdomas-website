@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    @include('layouts.head')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
-    <body>
     @include('layouts.header')
     <body class="hm-gradient">
-    <main>
         <div class="container mt-4">
             <div class="card mb-4">
                 <div class="card-body">
@@ -16,10 +14,13 @@
                         </div>
                         <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#sukurtiUzsakyma" class="btn btn-primary">Sukurti užsakymą</button>
                     </div>
+                    @if (count($uzsakymai) == 0)
+                    Neturite užsakymų.
+                    @else
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>Tema</th>
                                 <th>Uzsakovas</th>
                                 <th>Specialistas</th>
                                 <th>Atnaujintas</th>
@@ -30,31 +31,45 @@
                         <tbody>
                             @foreach($uzsakymai as $uzsakymas)
                                 <tr>
-                                    <th scope="row">{{$uzsakymas->id}}</th>
+                                    <td>{{$uzsakymas->tema}}</td>
                                     <td>{{$uzsakymas->uzsakovai->name}}[{{$uzsakymas->uzsakovai->id}}]</td>
                                     <td>{{$uzsakymas->specialistai->name}}[{{$uzsakymas->specialistai->id}}]</td>
                                     <td>{{$uzsakymas->data}}</td>
                                     <td>{{$uzsakymas->progresai->pavadinimas}}</td>
-                                    <td><button type="button" data-dismiss="modal" data-toggle="modal" data-target="#BusenosKeitimas" onclick="giveData({{$uzsakymas->id}})" class="btn btn-primary">Keisti būsena</button>
+                                    <!------- Užsakovas------->
+                                    @if( $uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Laukiama patvirtinimo')
+                                    <form class="form-style-5"role="form" method="POST" action="/patvirtintiUzsakyma"> 
+                                    @csrf  
+                                    <input type="hidden" id="uzsakymoid" name="uzsakymoid" value="{{$uzsakymas->id}}"/>
+                                    <td><button type="submit" class="btn btn-success">Patvirtinti</button>
+                                    </form>
                                     <a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteUzsakyma/{{$uzsakymas->id}}'>
+                                    <span>Pašalinti</span>    
+                                    </a>
+                                    @endif
+                                    
+                                    <!------Specialistas------>
+                                    @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas != 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo')
+                                    <td><button type="button" data-dismiss="modal" data-toggle="modal" data-target="#BusenosKeitimas" onclick="giveData({{$uzsakymas->id}})" class="btn btn-primary">Keisti būsena</button>
+                                    @endif
+                                    @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Laukiama patvirtinimo')
+                                    <td><a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteUzsakyma/{{$uzsakymas->id}}'>
                                     <span>Pašalinti</span>
                                     </a>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                                    {{$uzsakymai->links()}}
+                        {{$uzsakymai->links()}}
                         </nav>
+                @endif
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-</body>
         @include('layouts.footer')
-    </body>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="js/main.js"></script>
+</body>
 </html>
 
 <!-- Modal -->
@@ -77,9 +92,6 @@
 
                                 <select id="progresas" name="progresas">
                                     <option style="display:none">Pasirinkite progresą</option>
-                                       
-                                        <option disabled>Užsakovas turi patvirtinti užsakymą</option>
-                                    
                                             @foreach($progresai as $progresas)
                                             <option value="{{$progresas->id}}">{{$progresas->pavadinimas}}</option>
                                             @endforeach
@@ -111,12 +123,15 @@
                         @csrf
                         <div class="inputbox mt-3 mr-2">
                                 <input type="hidden" name="vartotojoid" id="vartotojoid">
-                                <select id="vartotojoid" name="vartotojoid">
+                                <label for="uzsakovasLabel">Užsakovas:</label><br>
+                                <select id="vartotojoid" name="vartotojoid" required>
                                     <option style="display:none">Pasirinkite vartotoją</option>
                                         @foreach($vartotojai as $vartotojas)
                                         <option value="{{$vartotojas->id}}">{{$vartotojas->name}}[{{$vartotojas->id}}]</option>
                                         @endforeach
-                                </select>
+                                </select><br><br>
+                                <label for="temaLabel">Užsakymo tema:</label>
+                                <input type="text" class="form-control" name="tema" id="tema" required/>
                         </div>
                     </div>
                 <div class="modal-footer">
@@ -127,15 +142,10 @@
             </div>
         </div>
     </div>
-
     <script>
-
-  function giveData(e){
-    var x = e;
-
-    $('#id').val(x);  //The id where to pass the value
-
-    $('#keistiProgresa').modal('show'); //The id of the modal to show
-  };
-
-</script>
+        function giveData(e){
+            var x = e;
+            $('#id').val(x);  //The id where to pass the value
+            $('#keistiProgresa').modal('show'); //The id of the modal to show
+        };
+    </script>

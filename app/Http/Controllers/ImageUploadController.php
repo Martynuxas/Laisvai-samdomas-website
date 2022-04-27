@@ -1,51 +1,41 @@
-
 <?php
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ImageUpload;
 
 class ImageUploadController extends Controller
 {
     function index()
     {
-     return view('dropzone');
+     return view('image_upload');
     }
 
-    function upload(Request $request)
+    public function store(Request $request)
     {
-     $image = $request->file('file');
-
-     $imageName = time() . '.' . $image->extension();
-
-     $image->move(public_path('images'), $imageName);
-
-     return response()->json(['success' => $imageName]);
+    	$image = $request->file('file');
+        $avatarName = $image->getClientOriginalName();
+        $image->move(public_path('images'),$avatarName);
+         
+        $imageUpload = new ImageUpload();
+        $imageUpload->filename = $avatarName;
+        $imageUpload->uzklausosId = $request->uzklausosId;
+        $imageUpload->save();
+        return response()->json(['success'=>$avatarName]);
     }
 
-    function fetch()
+    function destroy(Request $request)
     {
-     $images = \File::allFiles(public_path('images'));
-     $output = '<div class="row">';
-     foreach($images as $image)
-     {
-      $output .= '
-      <div class="col-md-2" style="margin-bottom:16px;" align="center">
-                <img src="'.asset('images/' . $image->getFilename()).'" class="img-thumbnail" width="175" height="175" style="height:175px;" />
-                <button type="button" class="btn btn-link remove_image" id="'.$image->getFilename().'">Remove</button>
-            </div>
-      ';
-     }
-     $output .= '</div>';
-     echo $output;
-    }
+        $filename = $request->get('filename');
+        ImageUpload::where('filename', $filename)->delete();
+        $path = public_path().'/images/'.$filename;
+        
+        if(file_exists($path)){
+            unlink($path);
+        }
 
-    function delete(Request $request)
-    {
-     if($request->get('name'))
-     {
-      \File::delete(public_path('images/' . $request->get('name')));
-     }
+        return $filename;
     }
 }
 ?>

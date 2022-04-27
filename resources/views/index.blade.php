@@ -1,20 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        @extends('layouts.head')
-        
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
-     alpha/css/bootstrap.css" rel="stylesheet">
-	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" 
-     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    </head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    @include('layouts.header')
     <body>
-        @include('layouts.header')
         <!-- Slider -->
         <div class="carousel">
                     <div class="container-fluid">
@@ -24,19 +12,13 @@
                                     <img src="img/carousel-1.png" alt="Image">
                                 </div>
                                 <div class="carousel-text">
-                                    <h3>Greitai rask, kas suteiks paslaugą</h3>
-                                    <h1>siųsk užklausą</h1>
+                                    <h3>Greitai ir patogiai surask, kas suteiks paslaugą</h3>
+                                    <h1>talpink užklausą</h1>
                                     <div class="col-lg-5">
-                                        <div class="location-form">
-                                            <h3>Ieškoti paslaugų</h3>
-                                            <form>
-                                                <div class="control-group">
-                                                    <textarea class="text" placeholder="Raktažodis" required="required"></textarea>
-                                                </div>
+                                        <div class="location-form">                                
                                                 <div>
-                                                    <button class="btn btn-custom" type="submit">Ieškoti</button>
+                                                    <button class="btn btn-custom" type="submit">Ieškoti paslaugų</button>
                                                 </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -46,19 +28,13 @@
                                     <img src="img/carousel-2.jpg" alt="Image">
                                 </div>
                                 <div class="carousel-text">
-                                    <h3>Greitai rask, kas suteiks paslaugą</h3>
+                                    <h3>Greitai ir patogiai surask, kas suteiks paslaugą</h3>
                                     <h1>gauk pasiūlymus</h1>
                                     <div class="col-lg-5">
                                         <div class="location-form">
-                                            <h3>Ieškoti paslaugų</h3>
-                                            <form>
-                                                <div class="control-group">
-                                                    <textarea class="text" placeholder="Raktažodis" required="required"></textarea>
-                                                </div>
                                                 <div>
-                                                    <button class="btn btn-custom" type="submit">Ieškoti</button>
+                                                    <button class="btn btn-custom" type="submit">Ieškoti paslaugų</button>
                                                 </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -68,19 +44,13 @@
                                     <img src="img/carousel-3.png" alt="Image">
                                 </div>
                                 <div class="carousel-text">
-                                    <h3>Greitai rask, kas suteiks paslaugą</h3>
+                                    <h3>Greitai ir patogiai surask, kas suteiks paslaugą</h3>
                                     <h1>išsirink tinkamiausią</h1>
                                     <div class="col-lg-5">
                                         <div class="location-form">
-                                            <h3>Ieškoti paslaugų</h3>
-                                            <form>
-                                                <div class="control-group">
-                                                    <textarea class="text" placeholder="Raktažodis" required="required"></textarea>
-                                                </div>
                                                 <div>
-                                                    <button class="btn btn-custom" type="submit">Ieškoti</button>
+                                                    <button class="btn btn-custom" type="submit">Ieškoti paslaugų</button>
                                                 </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -90,6 +60,7 @@
                     </div>
                 </div>
                 <!-- Slider End -->
+                
                                 <!-- Blog -->
                                 <div class="blog">
                     <div class="container">
@@ -167,13 +138,9 @@
                 </div>
                 <!-- Facts End -->
                 @include('layouts.footer')
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/counterup/counterup.min.js"></script>
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+                <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+                <!-- Template Javascript -->
+                <script src="js/main.js"></script>
     </body>
 
 </html>

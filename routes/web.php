@@ -28,23 +28,7 @@ Route::get('/ieskoti', function () {
     return view('ieskoti');
 })->name('ieskoti');
 
-Route::get('/klausti', function () {
-    return view('klausti');
-})->name('klausti');
-
-Route::get('/pasiulymai', function () {
-    return view('pasiulymai');
-})->name('pasiulymai');
 Route::get('/uzklausa', [App\Http\Controllers\UzklausaController::class, 'index'])->name('uzklausa');
-
-
-//tables
-Route::get('/isiminti', [App\Http\Controllers\IsimintiController::class, 'index'])->name('isiminti');
-Route::get('/kategorijos', [App\Http\Controllers\KategorijosController::class, 'index'])->name('kategorijos');
-Route::get('/prenumeratos', [App\Http\Controllers\PrenumeratosController::class, 'index'])->name('prenumeratos');
-Route::get('/statusai', [App\Http\Controllers\StatusaiController::class, 'index'])->name('statusai');
-Route::get('/vartotojai', [App\Http\Controllers\VartotojaiController::class, 'index'])->name('vartotojai');
-Route::get('/skelbimai', [App\Http\Controllers\SkelbimaiController::class, 'index'])->name('skelbimai');
 
 //Kategorijos
 Route::post('submit',[App\Http\Controllers\KategorijosController::class, 'insertKategorijos']);
@@ -59,18 +43,6 @@ Route::get('/deleteIsimintaVartotoja/{id}', [App\Http\Controllers\IsimintiContro
 Route::get('/deleteIsimintaPaslauga/{id}', [App\Http\Controllers\IsimintiController::class, 'deleteIsimintaPaslauga']);
 Route::get('/isimintiEdit/{id}',[App\Http\Controllers\IsimintiController::class, 'showData']);
 Route::post('updateIsimintus',[App\Http\Controllers\IsimintiController::class, 'update']);
-
-//Prenumeratos
-Route::post('submitPrenumeratas',[App\Http\Controllers\PrenumeratosController::class, 'insertPrenumeratas']);
-Route::get('/deletePrenumeratas/{id}', [App\Http\Controllers\PrenumeratosController::class, 'deletePrenumeratas']);
-Route::get('/prenumeratosEdit/{id}',[App\Http\Controllers\PrenumeratosController::class, 'showData']);
-Route::post('updatePrenumaratas',[App\Http\Controllers\PrenumeratosController::class, 'update']);
-
-//Statusai
-Route::post('submitStatusus',[App\Http\Controllers\StatusaiController::class, 'insertStatusus']);
-Route::get('/deleteStatusus/{id}', [App\Http\Controllers\StatusaiController::class, 'deleteStatusus']);
-Route::get('/skelbimo_statusasEdit/{id}',[App\Http\Controllers\StatusaiController::class, 'showData']);
-Route::post('updateStatusus',[App\Http\Controllers\StatusaiController::class, 'update']);
 
 //Vartotojai
 Route::post('submitVartotojus',[App\Http\Controllers\VartotojaiController::class, 'insertVartotojus']);
@@ -112,10 +84,12 @@ Route::get('/profilis/{id}', [App\Http\Controllers\ProfilisController::class, 'i
 Route::get('/profilisEdit', [App\Http\Controllers\ProfilisEditController::class, 'index'])->name('profilisEdit');
 
 Route::get('/paslaugos', [App\Http\Controllers\PaslaugosController::class, 'index'])->name('paslaugos');
+Route::get('/prenumeratos', [App\Http\Controllers\PrenumeratosController::class, 'index'])->name('prenumeratos');
 Route::get('/manoKambarys', [App\Http\Controllers\VaizdoController::class, 'index'])->name('manoKambarys');
 
 Route::get('/kurti', [App\Http\Controllers\KurtiController::class, 'index'])->name('kurti');
 Route::post('kurtiUzklausa',[App\Http\Controllers\KurtiController::class, 'insertUzklausa']);
+Route::post('kurtiPaslauga',[App\Http\Controllers\KurtiController::class, 'insertPaslauga']);
 
 Route::get('/paslauga', [App\Http\Controllers\PaslaugosController::class, 'index'])->name('paslauga');
 
@@ -169,10 +143,42 @@ Route::get('/klausimaiEdit/{id}',[App\Http\Controllers\KlausimaiController::clas
 Route::get('/uzklausaEdit/{id}',[App\Http\Controllers\KurtiController::class, 'showData']);
 
 Route::post('/updateUzklausa',[App\Http\Controllers\KurtiController::class, 'updateUzklausa']);
+Route::post('/updatePaslauga',[App\Http\Controllers\PaslaugosController::class, 'updatePaslauga']);
 Route::post('/updateKlausimus',[App\Http\Controllers\KlausimaiController::class, 'updateKlausimus']);
+Route::post('/updateKonkursa',[App\Http\Controllers\KonkursasController::class, 'updateKonkursa']);
 
 Route::get('/deleteKlausima/{id}', [App\Http\Controllers\KlausimaiController::class, 'deleteKlausima']);
 Route::get('/deleteUzklausa/{id}', [App\Http\Controllers\KurtiController::class, 'deleteUzklausa']);
-
+Route::get('/deleteKonkursa/{id}', [App\Http\Controllers\KonkursasController::class, 'deleteKonkursa']);
 
 Route::post('sveciasKambario','App\Http\Controllers\VaizdoController@sveciasKambario');
+Route::get('/paslauga/{id}', [App\Http\Controllers\SkelbimaiController::class, 'skelbimas']);
+
+Route::post('submitKomentara',[App\Http\Controllers\KomentarasController::class, 'insertKomentara']);
+Route::get('/deleteKomentara/{id}', [App\Http\Controllers\KomentarasController::class, 'deleteKomentara']);
+Route::post('patvirtintiUzsakyma',[App\Http\Controllers\UzsakymaiController::class, 'patvirtintiUzsakyma']);
+Route::get('/konkursai', [App\Http\Controllers\KonkursasController::class, 'index'])->name('konkursai');
+Route::post('konkursoPasiulymas',[App\Http\Controllers\KonkursasController::class, 'konkursoSiulymas']);
+Route::get('konkursoKurimas',[App\Http\Controllers\KonkursasController::class, 'konkursoKurimas']);
+Route::post('sukurtiKonkursa',[App\Http\Controllers\KonkursasController::class, 'sukurtiKonkursa']);
+Route::get('/konkursasEdit/{id}',[App\Http\Controllers\KonkursasController::class, 'showData']);
+Route::get('/pasiulymas/{id}', [App\Http\Controllers\KonkursasController::class, 'rodytiPasiulymus']);
+
+Route::get('/keistiSlaptazodi', [App\Http\Controllers\HomeController::class, 'showChangePasswordGet'])->name('changePasswordGet');
+Route::post('/keistiSlaptazodi', [App\Http\Controllers\HomeController::class, 'changePasswordPost'])->name('changePasswordPost');
+
+Route::post('prenumeruoti',[App\Http\Controllers\PrenumeratosController::class, 'kurtiPrenumerata']);
+
+Route::get('/deletePrenumerata/{id}', [App\Http\Controllers\PrenumeratosController::class, 'deletePrenumerata']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/testPaslauga', [App\Http\Controllers\KurtiController::class, 'testPaslauga']);
+
+Route::get('/upload', [App\Http\Controllers\ImageUploadController::class, 'index']);
+Route::post('/upload/store', [App\Http\Controllers\ImageUploadController::class, 'store']);
+Route::get('/delete', [App\Http\Controllers\ImageUploadController::class, 'destroy']);
+
+Route::get('/deleteUzklausosNuotrauka/{id}', [App\Http\Controllers\UzklausaController::class, 'deleteUzklausosNuotrauka']);
+Route::get('/paslaugaEdit/{id}',[App\Http\Controllers\PaslaugosController::class, 'showData']);

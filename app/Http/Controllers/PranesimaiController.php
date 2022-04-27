@@ -28,12 +28,12 @@ class PranesimaiController extends Controller
         $pranesimas->vartotojo_id = $vartotojo_id;
         $pranesimas->tekstas = $tekstas;
 
-        $elpastas = Vartotojas::find($vartotojo_id);
-        $elpastas = $elpastas->email;
+        $vartotojas = Vartotojas::find($vartotojo_id);
+        $elpastas = $vartotojas->email;
         Mail::to("$elpastas")->send(new Notification());
         $pranesimas->save();
     }
-    public function getMessagesSum()
+    public static function getMessagesSum()
     {
         $data = ChMessage::where('to_id', '=', Auth::user()->id)
                        ->where('seen',   '=', 0)

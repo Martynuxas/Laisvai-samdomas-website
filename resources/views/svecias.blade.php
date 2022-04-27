@@ -1,5 +1,3 @@
-
-    <!--<iframe allow="camera; microphone; fullscreen; display-capture; autoplay" src="https://meet.jit.si/laisvas" style="height: 100%; width: 100%; border: 0px;"></iframe>-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/vaizdo.css') }}">
     <script src='https://meet.jit.si/external_api.js'></script>
         <script type="text/javascript">
@@ -47,8 +45,8 @@
                     },
                     enableLipSync: false,
                     roomName: 'laisvaiSamdomas5832362{{ $id }}432541841',
-                    width: 700,
-                    height: 700,
+                    width: 1000,
+                    height: 600,
                     parentNode: document.querySelector('#meet'),
                     userInfo: {
                         email: '{{ Auth::user()->email }}',
@@ -62,12 +60,13 @@
  <!DOCTYPE html>
 <html lang="en">
     <head>
-        @include('layouts.head')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
+    @include('layouts.header')
     <body>
-        @include('layouts.header')
         <div class="meetCard">
             <div id="meet"></div>
         </div>
+        @include('layouts.footer')
     </body>
 </html>

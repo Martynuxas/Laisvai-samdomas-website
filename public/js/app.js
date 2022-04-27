@@ -8,7 +8,16 @@
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/lib/axios.js");
+const ClassicEditor = require( '@ckeditor/ckeditor5-build-classic' );
 
+ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
 /***/ }),
 
 /***/ "./node_modules/axios/lib/adapters/xhr.js":

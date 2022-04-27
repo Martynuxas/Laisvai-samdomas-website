@@ -1,0 +1,121 @@
+/* Global */
+.RankBadge {
+	display:inline-block;
+	box-sizing:border-box;
+	overflow:hidden;
+	border:1px solid #DDDDDD;
+	width:150px;
+	height:35px;
+	line-height:35px;
+	border-radius:10px;
+	text-shadow:2px 2px 2px rgba(0, 0, 0, 0.3);	
+}
+.RankBadge:before {
+	display:inline-block;
+	height:34px;
+	width:32px;
+	text-align:center;
+	font-family:fontAwesome;
+	border-right:1px solid #DDDDDD;
+	font-weight:normal;
+	font-size:20px;
+	content:'\00A0';
+}
+.RankBadge:after {
+	display:inline-block;
+	padding-left:2px;
+	font-family:arial, sans-serif;
+	font-weight:bold;
+	font-size:13px;
+	text-align:left;
+	vertical-align:top;
+	content:" ";
+	max-width:220px !important;
+}
+.Rank4 {
+	border-color:#e6e6e6;
+	background-color:#f9f9f9;
+	color:#ffffff;
+}
+.Rank4:before {
+	content:"\f164";
+	border-right-color:#e6e6e6;
+	color:#50504f;
+}
+.Rank4:after {
+	content:"1 lygio pardavėjas";
+    color:#3a46f0;
+}
+
+.Rank5 {
+	border-color:#e6e6e6;
+	background-color:#f9f9f9;
+	color:#ffffff;
+}
+.Rank5:before {
+	content:"\f164";
+	border-right-color:#e6e6e6;
+	color:#50504f;
+}
+.Rank5:after {
+	content:"2 lygio pardavėjas";
+    color:#3a46f0;
+}
+
+.Rank6 {
+	border-color:#e6e6e6;
+	background-color:#f9f9f9;
+	color:#ffffff;
+}
+.Rank6:before {
+	content:"\f164";
+	border-right-color:#e6e6e6;
+	color:#50504f;
+}
+.Rank6:after {
+	content:"3 lygio pardavėjas";
+	color:#3a46f0;
+}
+
+.Rank3 {
+	border-color:#e6e6e6;
+	background-color:#f9f9f9;
+	color:#ffffff;
+}
+.Rank3:before {
+	content:"\f164";
+	border-right-color:#e6e6e6;
+	color:#50504f;
+}
+.Rank3:after {
+	content:"TOP pardavėjas";
+	color:#f39c00;
+	text-shadow:1px 1px 2px rgba(243, 156, 0, 0.7);	
+}
+/* Admin */
+.Rank1 {
+	border-color:#508683;
+	background-color:#5e9c98;
+	color:#ffffff;
+}
+.Rank1:before {
+	content:"\f0e3";
+	border-right-color:#508683;
+}
+.Rank1:after {
+	content:"Administratorius";
+}
+.Rank2 {
+	border-color:#e6e6e6;
+	background-color:#f9f9f9;
+}
+.Rank2:before {
+	content:"\f21b";
+	border-right-color:#e6e6e6;
+	color:#50504f;
+}
+.Rank2:after {
+	content:"Moderatorius";
+	color:#0085c6;
+	text-shadow:1px 1px 2px rgba(0, 133, 198, 0.7);	
+}

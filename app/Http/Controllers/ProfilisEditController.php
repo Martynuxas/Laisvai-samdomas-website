@@ -15,15 +15,24 @@ class ProfilisEditController extends Controller
     }
     function profilisUpload(Request $request)
     {
+        $user = Auth::user();
         if($request->hasFile('avatar')){
             $avatar = $request->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
             Image::make($avatar)->resize(300,300)->save(public_path('/uploads/avatars/' . $filename));
 
-            $user = Auth::user();
             $user->avatar = $filename;
-            $user->save();
-        }   
+        } 
+        $user->apie = $request->editor; 
+        $user->numeris = $request->numeris; 
+        $user->updated_at = date('Y-m-d H:i:s');
+        $user->asmens_tipas = $request->asmens_tipas; 
+        $user->email = $request->elpastas;
+        $user->name = $request->name; 
+        $user->miestas = $request->miestas;
+        $user->puslapis = $request->puslapis;
+        $user->github = $request->github;
+        $user->save();
         return Redirect::to('/profilis/'. Auth::user()->id);
     }
 }

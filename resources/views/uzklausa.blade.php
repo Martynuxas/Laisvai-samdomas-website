@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        @include('layouts.head')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
+    @include('layouts.header')
     <body>
-        @include('layouts.header')
-        <!-- Queries -->
         <div class="blog">
             <div class="container">
                 <div class="section-header text-center">
                     
                     <p>Klientų užklausos</p>
                 </div>
-                @foreach ($kategorijos as $kategorija )
+                @foreach ($uzklausos as $uzklausa )
                 
                         <div class="blog-item">
                             <div class="blog-text">
-                                <h3><a href="#">{{$kategorija->pavadinimas}}</a></h3>
+                                <h3><a href="#">{{$uzklausa->pavadinimas}}</a></h3>
                                 <div class="blog-meta">
                                     <p><i class="fa fa-user"></i><a href="">Virgis</a></p>
                                     <p><i class="fa fa-folder"></i><a href="">Žemės kasimas</a></p>
@@ -27,19 +26,19 @@
 
                                     Ieškome „virtuvės ant ratų“ gruodžio 11 d. Organizuojame renginį, kuriame dalyvautų iki 40 žmonių. Ieškome maisto tiekėjo, kuris galėtų pasirūpinti karštais patiekalais ir užkandžiais.
                                 </p>
+                                @foreach(App\Http\Controllers\KurtiController::gautiNuotraukas($uzklausa->id, "uzklausa") as $nuotrauka)
+                                <img src="{{ URL::to('/images')}}/{{$nuotrauka->nuoroda}}" alt="Image" width="100" height="100"/>
+                                @endforeach
                                 <div>
                                     <a class="btn btn-custom" href="#">Pateikti pasiūlymą</a>
                                 </div>
                             </div>
                         </div>
-                    @endforeach    
+                @endforeach    
+                {{$uzklausos->links()}}
                 </div>
             </div>
         </div>
-        <!-- Queries End -->
         @include('layouts.footer')
     </body>
-        <!-- JS Lib -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="js/main.js"></script>
 </html>

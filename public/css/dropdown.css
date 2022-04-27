@@ -5,6 +5,7 @@ body {
 .profile-dropdown{
     align-items: right;
 }
+.dropdown:hover .dropdown-menu {display: block;}
 .top-bar{
     padding-left: 110px;
     padding-right: 120px;
