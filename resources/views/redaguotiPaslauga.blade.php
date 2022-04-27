@@ -284,7 +284,6 @@
             });
         function addPlan(){
             countPlans ++;
-            var pavadinimas = "{{$planai["countPlans"]->pavadinimas}}";
             var html = 
             '<div class="plan'+countPlans+'">'+
             '<div class="round">'+
@@ -294,7 +293,7 @@
                             '<div class="col">'+
                                 '<div class="form-group">'+
                                 '<label>Plano pavadinimas</label>'+
-                                '<input class="form-control" type="text" name="pavadinimas'+countPlans+'" id="pavadinimas'+countPlans+'" placeholder="Įprastas" value="'pavadinimas'" required>'+
+                                '<input class="form-control" type="text" name="pavadinimas'+countPlans+'" id="pavadinimas'+countPlans+'" placeholder="Įprastas" value="" required>'+
                                 '</div>'+
                             '</div>'+
                             '<div class="col">'+
