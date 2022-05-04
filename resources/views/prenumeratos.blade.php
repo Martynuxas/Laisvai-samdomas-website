@@ -7,7 +7,6 @@
         @include('layouts.header')
         
     </head>
-    
     <body class="hm-gradient">
             <main>
                 <div class="container mt-4">
@@ -38,26 +37,16 @@
                                     @if (count($prenumeratos) == 0)
                                     Neturite prenumeratų.
                                     @else
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Kategorija</th>
-                                                <th>Veiksmas</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+
                                             @foreach($prenumeratos as $prenumerata)
                                                 <tr>
-                                                    <td><div><b>{{$prenumerata->kategorijos->pavadinimas}}</b></div></td>
-                                                    <td>
-                                                        <a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deletePrenumerata/{{$prenumerata->id}}'>
-                                                        <span>Pašalinti</span>
+                                                    <br>
+                                                        <a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori atšaukti prenumerata?')" href='deletePrenumerata/{{$prenumerata->id}}'>
+                                                        <span>Atšaukti kategorijos <b>{{$prenumerata->kategorijos->pavadinimas}}</b> prenumerata</span>
                                                         </a>
-                                                    </td>
+                                                    <br>
                                                 </tr>
                                             @endforeach
-                                        </tbody>
-                                    </table>
                                             {{$prenumeratos->links()}}
                                     @endif
                                 </nav>

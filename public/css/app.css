@@ -1013,7 +1013,14 @@ body {
   }
   
   .blog .blog-item {
+    background-color: rgb(241, 241, 241);
+    border-radius: 20px;
     margin-bottom: 45px;
+
+  }
+  .blog-item:hover{
+    border-radius: 20px;
+    background-color: rgb(228, 226, 226);
   }
   
   .blog .blog-img {
@@ -1064,7 +1071,9 @@ body {
   }
   
   .blog .blog-text {
+    
     padding: 25px 0 20px 0;
+    padding-left: 20px;
   }
   
   .blog .blog-text h3 {

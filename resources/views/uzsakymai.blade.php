@@ -50,7 +50,7 @@
                                     
                                     <!------Specialistas------>
                                     @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas != 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo')
-                                    <td><button type="button" data-dismiss="modal" data-toggle="modal" data-target="#BusenosKeitimas" onclick="giveData({{$uzsakymas->id}})" class="btn btn-primary">Keisti būsena</button>
+                                    <td><button type="button" onclick="giveData({{$uzsakymas->id}})" class="btn btn-primary">Keisti būsena</button>
                                     @endif
                                     @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Laukiama patvirtinimo')
                                     <td><a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteUzsakyma/{{$uzsakymas->id}}'>

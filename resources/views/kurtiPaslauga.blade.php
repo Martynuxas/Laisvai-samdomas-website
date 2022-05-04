@@ -27,7 +27,7 @@
                                 @endforeach
                                 </select>
                             </div>
-                            <br>
+                    <br>
                     <h6 class="text-uppercase">Asmens tipas? *</h6>
                             <div class="inputbox mt-3 mr-2">
                                 <select id="asmens_tipas" name="asmens_tipas">
@@ -68,6 +68,16 @@
                             <div class="inputbox mt-3 mr-2"> <input type="text" id="miestas" name="miestas" placeholder="..."></div>
                         </div>
                     </div>
+                    <h6 class="text-uppercase">Pasirinkite (DUK) klausimyną? *</h6>
+                    <div class="inputbox mt-3 mr-2">
+                        <select id="klausimynoId" name="klausimynoId">
+                        <option></option>
+                        @foreach($duks as $duk)
+                        <option value="{{$duk->id}}">{{$duk->pavadinimas}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <br>
                     <div class="row">
                         <div class="col-md-12">
                             <h6 class="text-uppercase">Jūsų paslaugos puslapio antraštė *</h6>
@@ -77,7 +87,7 @@
                     <div class="row">
                         <div class="col mb-3">
                           <div class="form-group">
-                            <label>Apie mane</label>
+                            <label>Aprašykite jūsų paslaugą</label>
                             <textarea class="form-control" id="editor" name="editor"rows="5"></textarea>
                             <script>
                                 ClassicEditor
@@ -123,6 +133,10 @@
 <script type="text/javascript">
      $("#kategorija").select2({
             placeholder: "Ieškokite kategorijos",
+            allowClear: true
+        });
+        $("#klausimynoId").select2({
+            placeholder: "Ieškokite DUK klausimyno",
             allowClear: true
         });
 </script>

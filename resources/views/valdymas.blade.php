@@ -50,7 +50,10 @@
                                     
                                     <!------Specialistas------>
                                     @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas != 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo')
-                                    <td><button type="button" data-dismiss="modal" data-toggle="modal" data-target="#BusenosKeitimas" onclick="giveData({{$uzsakymas->id}})" class="btn btn-primary">Keisti būsena</button>
+                                    <td><button type="button" onclick="giveData({{$uzsakymas->id}})" class="btn btn-primary">Keisti būsena</button>
+                                    @endif
+                                    @if( $uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo')
+                                    <td><button type="button" onclick="" class="btn btn-warning">Įvertinti</button>
                                     @endif
                                     @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Laukiama patvirtinimo')
                                     <td><a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteUzsakyma/{{$uzsakymas->id}}'>
@@ -78,7 +81,7 @@
                             <tr class="text-center">
                                 <th>#</th>
                                 <th>Pavadinimas</th>
-                                <th>Sukurtas</th>
+                                <th>Būsena</th>
                                 <th>Veiksmai</th>
                             </tr>
                         </thead>
@@ -86,10 +89,9 @@
                             @foreach($paslaugos as $paslauga)
                                 <tr class="text-center">
                                     <th scope="row">{{$paslauga->id}}</th>
-                                    <td>{{$paslauga->pavadinimas}}</td>
-                                    <td>{{$paslauga->data}}</td>
-                                    <td>
-                                    <a href="paslauga/{{$paslauga->id}}" class="btn btn-success">Žiurėti</a>    
+                                    <td><div onclick="location.href='paslauga/{{$paslauga->id}}';" style="cursor: pointer;"><b>{{$paslauga->pavadinimas}}</b></td></div>
+                                    <td>{{$paslauga->busena}}</td>
+                                    <td>  
                                     <a href="paslaugaEdit/{{$paslauga->id}}" class="btn btn-primary">Redaguoti</a>
                                     <a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deletePaslauga/{{$paslauga->id}}'>
                                     <span>Pašalinti</span>
@@ -115,7 +117,7 @@
                             <tr class="text-center">
                                 <th>#</th>
                                 <th>Pavadinimas</th>
-                                <th>Sukurtas</th>
+                                <th>Būsena</th>
                                 <th>Veiksmai</th>
                             </tr>
                         </thead>
@@ -124,9 +126,8 @@
                                 <tr class="text-center">
                                     <th scope="row">{{$uzklausa->id}}</th>
                                     <td>{{$uzklausa->pavadinimas}}</td>
-                                    <td>{{$uzklausa->data}}</td>
+                                    <td>{{$uzklausa->busena}}</td>
                                     <td>
-                                    <a href="uzklausa/{{$uzklausa->id}}" class="btn btn-success">Žiurėti</a>    
                                     <a href="uzklausaEdit/{{$uzklausa->id}}" class="btn btn-primary">Redaguoti</a>
                                     <a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteUzklausa/{{$uzklausa->id}}'>
                                     <span>Pašalinti</span>
@@ -152,7 +153,7 @@
                             <tr class="text-center">
                                 <th>#</th>
                                 <th>Pavadinimas</th>
-                                <th>Atnaujintas</th>
+                                <th>Būsena</th>
                                 <th>Veiksmai</th>
                             </tr>
                         </thead>
@@ -161,7 +162,7 @@
                                 <tr class="text-center">
                                     <th scope="row">{{$konkursas->id}}</th>
                                     <td>{{$konkursas->pavadinimas}}</td>
-                                    <td>{{$konkursas->atnaujintas}}</td>
+                                    <td>{{$konkursas->busena}}</td>
                                     <td><input type="hidden" name="id" id="id" value="{{$konkursas->id}}"/>
                                     <a href="pasiulymas/{{$konkursas->id}}" class="btn btn-success">Pasiūlymai</a>
                                     <a href="konkursasEdit/{{$konkursas->id}}" class="btn btn-primary">Redaguoti</a>
@@ -189,7 +190,6 @@
                             <tr class="text-center">
                                 <th>#</th>
                                 <th>Pavadinimas</th>
-                                <th>Atnaujintas</th>
                                 <th>Veiksmai</th>
                             </tr>
                         </thead>
@@ -198,7 +198,6 @@
                                 <tr class="text-center">
                                     <th scope="row">{{$klausimas->id}}</th>
                                     <td>{{$klausimas->pavadinimas}}</td>
-                                    <td>{{$klausimas->atnaujintas}}</td>
                                     <input type="hidden" name="id" id="id" value="{{$klausimas->id}}"/>
                                     <td><a href="klausimaiEdit/{{$klausimas->id}}" class="btn btn-primary">Redaguoti</a>
                                     <a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteKlausima/{{$klausimas->id}}'>
@@ -218,9 +217,15 @@
         @include('layouts.footer')
     </body>
 </html>
-
+<script>
+    function giveData(e){
+        var x = e;
+        $('#idas').val(x);  //The id where to pass the value
+        $('#keistiProgresa').modal('show'); //The id of the modal to show
+    };
+</script>
 <!-- Modal -->
-<div class="modal fade" id="BusenosKeitimas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="keistiProgresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -234,7 +239,7 @@
                 <div class="alert alert-danger" style="display:none"></div>
                     @csrf
                     <div class="inputbox mt-3 mr-2">
-                            <input type="hidden" name="id" id="id">
+                            <input type="hidden" name="idas" id="idas">
                             <input type="hidden" name="progresas" id="progresas">
 
                             <select id="progresas" name="progresas">
@@ -289,10 +294,3 @@
         </div>
     </div>
 </div>
-<script>
-    function giveData(e){
-        var x = e;
-        $('#id').val(x);  //The id where to pass the value
-        $('#keistiProgresa').modal('show'); //The id of the modal to show
-    };
-</script>

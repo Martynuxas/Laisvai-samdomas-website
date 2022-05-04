@@ -17,7 +17,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $skelbimai = Skelbimas::orderByDesc('id')->take(-3)->get();
+        $skelbimai = Skelbimas::orderByDesc('id')->take(4)
+        ->where('busena', '=', 'patvirtinta')->get();
         return view('index', ['skelbimai'=>$skelbimai]);
     }
     public function showChangePasswordGet() {

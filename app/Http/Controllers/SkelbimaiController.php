@@ -12,6 +12,7 @@ use App\Models\Komentaras;
 use App\Models\Planas;
 use App\Models\Nuotrauka;
 use Symfony\Component\ErrorHandler\Debug;
+use App\Models\Klausimas;
 
 class SkelbimaiController extends Controller
 {
@@ -29,11 +30,12 @@ class SkelbimaiController extends Controller
     }
     public function skelbimas($id){
         $skelbimas = Skelbimas::find($id);
+        $DUKS = Klausimas::find($skelbimas->klausimynoId);
         $komentarai = Komentaras::with('userKomentavo')
         ->where('paslaugos_id', '=', $id)
         ->orderBy('data', 'desc')
         ->paginate(10);
-        return view('skelbimas',['skelbimas'=> $skelbimas, 'komentarai'=>$komentarai]);
+        return view('skelbimas',['skelbimas'=> $skelbimas, 'komentarai'=>$komentarai, 'duks'=>$DUKS]);
     }
     public function insertSkelbimus(Request $request)
     {
@@ -93,13 +95,13 @@ class SkelbimaiController extends Controller
         $skelbimas->vartotojo_id = $request->input('vartotojo_id');
         $skelbimas->save();
     }
-    return Redirect::to('/skelbimai')->with('success', 'Skelbimas pridėtas');
+    return Redirect::to('/skelbimai')->with('message', 'Skelbimas pridėtas');
     }
     public function deleteSkelbimus($id)
     {
         $data=Skelbimas::find($id);
         $data->delete();
-    return Redirect::to('/skelbimai ')->with('success', 'Skelbimas pašalintas');
+    return Redirect::to('/skelbimai ')->with('message', 'Skelbimas pašalintas');
     }
     function gautiVartotoja($vartotojoid){
         $vartotojas = Vartotojas::find($vartotojoid);
@@ -139,6 +141,6 @@ class SkelbimaiController extends Controller
         $data->miestas=$request->miestas;
         $data->vartotojo_id=$request->vartotojo_id;
         $data->save();
-        return Redirect::to('/skelbimai ')->with('success', 'Skelbimas redaguotas');
+        return Redirect::to('/skelbimai ')->with('message', 'Skelbimas redaguotas');
     }
 }

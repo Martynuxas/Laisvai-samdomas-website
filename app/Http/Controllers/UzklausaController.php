@@ -19,7 +19,9 @@ class UzklausaController extends Controller
      */
     public function index()
     {
-        $uzklausos = Uzklausa::paginate(10);
+        $uzklausos = Uzklausa::orderBy('data', 'DESC')
+        ->where('busena', '=', 'patvirtinta')
+        ->paginate(10);
         return view('uzklausa', ['uzklausos'=>$uzklausos]);
     }
     public function deleteUzklausosNuotrauka($id){

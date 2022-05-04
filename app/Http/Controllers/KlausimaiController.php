@@ -25,7 +25,7 @@ class KlausimaiController extends Controller
     {
         $data=Klausimas::find($id);
         $data->delete();
-        return Redirect::to('/valdymas ')->with('success', 'DUK pašalintas');
+        return Redirect::to('/valdymas ')->with('message', 'DUK pašalintas');
     }
 
     public function sukurtiKlausimus(Request $request)
@@ -43,17 +43,17 @@ class KlausimaiController extends Controller
             'atsakymas4' => $request->input('atsakymas4'),
             'atsakymas5' => $request->input('atsakymas5')
             ],
-            ['pavadinimas' => 'required|max:50',
-            'klausimas1' => 'nullable|max:100',
-            'klausimas2' => 'nullable|max:100',
-            'klausimas3' => 'nullable|max:100',
-            'klausimas4' => 'nullable|max:100',
-            'klausimas5' => 'nullable|max:100',
-            'atsakymas1' => 'nullable|max:100',
-            'atsakymas2' => 'nullable|max:100',
-            'atsakymas3' => 'nullable|max:100',
-            'atsakymas4' => 'nullable|max:100',
-            'atsakymas5' => 'nullable|max:100'
+            ['pavadinimas' => 'required',
+            'klausimas1' => 'nullable',
+            'klausimas2' => 'nullable',
+            'klausimas3' => 'nullable',
+            'klausimas4' => 'nullable',
+            'klausimas5' => 'nullable',
+            'atsakymas1' => 'nullable',
+            'atsakymas2' => 'nullable',
+            'atsakymas3' => 'nullable',
+            'atsakymas4' => 'nullable',
+            'atsakymas5' => 'nullable'
             ]
             );
         if ($validator->fails())
@@ -78,7 +78,7 @@ class KlausimaiController extends Controller
         $klausimas->atnaujintas=date('Y-m-d H:i:s');
         $klausimas->save();
         }
-        return Redirect::back()->with('success', 'DUK sukurtas!');
+        return Redirect::back()->with('message', 'DUK sukurtas!');
     }
     public function updateKlausimus(Request $request)
     {
@@ -95,17 +95,17 @@ class KlausimaiController extends Controller
             'atsakymas4' => $request->input('atsakymas4'),
             'atsakymas5' => $request->input('atsakymas5')
             ],
-            ['pavadinimas' => 'required|max:50',
-            'klausimas1' => 'nullable|max:100',
-            'klausimas2' => 'nullable|max:100',
-            'klausimas3' => 'nullable|max:100',
-            'klausimas4' => 'nullable|max:100',
-            'klausimas5' => 'nullable|max:100',
-            'atsakymas1' => 'nullable|max:100',
-            'atsakymas2' => 'nullable|max:100',
-            'atsakymas3' => 'nullable|max:100',
-            'atsakymas4' => 'nullable|max:100',
-            'atsakymas5' => 'nullable|max:100'
+            ['pavadinimas' => 'required',
+            'klausimas1' => 'nullable',
+            'klausimas2' => 'nullable',
+            'klausimas3' => 'nullable',
+            'klausimas4' => 'nullable',
+            'klausimas5' => 'nullable',
+            'atsakymas1' => 'nullable',
+            'atsakymas2' => 'nullable',
+            'atsakymas3' => 'nullable',
+            'atsakymas4' => 'nullable',
+            'atsakymas5' => 'nullable'
             ]
             );
         if ($validator->fails())
@@ -130,7 +130,7 @@ class KlausimaiController extends Controller
         $klausimas->atnaujintas=date('Y-m-d H:i:s');
         $klausimas->save();
         }
-        return Redirect::back()->with('success', 'DUK atnaujintas!');
+        return Redirect::back()->with('message', 'DUK atnaujintas!');
     }
 
 

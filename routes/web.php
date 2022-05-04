@@ -100,6 +100,8 @@ Route::get('/suma', function () {
 Route::get('mokejimas','App\Http\Controllers\MokejimasController@mokejimas')->name('mokejimas');
 Route::post('mokejimas','App\Http\Controllers\MokejimasController@poMokejimo');
 Route::post('mokejimasRed','App\Http\Controllers\MokejimasController@mokejimasRed');
+
+Route::post('pervedimas','App\Http\Controllers\MokejimasController@pervedimas');
 Route::post('/process',[App\Http\Controllers\PaymentController::class, 'paymentAction'])->name('payment_process');
 
 Route::get('/pranesimai', [App\Http\Controllers\PranesimaiController::class, 'index'])->name('pranesimai');
@@ -170,6 +172,7 @@ Route::post('/keistiSlaptazodi', [App\Http\Controllers\HomeController::class, 'c
 Route::post('prenumeruoti',[App\Http\Controllers\PrenumeratosController::class, 'kurtiPrenumerata']);
 
 Route::get('/deletePrenumerata/{id}', [App\Http\Controllers\PrenumeratosController::class, 'deletePrenumerata']);
+Route::get('/deletePaslauga/{id}', [App\Http\Controllers\PaslaugosController::class, 'deletePaslauga']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -182,3 +185,15 @@ Route::get('/delete', [App\Http\Controllers\ImageUploadController::class, 'destr
 
 Route::get('/deleteUzklausosNuotrauka/{id}', [App\Http\Controllers\UzklausaController::class, 'deleteUzklausosNuotrauka']);
 Route::get('/paslaugaEdit/{id}',[App\Http\Controllers\PaslaugosController::class, 'showData']);
+
+Route::get('/adminValdymas', [App\Http\Controllers\ValdymasController::class, 'adminValdymas']);
+Route::get('/adminPatvirtinimas', [App\Http\Controllers\ValdymasController::class, 'AdminPatvirtinimas']);
+
+Route::get('/paslaugaPatvirtinti/{id}', [App\Http\Controllers\PaslaugosController::class, 'paslaugaPatvirtinti']);
+Route::get('/paslaugaAtsaukti/{id}', [App\Http\Controllers\PaslaugosController::class, 'paslaugaAtsaukti']);
+
+Route::get('/uzklausaPatvirtinti/{id}', [App\Http\Controllers\KurtiController::class, 'uzklausaPatvirtinti']);
+Route::get('/uzklausaAtsaukti/{id}', [App\Http\Controllers\KurtiController::class, 'uzklausaAtsaukti']);
+
+Route::get('/konkursasPatvirtinti/{id}', [App\Http\Controllers\KonkursasController::class, 'konkursasPatvirtinti']);
+Route::get('/konkursasAtsaukti/{id}', [App\Http\Controllers\KonkursasController::class, 'konkursasAtsaukti']);

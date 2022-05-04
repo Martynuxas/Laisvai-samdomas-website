@@ -14,4 +14,8 @@ class Uzklausa extends Model
     {
         return $this->hasOne('App\Models\Kategorija', 'id', 'kategorija');
     }
+    public function users()
+    {
+        return $this->belongsTo('App\Models\User', 'vartotojo_id');
+    }
 }

@@ -18,7 +18,10 @@
         <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
         <link href="lib/animate/animate.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
+
 
 <!-- Top -->
         <div class="top-bar">
@@ -46,6 +49,9 @@
                         <a href="{{ url('/pranesimai') }}" class="dropdown-item"><i class="fa fa-bell"></i> Pranešimai</a>
                         <a href="{{ url('/tab1') }}" class="dropdown-item"><i class="fa fa-heart"></i> Įsiminti</a>
                         <a href="" class="dropdown-item" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-money"></i> Piniginė: {{ Auth::user()->valiuta }}€</a>
+
+                        <a href="{{ url('/tab1') }}" class="dropdown-item" data-toggle="modal" data-target="#adminPasirinkimas"><i class="fa fa-lock"></i> Admin</a>
+
                         <div class="divider dropdown-divider"></div>
                         <a href="{{ url('/logout') }}" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Atsijungti</a>
                     </div>
@@ -70,14 +76,22 @@
                             </button>
                             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                 <div class="navbar-nav mr-auto">
-                                    <a href="{{ route('paslaugos') }}" class="nav-item nav-link">Ieškoti paslaugų</a>
-                                    <a href="{{ route('prenumeratos') }}" class="nav-item nav-link">Gauti pasiūlymus</a>
+                                    <a href="{{ route('paslaugos') }}" class="nav-item nav-link">Paslaugų teikėjai</a>
+                                    @if (\Illuminate\Support\Facades\Auth::check())
+                                    <a href="{{ route('prenumeratos') }}" class="nav-item nav-link">Gauk pasiūlymus</a>
+                                    @else
+                                    <a href="{{ route('login') }}" class="nav-item nav-link">Gauk pasiūlymus</a>
+                                    @endif
                                     <a href="{{ route('uzklausa') }}" class="nav-item nav-link">Klientų užklausos</a>
                                     <a href="{{ route('konkursai') }}" class="nav-item nav-link">Konkursai</a>
                                     <a href="{{ route('kontaktai') }}" class="nav-item nav-link">Kontaktai</a>
                                 </div>
                                 <div class="ml-auto">
+                                    @if (\Illuminate\Support\Facades\Auth::check())
                                     <a class="btn btn-custom" href="{{ route('kurti') }}">Sukurti užklausą</a>
+                                    @else
+                                    <a class="btn btn-custom" href="{{ route('login') }}">Sukurti užklausą</a>
+                                    @endif
                             
                                         <a class="btn btn-custom" href="{{ URL::previous() }}">Atgal</a>
                                 </div>
@@ -169,7 +183,34 @@
             </div>
         </div>
     </div>
+    <!---MODAL adminui-->
 
+    <div class="modal fade" id="adminPasirinkimas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Administratorių valdymo panelė</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form class="" method="post" action="" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="alert alert-danger" style="display:none"></div>
+                        @csrf
+                        <div class="form-group">
+                            <label>Pasirinkite ką norite atlikti:</label><br>
+                            <a class="btn btn-success" href="/adminValdymas">Valdymas - paslaugų, užklausų, konkursų</a><br><br>
+                            <a class="btn btn-success" href="/adminPatvirtinimas">Patvirtinimai - paslaugų, užklausų, konkursų</a>
+                        </div>  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Uždaryti</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!---MODAL pokalbiam-->
 
  <div class="modal fade" id="pokalbisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -190,7 +231,7 @@
                              <label>Jūsų kambario slaptažodis: {{ Auth::user()->kambarioSlaptazodis }}</label><br>
                             @endif
                             <label>Pasirinkite ką norite atlikti:</label><br>
-                            <a class="btn btn-success" href="manoKambarys">Mano kambarys</a>
+                            <a class="btn btn-success" href="/manoKambarys">Mano kambarys</a>
                             <input data-dismiss="modal" data-toggle="modal" data-target="#kambarioPasirinkimasModal" class="btn btn-success" value="Kito asmens kambarys" />
                         </div>  
                 </div>
@@ -230,30 +271,21 @@
             </div>
         </div>
     </div>
+    @if(Session::has('message'))
+        <script>
+            toastr.success("{!! Session::get('message') !!}");
+        </script>
+    @endif
+    @if(Session::has('alert'))
     <script>
-        @if(Session::has('message'))
-        toastr.options =
-        {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-                toastr.options.positionClass = 'toast-bottom-right';
-                toastr.success("{{ session('message') }}");
-        @endif
-        @if(Session::has('alert'))
-        toastr.options =
-        {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-                toastr.options.positionClass = 'toast-bottom-right';
-                toastr.error("{{ session('alert') }}");
-        @endif
+        toastr.error("{!! Session::get('alert') !!}");
     </script>
+@endif
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <div class="col-12 col-md-9">
         @if (\Session::has('success'))
         <div class="alert alert-success">
-                <p>{!! \Session::get('success') !!}</p>
+            <p>{!! \Session::get('success') !!}</p>
         </div>
         @endif
         @if (count($errors) > 0)

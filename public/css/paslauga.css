@@ -49,12 +49,9 @@ img {
   }
 @media only screen and (min-width: 600px){
 .text-display-3 {
-    font-size: 28px;
-}
-.text-display-3 {
     font-size: 24px;
-    line-height: 130%;
 }
+
 .content{
     width: 450px;
     height: auto;
@@ -117,7 +114,7 @@ img {
     font-weight: normal;
 }
 .text-display{
-    font-size: 20px;
+    font-size: 16px;
 }
 .firstCol{
     margin-left: 150px;
@@ -157,7 +154,7 @@ img {
 }
 .miniText{
     text-align: center;
-    font-size: 8px
+    font-size: 10px
 }
 
 .number {
@@ -202,4 +199,76 @@ hr .new1 {
 
 .date {
     background-color: #ccc
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+
+
+details div {
+	border-left: 2px solid #000;
+	border-right: 2px solid #000;
+	border-bottom: 2px solid #000;
+	padding: 1.5em;
+}
+
+details div > * + * {
+	margin-top: 1.5em;
+}
+
+details + details {
+	margin-top: .5rem;
+}
+
+summary {
+	list-style: none;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+summary {
+	border: 2px solid #000;
+	padding: .75em 1em;
+	cursor: pointer;
+	position: relative;
+	padding-left: calc(1.75rem + .75rem + .75rem);
+}
+
+summary:before {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: .75rem;
+	content: "↓";
+	width: 1.75rem;
+	height: 1.75rem;
+	background-color: #000;
+	color: #FFF;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+details[open] summary {
+	background-color: #eee;
+}
+
+details[open] summary:before {
+	content: "↑";
+}
+
+summary:hover {
+	background-color: #eee;
+}
+
+code {
+	font-family: monospace;
+	font-weight: 600;
+}
+.duk{
+    justify-content: center!important;
+    width: 300px;
+    padding-bottom: 30px;
 }

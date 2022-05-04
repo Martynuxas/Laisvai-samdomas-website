@@ -37,4 +37,30 @@ class ValdymasController extends Controller
         $vartotojai = Vartotojas::all();
         return view('valdymas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'klausimai'=>$klausimai,'konkursai'=>$konkursai,'uzsakymai'=>$uzsakymai,'progresai'=>$progresai,'vartotojai'=>$vartotojai]);
     }
+    function adminValdymas()
+    {
+        $uzklausos = Uzklausa::orderBy('data', 'desc')
+        ->paginate(5);
+        $paslaugos = Skelbimas::orderBy('data', 'desc')
+        ->paginate(5);
+        $konkursai = Konkursas::orderBy('atnaujintas', 'desc')
+        ->paginate(5);
+        $vartotojai = Vartotojas::all();
+        return view('adminValdymas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'konkursai'=>$konkursai,'vartotojai'=>$vartotojai]);
+    }
+    function adminPatvirtinimas()
+    {
+        $uzklausos = Uzklausa::where('busena', '=', 'Laukiama patvirtinimo')
+        ->orderBy('data', 'desc')
+        ->paginate(5);
+        $paslaugos = Skelbimas::where('busena', '=', 'Laukiama patvirtinimo')
+        ->orderBy('data', 'desc')
+        ->paginate(5);
+        $konkursai = Konkursas::where('busena', '=', 'Laukiama patvirtinimo')
+        ->orderBy('atnaujintas', 'desc')
+        ->paginate(5);
+        $progresai = Progresas::all();
+        $vartotojai = Vartotojas::all();
+        return view('adminPatvirtinimas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'konkursai'=>$konkursai,'progresai'=>$progresai,'vartotojai'=>$vartotojai]);
+    }
 }

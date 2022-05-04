@@ -71,6 +71,15 @@
                             <div class="inputbox mt-3 mr-2"> <input type="text" id="miestas" name="miestas" placeholder="..." value="{{$data->miestas}}"></div>
                         </div>
                     </div>
+                    <h6 class="text-uppercase">Pasirinkite (DUK) klausimyną? *</h6>
+                    <div class="inputbox mt-3 mr-2">
+                        <select id="klausimynoId" name="klausimynoId">
+                        <option value="{{$data->duksai->id}}">{{$data->duksai->pavadinimas}}</option>
+                        @foreach($duksas as $dukas)
+                            <option value="{{$dukas->id}}">{{$dukas->pavadinimas}}</option>
+                        @endforeach
+                        </select>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <h6 class="text-uppercase">Jūsų paslaugos puslapio antraštė *</h6>
@@ -138,11 +147,14 @@
             placeholder: "Ieškokite kategorijos",
             allowClear: true
         });
+        $("#klausimynoid").select2({
+            placeholder: "Ieškokite DUK klausimyno",
+            allowClear: true
+        });
 </script>
 <script>
         const delImageFromData = (index, divName) => {
         var id = index;
-        var token = $("meta[name='csrf-token']").attr("content");
         if(confirm('Ar tikrai norite pašalinti nuotrauką?')) {
         $.ajax({
             type: "GET",
@@ -293,19 +305,19 @@
                             '<div class="col">'+
                                 '<div class="form-group">'+
                                 '<label>Plano pavadinimas</label>'+
-                                '<input class="form-control" type="text" name="pavadinimas'+countPlans+'" id="pavadinimas'+countPlans+'" placeholder="Įprastas" value="" required>'+
+                                '<input class="form-control" type="text" name="pavadinimas'+countPlans+'" id="pavadinimas'+countPlans+'" placeholder="Įprastas" required>'+
                                 '</div>'+
                             '</div>'+
                             '<div class="col">'+
                                 '<div class="form-group">'+
                                 '<label>Kaina</label>'+
-                                '<input class="form-control" type="text" name="kaina'+countPlans+'" id="kaina'+countPlans+'" placeholder="000e" value="{{$planai[0]->kaina}}" required>'+
+                                '<input class="form-control" type="text" name="kaina'+countPlans+'" id="kaina'+countPlans+'" placeholder="000e" required>'+
                                 '</div>'+
                             '</div>'+
                             '<div class="form-group">'+
                               '<label>Kainos tipas:</label>'+
                                 '<br>'+
-                                    '<select id="kainos_tipas'+countPlans+'" name="kainos_tipas'+countPlans+'" class="form-select" aria-label="Default select example" value="{{$planai[0]->kainos_tipas}}" required>'+
+                                    '<select id="kainos_tipas'+countPlans+'" name="kainos_tipas'+countPlans+'" class="form-select" aria-label="Default select example" required>'+
                                         '<option value="Fiksuota">Fiksuota</option>'+
                                         '<option value="Mėnesinė">Mėnesinė</option>'+
                                     '</select>'+
@@ -315,7 +327,7 @@
                             '<div class="col">'+
                                 '<div class="form-group">'+
                                 '<label>Lauko tekstas</label>'+
-                                    '<input class="form-control" type="text" name="tekstas'+countPlans+'_1" id="tekstas'+countPlans+'_1" placeholder="10 puslapių" value="{{$planai[0]->tekstas_1}}" required>'+
+                                    '<input class="form-control" type="text" name="tekstas'+countPlans+'_1" id="tekstas'+countPlans+'_1" placeholder="10 puslapių" required>'+
                                 '<div id="dynamic_field_append'+countPlans+'"></div>'+
                                 '</div>'+
                             '</div>'+

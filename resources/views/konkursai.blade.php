@@ -18,9 +18,16 @@
                             <div class="card p-3">
                                 <h3><a href="#">{{$konkursas->pavadinimas}}</a></h3>
                                 <div class="blog-meta" style="align: center; margin: auto; text-align: center;">
-                                    <p><i class="fa fa-user"></i><a>{{$konkursas->kategorijos->pavadinimas}}</a></p>
-                                    <p><i class="fa fa-folder"></i><a><b>{{App\Http\Controllers\KonkursasController::gautiPasiulymuSkaiciu($konkursas->id)}}</b> pasiūlymų</a></p>
-                                    <p><i class="fa fa-comments"></i><a>Galioja iki: <b>{{$konkursas->galutineData}}</b></a></p>
+                                        @if($konkursas->users->name != '')
+                                        <b><p><i class="fa fa-user"></i>{{$konkursas->users->name}}[{{$konkursas->users->id}}] </p><p></p></b>
+                                        @endif
+                                        @if($konkursas->kategorijos->pavadinimas != '')
+                                        <b><p><i class="fa fa-folder"></i>{{$konkursas->kategorijos->pavadinimas}} </p><p></p></b>
+                                        @endif
+                                        @if($konkursas->data != '')
+                                        <b><p><i class="fa fa-clock-o"></i>Galioja iki: {{$konkursas->galutineData}}</p><p></p></b>
+                                        @endif
+                                        <b><p>Pasiūlymų: {{App\Http\Controllers\KonkursasController::GautiPasiulymuSkaiciu($konkursas->id)}}</p></b>
                                 </div>
                                 <p>
                                 {{$konkursas->aprasymas}}
@@ -29,19 +36,21 @@
                                 <div>
                                 <div style="align: center; margin: auto; text-align: center; padding-top: 10px">
                                 <a href="pasiulymas/{{$konkursas->id}}" class="btn btn-success">Žiūrėti pasiūlymus</a>
-                                @if($konkursas->galutineData > Carbon::Now())
-                                    @if ($konkursas->vartotojo_id != Auth::user()->id)
-                                        @if (App\Http\Controllers\KonkursasController::arJauPasiule(Auth::user()->id, $konkursas->id) == false)
-                                        <a href="" class="btn btn-warning" data-toggle="modal" data-target="#konkursoPasiulymas" onclick="giveData({{$konkursas->id}})">Pasiūlyti kainą</a>
+                                @if (\Illuminate\Support\Facades\Auth::check())
+                                    @if($konkursas->galutineData > Carbon::Now())
+                                        @if ($konkursas->vartotojo_id != Auth::user()->id)
+                                            @if (App\Http\Controllers\KonkursasController::arJauPasiule(Auth::user()->id, $konkursas->id) == false)
+                                            <a href="" class="btn btn-warning" data-toggle="modal" data-target="#konkursoPasiulymas" onclick="giveData({{$konkursas->id}})">Pasiūlyti kainą</a>
+                                            @else
+                                            <a class="btn btn-success" disabled>Jau pasiūlėte</a>
+                                            @endif
                                         @else
-                                        <a class="btn btn-success" disabled>Jau pasiūlėte</a>
+                                        <a class="btn btn-danger" disabled>Negalite sau siūlyti</a>
                                         @endif
                                     @else
-                                    <a class="btn btn-danger" disabled>Negalite sau siūlyti</a>
+                                    <a class="btn btn-danger" disabled>Konkursas pasibaigęs</a>
                                     @endif
-                                @else
-                                <a class="btn btn-danger" disabled>Konkursas pasibaigęs</a>
-                                @endif
+                                 @endif
                                 </div>
                                 </div>
                             </div>

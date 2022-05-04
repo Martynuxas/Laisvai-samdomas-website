@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/kurti.css') }}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     @include('layouts.header')
@@ -66,3 +67,10 @@
     </body>
     @include('layouts.footer')
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+     $("#kategorija").select2({
+            placeholder: "Ieškokite kategorijos",
+            allowClear: true
+        });
+</script>

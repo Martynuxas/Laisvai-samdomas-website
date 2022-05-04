@@ -20,7 +20,7 @@ class PrenumeratosController extends Controller
     public function deletePrenumerata($id){
         $data=Prenumerata::find($id);
         $data->delete();
-    return Redirect::back()->with('success', 'Prenumerata pašalinta');
+    return Redirect::back()->with('message', 'Prenumerata pašalinta');
     }
     public function kurtiPrenumerata(Request $request){
             if($this->arKategorijaPrenumeruota(Auth::user()->id, $request->kategorija) == false){
@@ -30,7 +30,7 @@ class PrenumeratosController extends Controller
             $prenumerata->vartotojo_id = Auth::user()->id;
             $prenumerata->data = date('Y-m-d H:i:s');
             $prenumerata->save();
-            return Redirect::back()->with('success', 'Užprenumeravote kategoriją!');
+            return Redirect::back()->with('message', 'Užprenumeravote kategoriją!');
             }
             return Redirect::back()->with('alert', 'Jūs jau užsiprenumeravęs šią kategoriją!');
     }

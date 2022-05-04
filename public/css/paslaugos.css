@@ -18,6 +18,7 @@ body {
   background: #f6f6f6;
 }
 .card-h {
+  position: relative;
   scroll-snap-align: center;
   background: white;
   width: 240px;
@@ -36,8 +37,14 @@ body {
   height: 190px;
   object-fit: cover;
 }
+.remember{
+  z-index: 1000;
+  position: absolute;
+}
+.remember:hover{
+  color: rgb(61, 127, 240);
+}
 .card-h:hover{
-  background-color: #4071d9;
   transition: transform .2s;
   transform: scale(1.08);
 }
@@ -48,6 +55,8 @@ body {
   left: 10px;
 }
 .card-h .card-body {
+  background: rgb(235, 233, 233);
+  border-radius: 10px;
   padding: 5px 20px 0;
   flex: 1;
 }

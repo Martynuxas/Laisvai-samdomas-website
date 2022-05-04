@@ -22,4 +22,8 @@ class Skelbimas extends Model
     {
         return $this->hasOne('App\Models\Statusas', 'id', 'statuso_id');
     }
+    public function duksai()
+    {
+        return $this->belongsTo('App\Models\Klausimas', 'klausimynoId');
+    }
 }

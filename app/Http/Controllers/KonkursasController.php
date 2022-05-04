@@ -22,8 +22,21 @@ class KonkursasController extends Controller
     public function index()
     {
         $konkursai = Konkursas::orderBy('data', 'desc')
+        ->where('busena', '=', 'patvirtinta')
         ->paginate(10);
         return view('konkursai', ['konkursai'=>$konkursai,'Carbon' => 'Carbon\Carbon']);
+    }
+    public function konkursasPatvirtinti($id){
+        $konkursas = Konkursas::find($id);
+        $konkursas->busena = "patvirtinta";
+        $konkursas->save();
+        return Redirect::back()->with('message', 'Konkursas patvirtintas!');
+    }
+    public function konkursasAtsaukti($id){
+        $konkursas = Konkursas::find($id);
+        $konkursas->busena = "atšaukta";
+        $konkursas->save();
+        return Redirect::back()->with('message', 'Konkursas atšauktas!');
     }
     public function rodytiPasiulymus($id)
     {
@@ -51,7 +64,7 @@ class KonkursasController extends Controller
         $konkursas->data = date('Y-m-d H:i:s');
         $konkursas->atnaujintas = date('Y-m-d H:i:s');
         $konkursas->save();
-        return Redirect::back()->with('success', 'Konkursas sukurtas!');
+        return Redirect::back()->with('message', 'Konkursas sukurtas, LAUKITE ADMINISTRATORAIUS PATVIRTINIMO.');
     }
     public function konkursoSiulymas(Request $request)
     {
@@ -62,7 +75,7 @@ class KonkursasController extends Controller
         $konkursoPasiulymas->suma = $request->sumaDarbo;
         $konkursoPasiulymas->data=date('Y-m-d H:i:s');
         $konkursoPasiulymas->save();
-        return Redirect::back()->with('success', 'Pasiūlymas pateiktas!');
+        return Redirect::back()->with('message', 'Pasiūlymas pateiktas!');
     }
     public function arJauPasiule($id, $konkursoId){
         $rasti = KonkursoPasiulymas::All()
@@ -83,7 +96,7 @@ class KonkursasController extends Controller
     {
         $data=Konkursas::find($id);
         $data->delete();
-        return Redirect::to('/valdymas ')->with('success', 'Konkursas pašalinta');
+        return Redirect::back()->with('message', 'Konkursas pašalinta');
     }
 
     public function updateKonkursa(Request $request)
@@ -111,6 +124,6 @@ class KonkursasController extends Controller
         $uzklausa->pavadinimas = $request->input('pavadinimas');
         $uzklausa->save();
     }
-    return Redirect::to('/valdymas')->with('success', 'Konkursas atnaujinta');
+    return Redirect::back()->with('message', 'Konkursas atnaujinta');
     }
 }

@@ -13,6 +13,7 @@ use App\Models\Prenumerata;
 use App\Models\Skelbimas;
 use App\Models\Planas;
 use App\Models\ImageUpload;
+use App\Models\Klausimas;
 
 class KurtiController extends Controller
 {
@@ -30,7 +31,8 @@ class KurtiController extends Controller
     public function indexPaslauga()
     {
         $kategorijos = Kategorija::All();
-        return view('kurtiPaslauga', ['kategorijos'=>$kategorijos]);
+        $duks = Klausimas::where('vartotojo_id', '=', Auth::user()->id)->get();
+        return view('kurtiPaslauga', ['kategorijos'=>$kategorijos, 'duks'=>$duks]);
     }
     public function showData($id)
     {
@@ -42,9 +44,20 @@ class KurtiController extends Controller
     {
         $data=Uzklausa::find($id);
         $data->delete();
-        return Redirect::to('/valdymas ')->with('success', 'Užklausa pašalinta');
+        return Redirect::back()->with('message', 'Užklausa pašalinta!');
     }
-
+    public function uzklausaPatvirtinti($id){
+        $uzklausa = Uzklausa::find($id);
+        $uzklausa->busena = "patvirtinta";
+        $uzklausa->save();
+        return Redirect::back()->with('message', 'Užklausa patvirtinta!');
+    }
+    public function uzklausaAtsaukti($id){
+        $uzklausa = Uzklausa::find($id);
+        $uzklausa->busena = "atšaukta";
+        $uzklausa->save();
+        return Redirect::back()->with('message', 'Užklausa atšaukta!');
+    }
     public function insertUzklausa(Request $request)
     {
         $validator = Validator::make(
@@ -59,13 +72,13 @@ class KurtiController extends Controller
         ['laikas' => 'required',
         'biudzetas' => 'required|numeric',
         'kategorija' => 'required|alpha_num',
-        'aprasymas' => 'required|max:255',
-        'pavadinimas' => 'required|max:100'
+        'aprasymas' => 'required',
+        'pavadinimas' => 'required'
         ]
         );
     if ($validator->fails())
     {
-        //return Redirect::back()->withErrors($validator);
+        return Redirect::back()->withErrors($validator);
     }
     else
     {
@@ -95,8 +108,8 @@ class KurtiController extends Controller
            }
         }
     }
-    //$this->siustiPrenumeratoriams($request->input('kategorija'), $request->input('pavadinimas'));
-    //return Redirect::to('/kurti')->with('success', 'Užklausa patvirtinta');
+    $this->siustiPrenumeratoriams($request->input('kategorija'), $request->input('pavadinimas'));
+    return Redirect::back()->with('message', 'Užklausa sukurta, laukite administratoriaus patvirtinimo.');
     }
     public function gautiNuotraukas($skelbimas, $tipas){
         $nuotraukos = Nuotrauka::where('tipas','=', $tipas)->where('skelbimoid','=', $skelbimas)->get();
@@ -123,8 +136,8 @@ class KurtiController extends Controller
         ['laikas' => 'required',
         'biudzetas' => 'required|numeric',
         'kategorija' => 'required|alpha_num',
-        'aprasymas' => 'required|max:255',
-        'pavadinimas' => 'required|max:100'
+        'aprasymas' => 'required',
+        'pavadinimas' => 'required'
         ]
         );
     if ($validator->fails())
@@ -134,7 +147,6 @@ class KurtiController extends Controller
     else
     {
         $uzklausa = Uzklausa::find($request->input('id'));
-        $uzklausa->vartotojo_id = Auth::user()->id;
         $uzklausa->laikas = $request->input('laikas');
         $uzklausa->biudzetas = $request->input('biudzetas');
         $uzklausa->kategorija = $request->input('kategorija');
@@ -158,7 +170,7 @@ class KurtiController extends Controller
            }
         }
     }
-    return Redirect::to('/valdymas')->with('success', 'Užklausa atnaujinta');
+    return Redirect::back()->with('message', 'Užklausa atnaujinta!');
     }
     public function insertPaslauga(Request $request)
     {
@@ -201,6 +213,7 @@ class KurtiController extends Controller
         $skelbimas->statuso_id = 2;
         $skelbimas->asmens_tipas = $request->input('asmens_tipas');
         $skelbimas->miestas = $request->input('miestas');
+        $skelbimas->klausimynoId = $request->input('klausimynoId');
         $skelbimas->vartotojo_id = Auth::user()->id;
         $skelbimas->save();
         print_r($request->file('filename'));
@@ -237,6 +250,7 @@ class KurtiController extends Controller
                     $image->move(public_path().'/images/', $name);  
                 }
             }
+        if($request->input('pavadinimas1') != ''){
             $planas1 = new Planas();
             $planas1->pavadinimas = $request->input('pavadinimas1');
             $planas1->kainos_tipas = $request->input('kainos_tipas1');
@@ -248,6 +262,7 @@ class KurtiController extends Controller
             $planas1->tekstas_5 = $request->input('tekstas1_5');
             $planas1->kaina = $request->input('kaina1');
             $planas1->save();
+        }
         if($request->input('pavadinimas2') != ''){
             $planas2 = new Planas();
             $planas2->pavadinimas = $request->input('pavadinimas2');
@@ -276,7 +291,7 @@ class KurtiController extends Controller
         }
         }
     }
-    return Redirect::back()->with('success', 'Paslauga patvirtinta');
+    return Redirect::back()->with('message', 'Paslauga sukurta, LAUKITE ADMINISTRATORAIUS PATVIRTINIMO.');
     }
 
 }

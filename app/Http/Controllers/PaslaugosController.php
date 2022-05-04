@@ -11,12 +11,15 @@ use App\Models\Kategorija;
 use Auth;
 use App\Models\Nuotrauka;
 use App\Models\Planas;
+use App\Models\Klausimas;
+use App\Models\IsimintaPaslauga;
 
 class PaslaugosController extends Controller
 {
     public function index()
     {
-    $skelbimai = Skelbimas::with('kategorijos')->with('users')->orderBy('data','DESC')->get();
+    $skelbimai = Skelbimas::with('kategorijos')->with('users')->orderBy('data','DESC')
+    ->where('busena', '=', 'patvirtinta')->paginate(20);
     return view('paslaugos', ['skelbimai'=>$skelbimai]);
     }
     public function showData($id)
@@ -24,11 +27,34 @@ class PaslaugosController extends Controller
         $kategorijos = Kategorija::All();
         $planai = Planas::where('skelbimo_id','=',$id)->get();
         $data = Skelbimas::find($id);
-        return view('redaguotiPaslauga', ['data'=>$data,'kategorijos'=>$kategorijos,'planai'=>$planai]);
+        $duksas = Klausimas::where('vartotojo_id', '=', $data->vartotojo_id)->get();
+        return view('redaguotiPaslauga', ['data'=>$data,'kategorijos'=>$kategorijos,'planai'=>$planai,'duksas'=>$duksas]);
     }
     public function KomentaruSkaicius($skelbimoid){
         $komentarai = Komentaras::where('paslaugos_id','=',$skelbimoid)->get();
         return count($komentarai);
+    }
+    public function isiminimuSkaicius($skelbimoid){
+        $isiminimai = IsimintaPaslauga::where('isimintosPaslaugosId','=',$skelbimoid)->get();
+        return count($isiminimai);
+    }
+    public function deletePaslauga($id)
+    {
+        $data=Skelbimas::find($id);
+        $data->delete();
+        return Redirect::back()->with('message', 'Paslauga pašalinta');
+    }
+    public function paslaugaPatvirtinti($id){
+        $paslauga = Skelbimas::find($id);
+        $paslauga->busena = "patvirtinta";
+        $paslauga->save();
+        return Redirect::back()->with('message', 'Paslauga patvirtinta!');
+    }
+    public function paslaugaAtsaukti($id){
+        $paslauga = Skelbimas::find($id);
+        $paslauga->busena = "atšaukta";
+        $paslauga->save();
+        return Redirect::back()->with('message', 'Paslauga atšaukta!');
     }
     public function updatePaslauga(Request $request)
     {
@@ -40,7 +66,7 @@ class PaslaugosController extends Controller
         'kategorija' => $request->input('kategorija'),
         'paslaugos_atstumas' => $request->input('paslaugos_atstumas'),
         'asmens_tipas' => $request->input('asmens_tipas'),
-        'miestas' => $request->input('miestas')
+        'miestas' => $request->input('miestas'),
         ],
         ['pavadinimas' => 'required',
         'aprasymas' => 'required',
@@ -63,15 +89,13 @@ class PaslaugosController extends Controller
         $skelbimas->aprasymas = $request->input('editor');
         $skelbimas->valandinis = $request->input('valandinis');
         $skelbimas->data = date('Y-m-d H:i:s');
-        $skelbimas->telefonas = Auth::user()->numeris;
-        $skelbimas->el_pastas = Auth::user()->email;
         $skelbimas->patirtis = $request->input('patirtis');
         $skelbimas->kategorijos_id = $request->input('kategorija');
         $skelbimas->paslaugu_atstumai = $request->input('paslaugos_atstumas');
         $skelbimas->statuso_id = 2;
         $skelbimas->asmens_tipas = $request->input('asmens_tipas');
         $skelbimas->miestas = $request->input('miestas');
-        $skelbimas->vartotojo_id = Auth::user()->id;
+        $skelbimas->klausimynoId = $request->input('klausimynoId');
         $skelbimas->save();
         if($request->hasfile('filename'))
         {
@@ -81,7 +105,7 @@ class PaslaugosController extends Controller
                 {
                     $nuotrauka = new Nuotrauka();
                     $name=$image->getClientOriginalName();
-                    $name="(((".Auth::user()->id.")))".$name;
+                    $name="(((".$skelbimas->vartotojo_id.")))".$name;
                     $nuotrauka->nuoroda = $name;
                     $nuotrauka->tipas = "skelbimas";
                     $nuotrauka->skelbimoid = $skelbimas->id;
@@ -90,6 +114,7 @@ class PaslaugosController extends Controller
                     $image->move(public_path().'/images/', $name);  
                 }
             }
+        }
         if($request->input('pavadinimas1') != ''){
             $planas1 = new Planas();
             $planas1->pavadinimas = $request->input('pavadinimas1');
@@ -129,8 +154,7 @@ class PaslaugosController extends Controller
             $planas3->kaina = $request->input('kaina3');
             $planas3->save();
         }
-        }
     }
-    return Redirect::back()->with('success', 'Paslauga atnaujinta');
+    return Redirect::back()->with('message', 'Paslauga atnaujinta');
     }
 }

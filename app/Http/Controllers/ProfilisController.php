@@ -23,7 +23,7 @@ class ProfilisController extends Controller
         if(Auth::user()->id == $data->kas_komentavo)
         {
             $data->delete();
-            return Redirect::back()->with('success', 'Atsiliepimas pašalintas');
+            return Redirect::back()->with('message', 'Atsiliepimas pašalintas');
         }
         return Redirect::back();
     }
@@ -57,6 +57,6 @@ class ProfilisController extends Controller
         $vardas = Auth::user()->name;
         PranesimaiController::addMessage($kamKomentuoja, "Jums parašė atsiliepimą: $vardas");
         }
-        return Redirect::back()->with('success', 'Atsiliepimas patalpintas!');
+        return Redirect::back()->with('message', 'Atsiliepimas patalpintas!');
     }
 }

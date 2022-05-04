@@ -32,13 +32,13 @@ class StatusaiController extends Controller
         $statusas->pavadinimas = $request->input('pavadinimas');
         $statusas->save();
     }
-    return Redirect::to('/statusai')->with('success', 'Statusas pridėtas');
+    return Redirect::to('/statusai')->with('message', 'Statusas pridėtas');
     }
     public function deleteStatusus($id)
     {
         $data=Statusas::find($id);
         $data->delete();
-    return Redirect::to('/statusai ')->with('success', 'Statusas pašalintas');
+    return Redirect::to('/statusai ')->with('message', 'Statusas pašalintas');
     }
     function showData($id)
     {
@@ -51,6 +51,6 @@ class StatusaiController extends Controller
         $data = Statusas::find($request->id);
         $data->pavadinimas=$request->pavadinimas;
         $data->save();
-        return Redirect::to('/statusai ')->with('success', 'Statusas redaguota');
+        return Redirect::to('/statusai ')->with('message', 'Statusas redaguota');
     }
 }

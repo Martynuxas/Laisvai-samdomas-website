@@ -21,7 +21,7 @@ class KomentarasController extends Controller
         if(Auth::user()->id == $data->vartotojo_id)
         {
             $data->delete();
-            return Redirect::back()->with('success', 'Komentaras pašalintas');
+            return Redirect::back()->with('message', 'Komentaras pašalintas');
         }
         return Redirect::back();
     }
@@ -49,6 +49,6 @@ class KomentarasController extends Controller
         $vardas = Auth::user()->name;
         PranesimaiController::addMessage($kamKomentuoja, "Jums parašė komentarą: $vardas");
         }
-        return Redirect::back()->with('success', 'Komentaras patalpintas!');
+        return Redirect::back()->with('message', 'Komentaras patalpintas!');
     }
 }

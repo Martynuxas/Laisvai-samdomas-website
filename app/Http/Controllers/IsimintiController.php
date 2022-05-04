@@ -41,7 +41,7 @@ class IsimintiController extends Controller
         ->where('IsiminusioVartotojoId', '=', Auth::user()->id);
         $pamirsti->each->delete();
 
-        return Redirect::back()->with('success', 'Paslauga pamiršta');
+        return Redirect::back()->with('message', 'Paslauga pamiršta!');
     }
     public function isimintiPaslauga(Request $request){
         if($this->arPaslaugaIsiminta(Auth::user()->id, $request->id) == false){
@@ -51,7 +51,7 @@ class IsimintiController extends Controller
         $isiminta->IsiminusioVartotojoId = Auth::user()->id;
         $isiminta->data = date('Y-m-d H:i:s');
         $isiminta->save();
-        return Redirect::back()->with('success', 'Paslauga įsiminta');
+        return Redirect::back()->with('message', 'Paslauga įsiminta');
         }
         return Redirect::back()->with('alert', 'Jūs jau įsimines šią paslaugą!');
     }
@@ -75,7 +75,7 @@ class IsimintiController extends Controller
             $isimine->isiminusioVartotojoId = $request->kuriisimineid;
             $isimine->data = date('Y-m-d H:i:s');
             $isimine->save();
-            return Redirect::back()->with('success', 'Vartotojas įsimintas');
+            return Redirect::back()->with('message', 'Vartotojas įsimintas');
         }
         return Redirect::back()->with('alert', 'Jūs jau įsimines šį vartotoją!');
     }
@@ -89,7 +89,7 @@ class IsimintiController extends Controller
         $isiminti->vartotojo_id = $vartotojas->id;
         $isiminti->skelbimo_id = $skelbimas->id;
         $isiminti->save();
-        return Redirect::to('/isiminti')->with('success', 'Skelbimas įsimintas');
+        return Redirect::to('/isiminti')->with('message', 'Skelbimas įsimintas');
     }
     public function insertIsimintus(Request $request)
     {
@@ -110,25 +110,25 @@ class IsimintiController extends Controller
         $isiminti->skelbimo_id = $request->input('skelbimo_id');
         $isiminti->save();
     }
-    return Redirect::to('/isiminti')->with('success', 'Isiminimas pridėtas');
+    return Redirect::to('/isiminti')->with('message', 'Isiminimas pridėtas');
     }
     public function deleteIsimintus($id)
     {
         $data=Isiminti::find($id);
         $data->delete();
-    return Redirect::to('/isiminti ')->with('success', 'Isiminimas pašalintas');
+    return Redirect::to('/isiminti ')->with('message', 'Isiminimas pašalintas');
     }
     public function deleteIsimintaPaslauga($id)
     {
         $data=IsimintaPaslauga::find($id);
         $data->delete();
-    return Redirect::to('/tab1')->with('success', 'Isiminimas pašalintas');
+    return Redirect::to('/tab1')->with('message', 'Isiminimas pašalintas');
     }
     public function deleteIsimintaVartotoja($id)
     {
         $data=IsimintasVartotojas::find($id);
         $data->delete();
-    return Redirect::to('/tab2')->with('success', 'Isiminimas pašalintas');
+    return Redirect::to('/tab2')->with('message', 'Isiminimas pašalintas');
     }
     function showData($id)
     {
@@ -144,6 +144,6 @@ class IsimintiController extends Controller
         $data->vartotojo_id=$request->vartotojo_id;
         $data->skelbimo_id=$request->skelbimo_id;
         $data->save();
-        return Redirect::to('/isiminti ')->with('success', 'Isiminimas redaguotas');
+        return Redirect::to('/isiminti ')->with('message', 'Isiminimas redaguotas');
     }
 }

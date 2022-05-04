@@ -29,7 +29,7 @@
                                                 @foreach($gautiPasiulymai as $pasiulymas)
                                                     <tr>
                                                         <th scope="row">{{$pasiulymas->id}}</th>
-                                                        <td>[{{$pasiulymas->vartotojo_id}}]{{$pasiulymas->vartotojas->name}}</td>
+                                                        <td><b><div onclick="location.href='/profilis/{{$pasiulymas->vartotojo_id}}';" style="cursor: pointer;">[{{$pasiulymas->vartotojo_id}}]{{$pasiulymas->vartotojas->name}}</b></div></td>
                                                         <td>{{$pasiulymas->suma}}</td>
                                                         <td>{{$pasiulymas->dienuSkaicius}}</td>
                                                         <td>{{$pasiulymas->data}}</td>
@@ -39,7 +39,7 @@
                                         </table>
                                     {{$gautiPasiulymai->links()}}
                                     @else
-                                    Jūs dar pasiūlymų neturite
+                                    Konkurse pasiūlymų dar nėra
                                     @endif
                                 </nav>
                             </div>

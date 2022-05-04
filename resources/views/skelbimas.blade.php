@@ -20,13 +20,13 @@
                                     @if($i == 0)
                                     <div class="gallery__item">
                                         <input type="radio" id="img-{{$i}}" checked name="gallery" class="gallery__selector"/>
-                                        <img class="gallery__img" src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" />
+                                        <img class="gallery__img" src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="300" height="400">
                                         <label for="img-{{$i}}" class="gallery__thumb"><img src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="100" height="100"/></label>
                                     </div>
                                     @else
                                     <div class="gallery__item">
                                         <input type="radio" id="img-{{$i}}" name="gallery" class="gallery__selector"/>
-                                        <img class="gallery__img" src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" />
+                                        <img class="gallery__img" src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="300" height="400"/>
                                         <label for="img-{{$i}}" class="gallery__thumb"><img src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="100" height="100"/></label>
                                     </div>
                                     @endif
@@ -43,27 +43,34 @@
                                     $vartotojas = App\Http\Controllers\SkelbimaiController::gautiVartotoja($skelbimas->vartotojo_id);
                                     ?>
                                     <div class="profileInfo">
-                                        <div class=" image d-flex flex-column justify-content-center align-items-center"> <button> <img src="/uploads/avatars/{{$vartotojas->avatar}}" height="100" width="100" /></button> <span class="name mt-3">{{$vartotojas->name}}</span> 
+                                        <div class=" image d-flex flex-column justify-content-center align-items-center"> <button> <img src="/uploads/avatars/{{$vartotojas->avatar}}" height="100" width="100" /></button> <span class="name mt-3"><td><div onclick="location.href='/profilis/{{$vartotojas->id}}';" style="cursor: pointer;">{{$vartotojas->name}}</div></td></span> 
                                             @if( $vartotojas->lygis > 0)
                                                 <div class="RankBadge Rank{{$vartotojas->lygis}}"></div><br>
                                             @endif
-                                            @if($vartotojas->email != '')<span class="idd">{{$vartotojas->email}} 
+                                            @if($vartotojas->email != '')
+                                            <span class="idd">{{$vartotojas->email}} 
                                                 <div class="miniText">el. paštas</div>
                                                 <br></span>
                                             @endif
-                                            @if($vartotojas->numeris != '')<span class="idd">{{$vartotojas->numeris}} 
+                                            @if($vartotojas->numeris != '')
+                                            <span class="idd">{{$vartotojas->numeris}} 
                                                 <div class="miniText">numeris</div>
-                                                <br></span>
+                                            <br></span>
                                             @endif
-                                            @if($vartotojas->puslapis != '')<span class="idd">{{$vartotojas->puslapis}} 
+                                            @if($vartotojas->puslapis != '')
+                                            <span class="idd">{{$vartotojas->puslapis}} 
                                                 <div class="miniText">puslapis</div>
                                                 <br></span>
                                             @endif
                                             @if($vartotojas->github != '')
                                                 <span class="idd">{{$vartotojas->github}}
-                                                <div class="miniText">GitHub</div></span>
+                                                    <div class="miniText">gitub</div>
+                                                    <br></span>
                                             @endif
-                                            <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">{{$vartotojas->uzsakymuKiekis}} <span class="follow">Atlikti užsakymai</span></span> </div>
+                                            <span class="idd d-flex flex-column justify-content-center align-items-center">{{$vartotojas->uzsakymuKiekis}}
+                                                <div class="miniText ">Atlikti užsakymai</div>
+                                                <br></span>
+                                            
                                             <div class="text mt-3"> <span>{!! $vartotojas->apie !!}</div>
                                                 
                                             <div class=" px-2 rounded mt-4 date "> <span class="join">Nuo {{$vartotojas->created_at}}</span> </div>
@@ -75,9 +82,10 @@
                             </div>
                             <?php $planai = App\Http\Controllers\SkelbimaiController::gautiSkelbimoPlanus($skelbimas->id);?>
 
-                                @if(count($planai)>0)
+                                
                                 <div class="content">
                                     <ul class="nav nav-pills" role="tablist">
+                                        @if(count($planai)>0)
                                         @for ($n = 0; $n <= count($planai)-1; $n++)
                                             @if($n == 0)
                                                 <li class="nav-itemai">
@@ -123,9 +131,65 @@
                                     @endfor
                                     </div>
                                 @endif
+                                <div class="duk">
+                                    @if($duks != '')
+                                    <b>DUK(Dažniausiai užduodami klausimai)</b>
+                                            @if($duks->klausimas1 != '')
+                                            <details>
+                                                <summary>
+                                                {{$duks->klausimas1}}
+                                                </summary>
+                                                <div>
+                                                {{$duks->atsakymas1}}
+                                                </div>
+                                            </details>
+                                            @endif
+                                            @if($duks->klausimas2 != '')
+                                            <details>
+                                                <summary>
+                                                {{$duks->klausimas2}}
+                                                </summary>
+                                                <div>
+                                                {{$duks->atsakymas2}}
+                                                </div>
+                                            </details>
+                                            @endif
+                                            @if($duks->klausimas3 != '')
+                                            <details>
+                                                <summary>
+                                                {{$duks->klausimas3}}
+                                                </summary>
+                                                <div>
+                                                {{$duks->atsakymas3}}
+                                                </div>
+                                            </details>
+                                            @endif
+                                            @if($duks->klausimas4 != '')
+                                            <details>
+                                                <summary>
+                                                {{$duks->klausimas4}}
+                                                </summary>
+                                                <div>
+                                                {{$duks->atsakymas4}}
+                                                </div>
+                                            </details>
+                                            @endif
+                                            @if($duks->klausimas5 != '')
+                                            <details>
+                                                <summary>
+                                                {{$duks->klausimas5}}
+                                                </summary>
+                                                <div>
+                                                {{$duks->atsakymas5}}
+                                                </div>
+                                            </details>
+                                            @endif
+                                    @endif
+                                    </div>
                             </div>
                     </div>
                 </div>
+            @if (\Illuminate\Support\Facades\Auth::check())
             <div class="container mt-5 mb-5">
                 <div class="d-flex justify-content-center row">
                     <div class="d-flex flex-column col-md-8">
@@ -168,6 +232,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
         @include('layouts.footer')
     </body>

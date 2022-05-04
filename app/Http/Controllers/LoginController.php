@@ -45,7 +45,7 @@ class LoginController extends Controller
         $this->_registerOrLoginUser($user);
 
         // Return home after login
-        return redirect()->route('home');
+        return redirect()->route('home')->with('message', 'Prisijungėte!');
     }
 
     // Facebook login
@@ -62,7 +62,7 @@ class LoginController extends Controller
         $this->_registerOrLoginUser($user);
 
         // Return home after login
-        return redirect()->route('home');
+        return redirect()->route('home')->with('message', 'Prisijungėte!');
     }
 
     protected function _registerOrLoginUser($data)

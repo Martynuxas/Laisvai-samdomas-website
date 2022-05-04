@@ -32,6 +32,13 @@
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
+                buttonText:{
+                    today:    'šiandien',
+                    month:    'mėnesis',
+                    week:     'savaitė',
+                    day:      'diena',
+                    list:     'sąrašas'
+                },
                 events:'/kalendorius',
                 selectable:true,
                 selectHelper: true,

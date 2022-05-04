@@ -17,20 +17,30 @@
                             <div class="blog-text">
                                 <h3><a href="#">{{$uzklausa->pavadinimas}}</a></h3>
                                 <div class="blog-meta">
-                                    <p><i class="fa fa-user"></i><a href="">Virgis</a></p>
-                                    <p><i class="fa fa-folder"></i><a href="">Žemės kasimas</a></p>
-                                    <p><i class="fa fa-comments"></i><a href="">10 pasiūlymų</a></p>
+                                    @if($uzklausa->users->name != '')
+                                    <b><p><i class="fa fa-user"></i>{{$uzklausa->users->name}}[{{$uzklausa->users->id}}] </p><p></p></b>
+                                    @endif
+                                    @if($uzklausa->kategorijos->pavadinimas != '')
+                                    <b><p><i class="fa fa-folder"></i>{{$uzklausa->kategorijos->pavadinimas}} </p><p></p></b>
+                                    @endif
+                                    @if($uzklausa->laikas != '')
+                                    <b><p><i class="fa fa-calendar"></i>{{$uzklausa->laikas}} </p><p></p></b>
+                                    @endif
+                                    @if($uzklausa->biudzetas != '')
+                                    <b><p><i class="fa fa-money"></i>{{$uzklausa->biudzetas}}eur </p><p></p></b>
+                                    @endif
+                                    @if($uzklausa->data != '')
+                                    <b><p><i class="fa fa-clock-o"></i>{{$uzklausa->data}}</p><p></p></b>
+                                    @endif
                                 </div>
                                 <p>
-                                    Sveiki,
-
-                                    Ieškome „virtuvės ant ratų“ gruodžio 11 d. Organizuojame renginį, kuriame dalyvautų iki 40 žmonių. Ieškome maisto tiekėjo, kuris galėtų pasirūpinti karštais patiekalais ir užkandžiais.
+                                    {{$uzklausa->aprasymas}}
                                 </p>
                                 @foreach(App\Http\Controllers\KurtiController::gautiNuotraukas($uzklausa->id, "uzklausa") as $nuotrauka)
-                                <img src="{{ URL::to('/images')}}/{{$nuotrauka->nuoroda}}" alt="Image" width="100" height="100"/>
+                                <img src="{{ URL::to('/images')}}/{{$nuotrauka->nuoroda}}" alt="Image" width="200" height="200"/>
                                 @endforeach
                                 <div>
-                                    <a class="btn btn-custom" href="#">Pateikti pasiūlymą</a>
+                                    <a class="btn btn-outline-primary" href="/zinutes/{{$uzklausa->vartotojo_id}}">Pateikti pasiūlymą</a>
                                 </div>
                             </div>
                         </div>
