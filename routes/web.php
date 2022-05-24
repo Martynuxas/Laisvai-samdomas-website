@@ -197,3 +197,7 @@ Route::get('/uzklausaAtsaukti/{id}', [App\Http\Controllers\KurtiController::clas
 
 Route::get('/konkursasPatvirtinti/{id}', [App\Http\Controllers\KonkursasController::class, 'konkursasPatvirtinti']);
 Route::get('/konkursasAtsaukti/{id}', [App\Http\Controllers\KonkursasController::class, 'konkursasAtsaukti']);
+
+Route::get('/ieskoti', [App\Http\Controllers\PaslaugosController::class, 'ieskoti']);
+Route::get('/ieskotiUzklausu', [App\Http\Controllers\KurtiController::class, 'ieskotiUzklausu']);
+Route::post('ivertintiPaslauga',[App\Http\Controllers\PaslaugosController::class, 'ivertintiPaslauga']);

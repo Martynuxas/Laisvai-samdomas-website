@@ -11,6 +11,6 @@ class UserController extends Controller
     function index()
     {
         $data = User::all();
-        return view('index',['data'=>$data]);
+        return view('pradinis',['data'=>$data]);
     }
 }

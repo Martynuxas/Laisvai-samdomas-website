@@ -35,7 +35,7 @@ class ValdymasController extends Controller
         ->paginate(5);
         $progresai = Progresas::all();
         $vartotojai = Vartotojas::all();
-        return view('valdymas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'klausimai'=>$klausimai,'konkursai'=>$konkursai,'uzsakymai'=>$uzsakymai,'progresai'=>$progresai,'vartotojai'=>$vartotojai]);
+        return view('irasuValdymas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'klausimai'=>$klausimai,'konkursai'=>$konkursai,'uzsakymai'=>$uzsakymai,'progresai'=>$progresai,'vartotojai'=>$vartotojai]);
     }
     function adminValdymas()
     {
@@ -46,7 +46,7 @@ class ValdymasController extends Controller
         $konkursai = Konkursas::orderBy('atnaujintas', 'desc')
         ->paginate(5);
         $vartotojai = Vartotojas::all();
-        return view('adminValdymas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'konkursai'=>$konkursai,'vartotojai'=>$vartotojai]);
+        return view('administratoriausIrasuValdymas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'konkursai'=>$konkursai,'vartotojai'=>$vartotojai]);
     }
     function adminPatvirtinimas()
     {
@@ -61,6 +61,6 @@ class ValdymasController extends Controller
         ->paginate(5);
         $progresai = Progresas::all();
         $vartotojai = Vartotojas::all();
-        return view('adminPatvirtinimas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'konkursai'=>$konkursai,'progresai'=>$progresai,'vartotojai'=>$vartotojai]);
+        return view('administratoriausIrasuPatvirtinimas', ['uzklausos'=>$uzklausos, 'paslaugos'=>$paslaugos,'konkursai'=>$konkursai,'progresai'=>$progresai,'vartotojai'=>$vartotojai]);
     }
 }

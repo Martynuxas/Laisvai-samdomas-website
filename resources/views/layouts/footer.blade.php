@@ -4,7 +4,6 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-contact">
                             <h2>Susisiek su mumis</h2>
-                            <p><i class="fa fa-map-marker-alt"></i>S. Lozoraičio, Garliava, Kaunas</p>
                             <p><i class="fa fa-phone-alt"></i>+370 674 642 23</p>
                             <p><i class="fa fa-envelope"></i>info@laisvaisamdomas.lt</p>
                             <div class="footer-social">
@@ -20,9 +19,9 @@
                         <div class="footer-link">
                             <h2>Populiariausios nuorodos</h2>
                             <a href="">Apie mus</a>
-                            <a href="">Kontaktai</a>
-                            <a href="">Mūsų paslaugos</a>
-                            <a href="">Kainoraštis</a>
+                            <a href="kontaktai">Kontaktai</a>
+                            <a href="paslaugos">Paslaugų teikėjai</a>
+                            <a href="uzklausa">Klientų užklausos</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">

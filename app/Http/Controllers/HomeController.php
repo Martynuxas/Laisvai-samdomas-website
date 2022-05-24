@@ -19,10 +19,10 @@ class HomeController extends Controller
     {
         $skelbimai = Skelbimas::orderByDesc('id')->take(4)
         ->where('busena', '=', 'patvirtinta')->get();
-        return view('index', ['skelbimai'=>$skelbimai]);
+        return view('pradinis', ['skelbimai'=>$skelbimai]);
     }
     public function showChangePasswordGet() {
-        return view('keistiSlaptazodi');
+        return view('slaptazodzioKeitimas');
     }
 
     public function changePasswordPost(Request $request) {

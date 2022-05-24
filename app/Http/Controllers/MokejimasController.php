@@ -61,7 +61,7 @@ class MokejimasController extends Controller
 		]);
 		$intent = $payment_intent->client_secret;
 
-		return view('mokejimas',compact('intent'),['data'=>$payment_intent->amount/100]);
+		return view('valiutosValdymas',compact('intent'),['data'=>$payment_intent->amount/100]);
 
     }
 
@@ -86,6 +86,6 @@ class MokejimasController extends Controller
         
         PranesimaiController::addMessage(Auth::user()->id, "Mokėjimas sėkmingai atliktas:  $pilnasuma € pridėta į piniginę.");
 
-        return redirect('/home')->with('message','Mokėjimas sėkmingai atliktas!');
+        return redirect('/pradinis')->with('message','Mokėjimas sėkmingai atliktas!');
     }
 }

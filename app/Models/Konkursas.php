@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Konkursas extends Model
 {
     use HasFactory;
-    protected $table = 'konkursas';
+    protected $table = 'konkursai';
     public $timestamps = false;
 
     public function kategorijos()

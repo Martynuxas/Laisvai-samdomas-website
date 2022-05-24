@@ -17,15 +17,6 @@
                             <h2>Informacija</h2>
                             <div class="contact-info-item">
                                 <div class="contact-info-icon">
-                                    <i class="far fa-clock"></i>
-                                </div>
-                                <div class="contact-info-text">
-                                    <h3>Darbo laikas</h3>
-                                    <p>Pirm-Sekmd, 8:00 - 19:00</p>
-                                </div>
-                            </div>
-                            <div class="contact-info-item">
-                                <div class="contact-info-icon">
                                     <i class="fa fa-phone-alt"></i>
                                 </div>
                                 <div class="contact-info-text">
@@ -70,11 +61,12 @@
                             </form>
                         </div>
                     </div>
-                    <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=lozorai%C4%8Dio%20g%20garliava&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies-online.net"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:1200px;}</style><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:1200px;}</style></div></div>
+                
                 </div>
             </div>
         </div>
-        <!-- Contact End -->
+        <!-- Queries End -->
         @include('layouts.footer')
     </body>
+    <script src="js/main.js"></script>
 </html>

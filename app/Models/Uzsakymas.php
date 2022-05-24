@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Uzsakymas extends Model
 {
     use HasFactory;
-    protected $table = 'uzsakymas';
+    protected $table = 'uzsakymai';
     public $timestamps = false;
     public function specialistai()
     {

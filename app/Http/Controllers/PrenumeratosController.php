@@ -15,7 +15,7 @@ class PrenumeratosController extends Controller
     {
     $kategorijos = Kategorija::all();
     $prenumeratos = Prenumerata::where('vartotojo_id', '=', Auth::user()->id)->paginate(5);
-    return view('prenumeratos', ['kategorijos'=>$kategorijos, 'prenumeratos' => $prenumeratos]);
+    return view('prenumerata', ['kategorijos'=>$kategorijos, 'prenumeratos' => $prenumeratos]);
     }
     public function deletePrenumerata($id){
         $data=Prenumerata::find($id);

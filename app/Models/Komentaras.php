@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Komentaras extends Model
 {
     use HasFactory;
-    protected $table = 'komentaras';
+    protected $table = 'komentarai';
     public $timestamps = false;
     public function userKomentavo()
     {

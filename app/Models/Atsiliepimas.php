@@ -10,7 +10,7 @@ class Atsiliepimas extends Model
     use HasFactory;
     
     protected $guarded = [];
-    protected $table = 'atsiliepimas';
+    protected $table = 'atsiliepimai';
     public $timestamps = false;
 
     public function userKomentavo()

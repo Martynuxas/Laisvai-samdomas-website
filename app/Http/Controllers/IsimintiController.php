@@ -23,7 +23,7 @@ class IsimintiController extends Controller
         ->where('IsiminusioVartotojoId', '=', Auth::user()->id)
         ->orderBy('data', 'desc')
         ->paginate(10);
-        return view('isimintuSarasas', ['isimintiVartotojai'=>$isimintiVartotojai,'isimintosPaslaugos'=>$isimintosPaslaugos]);
+        return view('isimintuVartotojuPaslauguSarasas', ['isimintiVartotojai'=>$isimintiVartotojai,'isimintosPaslaugos'=>$isimintosPaslaugos]);
     }
     public static function arPaslaugaIsiminta($vartotojoId, $paslaugosId){
         $tikrinam = IsimintaPaslauga::all()

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KonkursoPasiulymas extends Model
 {
     use HasFactory;
-    protected $table = 'konkursoPasiulymai';
+    protected $table = 'konkursuPasiulymai';
     public $timestamps = false;
     public function vartotojas()
     {

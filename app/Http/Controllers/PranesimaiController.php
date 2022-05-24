@@ -19,7 +19,7 @@ class PranesimaiController extends Controller
         $pranesimai = Pranesimas::where('vartotojo_id', '=', Auth::user()->id)
                        ->orderBy('data', 'desc')
                        ->paginate(10);
-        return view('pranesimai',['pranesimai'=>$pranesimai]);
+        return view('pranesimuSarasas',['pranesimai'=>$pranesimai]);
     }
     public function addMessage($vartotojo_id, $tekstas)
     {

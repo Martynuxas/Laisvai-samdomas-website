@@ -10,7 +10,7 @@ class IsimintaPaslauga extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = 'isimintapaslauga';
+    protected $table = 'isimintospaslaugos';
     public $timestamps = false;
     public function paslaugos()
     {

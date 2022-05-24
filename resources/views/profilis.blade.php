@@ -174,3 +174,4 @@
     </div>
 </body>
 @include('layouts.footer')
+<script src="js/main.js"></script>

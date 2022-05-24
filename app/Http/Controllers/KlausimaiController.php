@@ -12,20 +12,20 @@ class KlausimaiController extends Controller
 {
     public function index()
     {
-    return view('kurtiKlausimus');
+    return view('klausimynoKurimas');
     }
 
     public function showData($id)
     {
     $data = Klausimas::find($id);
-    return view('redaguotiKlausimus',['data'=>$data]);
+    return view('klausimynoRedagavimas',['data'=>$data]);
     }
     
     public function deleteKlausima($id)
     {
         $data=Klausimas::find($id);
         $data->delete();
-        return Redirect::to('/valdymas ')->with('message', 'DUK pašalintas');
+        return Redirect::to('/Valdymas ')->with('message', 'DUK pašalintas');
     }
 
     public function sukurtiKlausimus(Request $request)

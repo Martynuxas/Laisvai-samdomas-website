@@ -26,19 +26,27 @@ class KurtiController extends Controller
     public function index()
     {
         $kategorijos = Kategorija::All();
-        return view('kurti', ['kategorijos'=>$kategorijos]);
+        return view('uzklausosKurimas', ['kategorijos'=>$kategorijos]);
+    }
+    public function ieskotiUzklausu(Request $request)
+    {
+        $search_text = $request->get('query');
+        $uzklausos = Uzklausa::where('pavadinimas','LIKE','%'.$search_text.'%')->orderBy('data', 'DESC')
+        ->where('busena', '=', 'patvirtinta')
+        ->paginate(10);
+        return view('uzklausuSarasas', ['uzklausos'=>$uzklausos]);
     }
     public function indexPaslauga()
     {
         $kategorijos = Kategorija::All();
         $duks = Klausimas::where('vartotojo_id', '=', Auth::user()->id)->get();
-        return view('kurtiPaslauga', ['kategorijos'=>$kategorijos, 'duks'=>$duks]);
+        return view('paslaugosKurimas', ['kategorijos'=>$kategorijos, 'duks'=>$duks]);
     }
     public function showData($id)
     {
         $kategorijos = Kategorija::All();
         $data = Uzklausa::find($id);
-        return view('redaguotiUzklausa',['data'=>$data,'kategorijos'=>$kategorijos]);
+        return view('uzklausosRedagavimas',['data'=>$data,'kategorijos'=>$kategorijos]);
     }
     public function deleteUzklausa($id)
     {
@@ -181,7 +189,6 @@ class KurtiController extends Controller
         'patirtis' => $request->input('patirtis'),
         'kategorija' => $request->input('kategorija'),
         'paslaugos_atstumas' => $request->input('paslaugos_atstumas'),
-        'asmens_tipas' => $request->input('asmens_tipas'),
         'miestas' => $request->input('miestas')
         ],
         ['pavadinimas' => 'required',
@@ -190,7 +197,6 @@ class KurtiController extends Controller
         'patirtis' => 'required|numeric',
         'kategorija' => 'required',
         'paslaugos_atstumas' => 'required',
-        'asmens_tipas' => 'required',
         'miestas' => 'required'
         ]
         );
@@ -211,7 +217,7 @@ class KurtiController extends Controller
         $skelbimas->kategorijos_id = $request->input('kategorija');
         $skelbimas->paslaugu_atstumai = $request->input('paslaugos_atstumas');
         $skelbimas->statuso_id = 2;
-        $skelbimas->asmens_tipas = $request->input('asmens_tipas');
+        $skelbimas->asmens_tipas = 'fizinis';
         $skelbimas->miestas = $request->input('miestas');
         $skelbimas->klausimynoId = $request->input('klausimynoId');
         $skelbimas->vartotojo_id = Auth::user()->id;

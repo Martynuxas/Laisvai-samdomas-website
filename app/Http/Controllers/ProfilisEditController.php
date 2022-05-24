@@ -11,7 +11,7 @@ class ProfilisEditController extends Controller
 {
     public function index()
     {
-        return view('profilisEdit');
+        return view('profilioRedagavimas');
     }
     function profilisUpload(Request $request)
     {

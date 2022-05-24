@@ -11,7 +11,7 @@ class VaizdoController extends Controller
     //
     function index()
     {
-        return view('manoKambarys');
+        return view('nuosavasPokalbiuKambarys');
     }
     function SveciasKambario(Request $request)
     {
@@ -20,7 +20,7 @@ class VaizdoController extends Controller
         $pass = $request->kambariopass;
         if($vartotojas->kambarioSlaptazodis == $pass)
         {
-            return view('svecias',['id'=>$data]);
+            return view('svecioPokalbiuKambarys',['id'=>$data]);
         }
         else
         {

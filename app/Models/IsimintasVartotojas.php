@@ -10,7 +10,7 @@ class IsimintasVartotojas extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = 'isimintasvartotojas';
+    protected $table = 'isimintiVartotojai';
     public $timestamps = false;
     public function users()
     {

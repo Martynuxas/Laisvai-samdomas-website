@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Uzklausa extends Model
 {
     use HasFactory;
-    protected $table = 'uzklausa';
+    protected $table = 'uzklausos';
     public $timestamps = false;
     public function kategorijos()
     {

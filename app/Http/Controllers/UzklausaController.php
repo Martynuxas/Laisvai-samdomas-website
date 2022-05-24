@@ -22,7 +22,7 @@ class UzklausaController extends Controller
         $uzklausos = Uzklausa::orderBy('data', 'DESC')
         ->where('busena', '=', 'patvirtinta')
         ->paginate(10);
-        return view('uzklausa', ['uzklausos'=>$uzklausos]);
+        return view('uzklausuSarasas', ['uzklausos'=>$uzklausos]);
     }
     public function deleteUzklausosNuotrauka($id){
         $nuotrauka = Nuotrauka::find($id);

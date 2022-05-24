@@ -24,7 +24,7 @@ class KonkursasController extends Controller
         $konkursai = Konkursas::orderBy('data', 'desc')
         ->where('busena', '=', 'patvirtinta')
         ->paginate(10);
-        return view('konkursai', ['konkursai'=>$konkursai,'Carbon' => 'Carbon\Carbon']);
+        return view('konkursuSarasas', ['konkursai'=>$konkursai,'Carbon' => 'Carbon\Carbon']);
     }
     public function konkursasPatvirtinti($id){
         $konkursas = Konkursas::find($id);
@@ -43,7 +43,7 @@ class KonkursasController extends Controller
         $gautiPasiulymai = KonkursoPasiulymas::where('konkursoId', '=', $id)
         ->orderBy('data', 'desc')
         ->paginate(10);
-        return view('pasiulymai',['gautiPasiulymai'=>$gautiPasiulymai]);
+        return view('pasiulymuSarasas',['gautiPasiulymai'=>$gautiPasiulymai]);
     }
     public function konkursoKurimas(){
         $kategorijos = Kategorija::all();
@@ -90,7 +90,7 @@ class KonkursasController extends Controller
     {
         $kategorijos = Kategorija::All();
         $data = Konkursas::find($id);
-        return view('konkursasEdit',['data'=>$data,'kategorijos'=>$kategorijos]);
+        return view('konkursoRedagavimas',['data'=>$data,'kategorijos'=>$kategorijos]);
     }
     public function deleteKonkursa($id)
     {

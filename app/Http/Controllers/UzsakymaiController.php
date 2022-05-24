@@ -17,16 +17,7 @@ class UzsakymaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $uzsakymai = Uzsakymas::where('specialisto_id', '=', Auth::user()->id)
-        ->orwhere('uzsakovo_id', '=', Auth::user()->id)
-        ->orderBy('data', 'desc')
-        ->paginate(5);
-        $progresai = Progresas::all();
-        $vartotojai = Vartotojas::all();
-        return view('uzsakymai', ['uzsakymai'=>$uzsakymai, 'progresai'=>$progresai, 'vartotojai'=>$vartotojai]);
-    }
+
     public function keistiProgresa(Request $request)
     {
         $progresas = Progresas::find($request->progresas);

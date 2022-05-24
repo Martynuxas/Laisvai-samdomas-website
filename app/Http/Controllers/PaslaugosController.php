@@ -13,6 +13,8 @@ use App\Models\Nuotrauka;
 use App\Models\Planas;
 use App\Models\Klausimas;
 use App\Models\IsimintaPaslauga;
+use App\Models\Ivertinimas;
+use App\Models\Uzsakymas;
 
 class PaslaugosController extends Controller
 {
@@ -20,7 +22,39 @@ class PaslaugosController extends Controller
     {
     $skelbimai = Skelbimas::with('kategorijos')->with('users')->orderBy('data','DESC')
     ->where('busena', '=', 'patvirtinta')->paginate(20);
-    return view('paslaugos', ['skelbimai'=>$skelbimai]);
+    return view('paslauguSarasas', ['skelbimai'=>$skelbimai]);
+    }
+    public function arJauIvertintas($id){
+        $ivertinimas = Ivertinimas::where('skelbimoId','=',$id)->get();
+        if(count($ivertinimas) ==0){
+            return false;
+        }
+        return true;
+    }
+    public function ieskoti(Request $request)
+    {
+        $search_text = $request->get('query');
+        $skelbimai = Skelbimas::where('pavadinimas','LIKE','%'.$search_text.'%')->with('kategorijos')->with('users')->orderBy('data','DESC')
+        ->where('busena', '=', 'patvirtinta')->paginate(20);
+        return view('paslauguSarasas', ['skelbimai'=>$skelbimai]);
+    }
+    public function ivertintiPaslauga(Request $request){
+        if($request->rating1 != 0  || $request->rating2 != 0 || $request->rating3 != 0 || $request->rating4 != 0 || $request->rating5 != 0)
+        {
+            $ivertinimas = new Ivertinimas();
+            $ivertinimas->skelbimoId = $request->paslaugosId;
+            $ivertinimas->vartotojoId = Auth::user()->id;
+            $ivertinimas->Ivertinimas_1 = $request->rating1;
+            $ivertinimas->Ivertinimas_2 = $request->rating2;
+            $ivertinimas->Ivertinimas_3 = $request->rating3;
+            $ivertinimas->Ivertinimas_4 = $request->rating4;
+            $ivertinimas->Ivertinimas_5 = $request->rating5;
+            $vidurkis = ($request->rating1+$request->rating2+$request->rating3+$request->rating4+$request->rating5)/5;
+            $ivertinimas->Vidurkis = $vidurkis;
+            $ivertinimas->save();
+            return Redirect::back()->with('message', 'Paslauga įvertinta');
+        }
+        return Redirect::back()->with('alert', 'Turite atsakyti į visus klausimus!');
     }
     public function showData($id)
     {
@@ -28,7 +62,7 @@ class PaslaugosController extends Controller
         $planai = Planas::where('skelbimo_id','=',$id)->get();
         $data = Skelbimas::find($id);
         $duksas = Klausimas::where('vartotojo_id', '=', $data->vartotojo_id)->get();
-        return view('redaguotiPaslauga', ['data'=>$data,'kategorijos'=>$kategorijos,'planai'=>$planai,'duksas'=>$duksas]);
+        return view('paslaugosRedagavimas', ['data'=>$data,'kategorijos'=>$kategorijos,'planai'=>$planai,'duksas'=>$duksas]);
     }
     public function KomentaruSkaicius($skelbimoid){
         $komentarai = Komentaras::where('paslaugos_id','=',$skelbimoid)->get();

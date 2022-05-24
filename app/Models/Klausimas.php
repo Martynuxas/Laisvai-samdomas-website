@@ -10,6 +10,6 @@ class Klausimas extends Model
     use HasFactory;
     
     protected $guarded = [];
-    protected $table = 'klausimas';
+    protected $table = 'klausimynai';
     public $timestamps = false;
 }

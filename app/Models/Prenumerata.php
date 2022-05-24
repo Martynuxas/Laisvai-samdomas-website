@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Prenumerata extends Model
 {
     use HasFactory;
-    protected $table = 'prenumerata';
+    protected $table = 'prenumeratos';
     public $timestamps = false;
     public function kategorijos()
     {

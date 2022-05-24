@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Progresas extends Model
 {
     use HasFactory;
-    protected $table = 'progresas_spec';
+    protected $table = 'progresai';
     public $timestamps = false;
 }
