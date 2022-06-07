@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('layouts.header')
+
 @include('Chatify::layouts.headLinks')
 <div class="messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
@@ -52,7 +52,7 @@
              </div>
 
              {{-- ---------------- [ Search Tab ] ---------------- --}}
-           <div class="messenger-tab search-tab app-scroll"app-scroll" data-view="search">
+           <div class="messenger-tab search-tab app-scroll"app-scroll data-view="search">
                 {{-- items --}}
                 <p class="messenger-title">Ieškoti</p>
                 <div class="search-records">

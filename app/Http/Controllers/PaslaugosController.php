@@ -56,6 +56,68 @@ class PaslaugosController extends Controller
         }
         return Redirect::back()->with('alert', 'Turite atsakyti į visus klausimus!');
     }
+    public function pirmoKlausimoVidurkis($id){
+        $ivertinimai = Ivertinimas::where('vartotojoId','=', $id)->get();
+        $balas = 0;
+        foreach($ivertinimai as $ivertinimas)
+        {
+            $balas += $ivertinimas->Ivertinimas_1;
+        }
+        $balas = $balas/count($ivertinimai);
+        return $balas;
+    }
+    public function antroKlausimoVidurkis($id){
+        $ivertinimai = Ivertinimas::where('vartotojoId','=', $id)->get();
+        $balas = 0;
+        foreach($ivertinimai as $ivertinimas)
+        {
+            $balas += $ivertinimas->Ivertinimas_2;
+        }
+        $balas = $balas/count($ivertinimai);
+        return $balas;
+    }
+    public function trecioKlausimoVidurkis($id){
+        $ivertinimai = Ivertinimas::where('vartotojoId','=', $id)->get();
+        $balas = 0;
+        foreach($ivertinimai as $ivertinimas)
+        {
+            $balas += $ivertinimas->Ivertinimas_3;
+        }
+        $balas = $balas/count($ivertinimai);
+        return $balas;
+    }
+    public function ketvirtoKlausimoVidurkis($id){
+        $ivertinimai = Ivertinimas::where('vartotojoId','=', $id)->get();
+        $balas = 0;
+        foreach($ivertinimai as $ivertinimas)
+        {
+            $balas += $ivertinimas->Ivertinimas_4;
+        }
+        $balas = $balas/count($ivertinimai);
+        return $balas;
+    }
+    public function penktoKlausimoVidurkis($id){
+        $ivertinimai = Ivertinimas::where('vartotojoId','=', $id)->get();
+        $balas = 0;
+        foreach($ivertinimai as $ivertinimas)
+        {
+            $balas += $ivertinimas->Ivertinimas_5;
+        }
+        $balas = $balas/count($ivertinimai);
+        return $balas;
+    }
+    public function visuKlausimuVidurkis($id){
+        $vidurkis = (self::pirmoKlausimoVidurkis($id)+self::antroKlausimoVidurkis($id)+self::trecioKlausimoVidurkis($id)+self::ketvirtoKlausimoVidurkis($id)+self::penktoKlausimoVidurkis($id))/5;
+        return $vidurkis;
+    }
+    public function arTuriIvertinimu($id)
+    {
+        $ivertinimai = Ivertinimas::where('vartotojoId','=', $id)->get();
+        if(count($ivertinimai) >0)
+        return true;
+        else
+        return false;
+    }
     public function showData($id)
     {
         $kategorijos = Kategorija::All();

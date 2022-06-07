@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Vartotojai;
 
-class Ivertinimas extends Model
+class Isiminti extends Model
 {
     use HasFactory;
-    
     protected $guarded = [];
-    protected $table = 'ivertinimai';
+    protected $table = 'Isiminti';
     public $timestamps = false;
-
-    public function uzsakymai()
+    public function isiminti()
     {
-        return $this->belongsTo('App\Models\Uzsakymas', 'skelbimoId');
+        return $this->hasMany(Isiminti::class);
     }
 }

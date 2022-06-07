@@ -3,6 +3,7 @@
     <head>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/paslauga.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/ranks.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/profilis.css') }}">
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     </head>
     @include('layouts.header')
@@ -20,13 +21,13 @@
                                     @if($i == 0)
                                     <div class="gallery__item">
                                         <input type="radio" id="img-{{$i}}" checked name="gallery" class="gallery__selector"/>
-                                        <img class="gallery__img" src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="300" height="400">
+                                        <img class="gallery__img" src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="65%" height="80%">
                                         <label for="img-{{$i}}" class="gallery__thumb"><img src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="100" height="100"/></label>
                                     </div>
                                     @else
                                     <div class="gallery__item">
                                         <input type="radio" id="img-{{$i}}" name="gallery" class="gallery__selector"/>
-                                        <img class="gallery__img" src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="300" height="400"/>
+                                        <img class="gallery__img" src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="65%" height="80%"/>
                                         <label for="img-{{$i}}" class="gallery__thumb"><img src="{{ URL::to('/images')}}/{{$nuotraukos[$i]->nuoroda}}" width="100" height="100"/></label>
                                     </div>
                                     @endif

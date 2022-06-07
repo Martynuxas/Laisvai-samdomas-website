@@ -4,10 +4,25 @@
         function codeAddress(){
             const domain = 'meet.jit.si';
             const options = {
+                configOverwrite:{
+                defaultLanguage: 'lt',
+                disableDeepLinking: true,
+                hideFilmstrip: true,
+                disableFilmstripAutohiding: true,
+                filmStripOnly: false
+                },
+                interfaceConfigOverwrite:{
+			    PROVIDER_NAME: 'Laisvai Samdomas',
+			    filmStripOnly: false,
+			    SET_FILMSTRIP_ENABLED: false,
+ 			    FILM_STRIP_MAX_HEIGHT: 0,
+			    VERTICAL_FILMSTRIP: true,
+                HIDE_INVITE_MORE_HEADER: true
+                },
                 enableLipSync: false,
                 roomName: 'laisvaiSamdomas5832362{{ Auth::user()->id }}432541841',
-                width: 700,
-                height: 700,
+                width: 1000,
+                    height: 600,
                 parentNode: document.querySelector('#meet'),
                 userInfo: {
                     email: '{{ Auth::user()->email }}',

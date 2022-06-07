@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\Vartotojas;
 use App\Models\Atsiliepimas;
+use App\Models\Ivertinimas;
 use Auth;
 class ProfilisController extends Controller
 {
@@ -16,7 +17,10 @@ class ProfilisController extends Controller
         ->where('vartotojo_id', '=', $id)
         ->orderBy('data', 'desc')
         ->paginate(5);
-        return view('profilis',['data'=>$data, 'atsiliepimai'=>$atsiliepimai]);
+        $uzsakymuIvertinimai = Ivertinimas::
+        where('vartotojoId', '=', $id)
+        ->paginate(3);
+        return view('profilis',['data'=>$data, 'atsiliepimai'=>$atsiliepimai, 'uzsakymuIvertinimai' => $uzsakymuIvertinimai]);
     }
     public function deleteAtsiliepima($id){
         $data = Atsiliepimas::find($id);

@@ -60,6 +60,51 @@
                 </ul>
               </div>
               @endif
+              @if(App\Http\Controllers\PaslaugosController::arTuriIvertinimu($data->id) == true)
+              <div class="content text-center">
+                <div class="ratings">
+                  <div class="stars">
+                    <i class="fa fa-star"></i>
+                </div>
+                    <span class="product-rating">{{App\Http\Controllers\PaslaugosController::visuKlausimuVidurkis($data->id)}}</span><span>/5</span>
+                    <div class="rating-text">
+                      <div class="stars">
+                        {{App\Http\Controllers\PaslaugosController::pirmoKlausimoVidurkis($data->id)}}
+                        <i class="fa fa-star"></i>
+                      </div>
+                        <span>Ar specialistas paslaugą atliko laiku?</span>
+                    </div>
+                    <div class="rating-text">
+                      <div class="stars">
+                        {{App\Http\Controllers\PaslaugosController::antroKlausimoVidurkis($data->id)}}
+                        <i class="fa fa-star"></i>
+                      </div>
+                        <span>Ar specialistas atliko paslaugą taip kaip buvo sutarta?</span>
+                    </div>
+                    <div class="rating-text">
+                      <div class="stars">
+                        {{App\Http\Controllers\PaslaugosController::trecioKlausimoVidurkis($data->id)}}
+                        <i class="fa fa-star"></i>
+                      </div>
+                        <span>Ar specialistas greit suteikė atgalinį ryšį?</span>
+                    </div>
+                    <div class="rating-text">
+                      <div class="stars">
+                        {{App\Http\Controllers\PaslaugosController::ketvirtoKlausimoVidurkis($data->id)}}
+                        <i class="fa fa-star"></i>
+                      </div>
+                        <span>Ar specialistas davė pasiūlymų/sprendimų?</span>
+                    </div>
+                    <div class="rating-text">
+                      <div class="stars">
+                        {{App\Http\Controllers\PaslaugosController::penktoKlausimoVidurkis($data->id)}}
+                        <i class="fa fa-star"></i>
+                      </div>
+                        <span>Ar specialistas paslaugą atliko kokybiškai?</span>
+                    </div>
+                </div>
+            </div>
+            @endif
             </div>
             <div class="col-md-8">
               <div class="card mb-3">
@@ -121,6 +166,39 @@
                   </div>
                 </div>
               </div>
+            @if (count($uzsakymuIvertinimai) != 0)
+              <div class="section-header text-center">   
+                <p>Paskutinių atliktų darbų įvertinimai</p>
+              </div>
+              @foreach($uzsakymuIvertinimai as $uzsakymuIvertinimas)
+              <div class="roundedIvertis">
+                <div class="rating-text">
+                  <b>{{$uzsakymuIvertinimas->uzsakymai->tema}} | {{$uzsakymuIvertinimas->uzsakymai->data}}</b>
+                  <div class="stars">
+                    <span> Ar specialistas paslaugą atliko laiku?</span><i class="fa fa-star"></i>
+                  <b>{{$uzsakymuIvertinimas->Ivertinimas_1}}</b>
+                  </div>
+                  <div class="stars">
+                    <span> Ar specialistas atliko paslaugą taip kaip buvo sutarta?</span><i class="fa fa-star"></i>
+                  <b>{{$uzsakymuIvertinimas->Ivertinimas_2}}</b>
+                  </div>
+                  <div class="stars">
+                    <span> Ar specialistas greit suteikė atgalinį ryšį?</span><i class="fa fa-star"></i>
+                  <b>{{$uzsakymuIvertinimas->Ivertinimas_3}}</b>
+                  </div>
+                  <div class="stars">
+                    <span> Ar specialistas davė pasiūlymų/sprendimų?</span><i class="fa fa-star"></i>
+                  <b>{{$uzsakymuIvertinimas->Ivertinimas_4}}</b>
+                  </div>
+                  <div class="stars">
+                    <span> Ar specialistas paslaugą atliko kokybiškai?</span><i class="fa fa-star"></i>
+                  <b>{{$uzsakymuIvertinimas->Ivertinimas_5}}</b>
+                  </div>
+                </div>
+              </div>
+              <br>
+              @endforeach
+            @endif
             <div class="container mt-5 mb-5">
                 <div class="d-flex justify-content-center row">
                     <div class="d-flex flex-column col-md-8">
@@ -167,6 +245,7 @@
                         {{$atsiliepimai->links()}}
                     </div>
                 </div>
+                
             </div>
           </div>
         </div>

@@ -87,6 +87,8 @@ Route::get('/paslaugos', [App\Http\Controllers\PaslaugosController::class, 'inde
 Route::get('/prenumeratos', [App\Http\Controllers\PrenumeratosController::class, 'index'])->name('prenumeratos');
 Route::get('/manoKambarys', [App\Http\Controllers\VaizdoController::class, 'index'])->name('manoKambarys');
 
+Route::get('/atrakintiKambari', [App\Http\Controllers\VaizdoController::class, 'atrakintiKambari']);
+Route::get('/uzrakintiKambari', [App\Http\Controllers\VaizdoController::class, 'uzrakintiKambari']);
 Route::get('/kurti', [App\Http\Controllers\KurtiController::class, 'index'])->name('kurti');
 Route::post('kurtiUzklausa',[App\Http\Controllers\KurtiController::class, 'insertUzklausa']);
 Route::post('kurtiPaslauga',[App\Http\Controllers\KurtiController::class, 'insertPaslauga']);
@@ -154,11 +156,13 @@ Route::get('/deleteUzklausa/{id}', [App\Http\Controllers\KurtiController::class,
 Route::get('/deleteKonkursa/{id}', [App\Http\Controllers\KonkursasController::class, 'deleteKonkursa']);
 
 Route::post('sveciasKambario','App\Http\Controllers\VaizdoController@sveciasKambario');
+Route::post('keistiKambarioSlaptazodi','App\Http\Controllers\VaizdoController@keistiKambarioSlaptazodi');
 Route::get('/paslauga/{id}', [App\Http\Controllers\SkelbimaiController::class, 'skelbimas']);
 
 Route::post('submitKomentara',[App\Http\Controllers\KomentarasController::class, 'insertKomentara']);
 Route::get('/deleteKomentara/{id}', [App\Http\Controllers\KomentarasController::class, 'deleteKomentara']);
 Route::post('patvirtintiUzsakyma',[App\Http\Controllers\UzsakymaiController::class, 'patvirtintiUzsakyma']);
+Route::post('patvirtintiProgresa',[App\Http\Controllers\UzsakymaiController::class, 'patvirtintiProgresa']);
 Route::get('/konkursai', [App\Http\Controllers\KonkursasController::class, 'index'])->name('konkursai');
 Route::post('konkursoPasiulymas',[App\Http\Controllers\KonkursasController::class, 'konkursoSiulymas']);
 Route::get('konkursoKurimas',[App\Http\Controllers\KonkursasController::class, 'konkursoKurimas']);

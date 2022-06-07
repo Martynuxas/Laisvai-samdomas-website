@@ -24,6 +24,7 @@
                                 <th>Tema</th>
                                 <th>Uzsakovas</th>
                                 <th>Specialistas</th>
+                                <th>Suma</th>
                                 <th>Atnaujintas</th>
                                 <th>Progresas</th>
                                 <th>Veiksmai</th>
@@ -35,10 +36,11 @@
                                     <td>{{$uzsakymas->tema}}</td>
                                     <td>{{$uzsakymas->uzsakovai->name}}[{{$uzsakymas->uzsakovai->id}}]</td>
                                     <td>{{$uzsakymas->specialistai->name}}[{{$uzsakymas->specialistai->id}}]</td>
+                                    <td>{{$uzsakymas->suma}}</td>
                                     <td>{{$uzsakymas->data}}</td>
                                     <td>{{$uzsakymas->progresai->pavadinimas}}</td>
                                     <!------- Užsakovas------->
-                                    @if( $uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Laukiama patvirtinimo')
+                                    @if($uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Laukiama patvirtinimo')
                                     <form class="form-style-5"role="form" method="POST" action="/patvirtintiUzsakyma"> 
                                     @csrf  
                                     <input type="hidden" id="uzsakymoid" name="uzsakymoid" value="{{$uzsakymas->id}}"/>
@@ -48,13 +50,19 @@
                                     <span>Pašalinti</span>    
                                     </a>
                                     @endif
-                                    
-                                    <!------Specialistas------>
-                                    @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas != 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo')
-                                    <td><button type="button" onclick="giveData({{$uzsakymas->id}})" class="btn btn-primary">Keisti būsena</button>
+                                    @if($uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->patvirtinimas == 1)
+                                    <form class="form-style-5"role="form" method="POST" action="/patvirtintiProgresa"> 
+                                    @csrf  
+                                    <input type="hidden" id="uzsakymoid" name="uzsakymoid" value="{{$uzsakymas->id}}"/>
+                                    <td><button type="submit" class="btn btn-success">Patvirtinti</button>
+                                    </form>
                                     @endif
-                                    @if( $uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo' && (App\Http\Controllers\PaslaugosController::arJauIvertintas($uzsakymas->id) == false))
+                                    @if( $uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo' && $uzsakymas->patvirtinimas == 0 && (App\Http\Controllers\PaslaugosController::arJauIvertintas($uzsakymas->id) == false))
                                     <td><button type="button" onclick="ivertintiPaslauga({{$uzsakymas->id}})" class="btn btn-warning">Įvertinti</button>
+                                    @endif
+                                    <!------Specialistas------>
+                                    @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas != 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo' && $uzsakymas->patvirtinimas != 1)
+                                    <td><button type="button" onclick="giveData({{$uzsakymas->id}},{{$uzsakymas->progresas}})" class="btn btn-primary">Keisti būsena</button>
                                     @endif
                                     @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Laukiama patvirtinimo')
                                     <td><a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteUzsakyma/{{$uzsakymas->id}}'>
@@ -220,14 +228,12 @@
     <script src="js/main.js"></script>
 </html>
 <script>
-    function giveData(e){
-        var x = e;
-        $('#idas').val(x);  //The id where to pass the value
+    function giveData(e, progresas){
+        $('#idas').val(e);  //The id where to pass the value
         $('#keistiProgresa').modal('show'); //The id of the modal to show
     };
     function ivertintiPaslauga(e){
-        var x = e;
-        $('#paslaugosId').val(x);  //The id where to pass the value
+        $('#paslaugosId').val(e);  //The id where to pass the value
         $('#ivertintiPaslauga').modal('show'); //The id of the modal to show
     };
 </script>
@@ -251,9 +257,11 @@
 
                             <select id="progresas" name="progresas">
                                 <option style="display:none">Pasirinkite progresą</option>
-                                        @foreach($progresai as $progresas)
+                                    @foreach($progresai as $progresas)
+                                        @if(2 < $progresas->id)
                                         <option value="{{$progresas->id}}">{{$progresas->pavadinimas}}</option>
-                                        @endforeach
+                                        @endif
+                                    @endforeach
                              
                             </select>
                     </div>
@@ -289,8 +297,10 @@
                                     <option value="{{$vartotojas->id}}">{{$vartotojas->name}}[{{$vartotojas->id}}]</option>
                                     @endforeach
                             </select><br><br>
-                            <label for="temaLabel">Užsakymo tema:</label>
+                            <label for="temaLabel">Tema:</label>
                             <input type="text" class="form-control" name="tema" id="tema" required/>
+                            <label for="temaLabel">Suma:</label>
+                            <input type="text" class="form-control" name="suma" id="suma" required/>
                     </div>
                 </div>
             <div class="modal-footer">
