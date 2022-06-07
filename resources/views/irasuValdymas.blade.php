@@ -52,17 +52,22 @@
                                     @endif
                                     @if($uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->patvirtinimas == 1)
                                     <form class="form-style-5"role="form" method="POST" action="/patvirtintiProgresa"> 
-                                    @csrf  
-                                    <input type="hidden" id="uzsakymoid" name="uzsakymoid" value="{{$uzsakymas->id}}"/>
-                                    <td><button type="submit" class="btn btn-success">Patvirtinti</button>
+                                        @csrf  
+                                        <input type="hidden" id="uzsakymoid" name="uzsakymoid" value="{{$uzsakymas->id}}"/>
+                                        <td><button type="submit" class="btn btn-success">Patvirtinti</button>
+                                    </form>
+                                    <form class="form-style-5"role="form" method="POST" action="/grazintiProgresa"> 
+                                        @csrf  
+                                        <input type="hidden" id="uzsakymoid" name="uzsakymoid" value="{{$uzsakymas->id}}"/>
+                                        <td><button type="submit" class="btn btn-danger">Atšaukti</button>
                                     </form>
                                     @endif
                                     @if( $uzsakymas->uzsakovo_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo' && $uzsakymas->patvirtinimas == 0 && (App\Http\Controllers\PaslaugosController::arJauIvertintas($uzsakymas->id) == false))
-                                    <td><button type="button" onclick="ivertintiPaslauga({{$uzsakymas->id}})" class="btn btn-warning">Įvertinti</button>
+                                    <td><button type="button" onclick="ivertintiPaslauga({{$uzsakymas->id}},{{$uzsakymas->specialisto_id}})" class="btn btn-warning">Įvertinti</button>
                                     @endif
                                     <!------Specialistas------>
                                     @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas != 'Baigta' && $uzsakymas->progresai->pavadinimas != 'Laukiama patvirtinimo' && $uzsakymas->patvirtinimas != 1)
-                                    <td><button type="button" onclick="giveData({{$uzsakymas->id}},{{$uzsakymas->progresas}})" class="btn btn-primary">Keisti būsena</button>
+                                    <td><button type="button" onclick="giveData({{$uzsakymas->id}},{{$uzsakymas->progresas}})" class="btn btn-primary">Keisti progresa</button>
                                     @endif
                                     @if( $uzsakymas->specialisto_id == Auth::user()->id && $uzsakymas->progresai->pavadinimas == 'Laukiama patvirtinimo')
                                     <td><a class="btn btn-danger" onclick="javascript:return confirm('Ar tikrai nori pašalinti tai?')" href='deleteUzsakyma/{{$uzsakymas->id}}'>
@@ -232,8 +237,9 @@
         $('#idas').val(e);  //The id where to pass the value
         $('#keistiProgresa').modal('show'); //The id of the modal to show
     };
-    function ivertintiPaslauga(e){
+    function ivertintiPaslauga(e, b){
         $('#paslaugosId').val(e);  //The id where to pass the value
+        $('#specialistoId').val(b);  //The id where to pass the value
         $('#ivertintiPaslauga').modal('show'); //The id of the modal to show
     };
 </script>
@@ -290,6 +296,7 @@
                     @csrf
                     <div class="inputbox mt-3 mr-2">
                             <input type="hidden" name="vartotojoid" id="vartotojoid">
+                            <label for="uzsakovasLabel"><b>! Užsakymą kuria specialistas !</b></label><br>
                             <label for="uzsakovasLabel">Užsakovas:</label><br>
                             <select id="vartotojoid" name="vartotojoid" required>
                                 <option style="display:none">Pasirinkite vartotoją</option>
@@ -326,6 +333,7 @@
                 <div class="alert alert-danger" style="display:none"></div>
                     @csrf
                     <input type="hidden" name="paslaugosId" id="paslaugosId">
+                    <input type="hidden" name="specialistoId" id="specialistoId">
                     <div id="full-stars-example-two">
                         <p class="desc" style="font-family: sans-serif; font-size:0.9rem">
                             Ar specialistas paslaugą atliko laiku?</p>

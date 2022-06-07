@@ -86,6 +86,6 @@ class MokejimasController extends Controller
         
         PranesimaiController::addMessage(Auth::user()->id, "Mokėjimas sėkmingai atliktas:  $pilnasuma € pridėta į piniginę.");
 
-        return redirect('/pradinis')->with('message','Mokėjimas sėkmingai atliktas!');
+        return redirect('/home')->with('message','Mokėjimas sėkmingai atliktas!');
     }
 }

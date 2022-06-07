@@ -21,6 +21,11 @@ class UzsakymaiController extends Controller
     public function keistiProgresa(Request $request)
     {
         $progresas = Progresas::find($request->progresas);
+        $data = Uzsakymas::find($request->idas);
+        if($data->progresas > $request->progresas)
+        {
+            return Redirect::back()->with('alert', 'Progresas negali sumažėti!');
+        }
         if($progresas->pavadinimas == 'Baigta')
         {
             $uzsakovas = Vartotojas::find(Auth::user()->id);
@@ -31,13 +36,21 @@ class UzsakymaiController extends Controller
             if($uzsakovas->uzsakymuKiekis == 101){$uzsakovas->lygis = 3;}
             $uzsakovas->save();
         }
-        $data = Uzsakymas::find($request->idas);
         $data->patvirtinimas = 1;
         $data->buvesProgresas=$data->progresas;
         $data->progresas=$request->progresas;
         $data->data=date('Y-m-d H:i:s');
         $data->save();
         return Redirect::back()->with('message', 'Progresas pakeistas!');
+    }
+    public function grazintiProgresa(Request $request)
+    {
+        $data = Uzsakymas::find($request->uzsakymoid);
+        $data->patvirtinimas = 0;
+        $data->progresas=$data->buvesProgresas;
+        $data->data=date('Y-m-d H:i:s');
+        $data->save();
+        return Redirect::back()->with('message', 'Progresas atšauktas!');
     }
     public function sukurtiUzsakyma(Request $request)
     {
@@ -96,6 +109,7 @@ class UzsakymaiController extends Controller
         if($uzsakymas->progresas == 10){$kiekis = 80;}
         if($uzsakymas->progresas == 11){$kiekis = 90;}
         if($uzsakymas->progresas == 12){$kiekis = 100;}
+        if($uzsakymas->progresas == 13){$kiekis = 100;}
         if($uzsakymas->buvesProgresas == 3){$buvusioKiekis = 10;}
         if($uzsakymas->buvesProgresas == 4){$buvusioKiekis = 20;}
         if($uzsakymas->buvesProgresas == 5){$buvusioKiekis = 30;}
@@ -106,11 +120,9 @@ class UzsakymaiController extends Controller
         if($uzsakymas->buvesProgresas == 10){$buvusioKiekis = 80;}
         if($uzsakymas->buvesProgresas == 11){$buvusioKiekis = 90;}
         if($uzsakymas->buvesProgresas == 12){$buvusioKiekis = 100;}
-        if($uzsakymas->progresas != 13){
         $kiekisProc = $kiekis - $buvusioKiekis;
         $specialistas->valiuta += $uzsakymas->suma * ($kiekisProc*0.01);
         $uzsakymas->depozitas -= $uzsakymas->suma * ($kiekisProc*0.01);
-        }
         $specialistas->save();
         $uzsakovas->save();
         $uzsakymas->save();

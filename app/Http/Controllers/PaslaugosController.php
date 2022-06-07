@@ -43,7 +43,7 @@ class PaslaugosController extends Controller
         {
             $ivertinimas = new Ivertinimas();
             $ivertinimas->skelbimoId = $request->paslaugosId;
-            $ivertinimas->vartotojoId = Auth::user()->id;
+            $ivertinimas->vartotojoId = $request->specialistoId;
             $ivertinimas->Ivertinimas_1 = $request->rating1;
             $ivertinimas->Ivertinimas_2 = $request->rating2;
             $ivertinimas->Ivertinimas_3 = $request->rating3;

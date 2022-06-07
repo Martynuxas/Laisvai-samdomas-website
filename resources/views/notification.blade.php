@@ -3,7 +3,7 @@
 
 Jūs gavote naują pranešimą!
 
-@component('mail::button', ['url' => 'http://localhost:8000/pranesimai'])
+@component('mail::button', ['url' => 'http://dev.kemezys.dev/pranesimai'])
 Peržiurėti
 @endcomponent
 

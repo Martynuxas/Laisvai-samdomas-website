@@ -115,7 +115,7 @@
                         @csrf
                         <div class="form-group">
                             <label>Įveskite kiekį, kurį norite pirkti(3%+0.3€ mokestis):</label>
-                            <input type="text" name="suma" id="suma" class="form-control" pattern="[1-9]+[0-9]{0,5}" required placeholder="000"/>
+                            <input type="text" name="suma" id="suma" class="form-control" pattern="[1-9]+[0-9]{0,5}" min="0" required placeholder="000"/>
                         </div>  
                 </div>
                 <div class="modal-footer">
@@ -170,9 +170,9 @@
                         @csrf
                         <div class="form-group">
                         <label>Įveskite vartotojo id kuriam norite pervesti valiutą:</label>
-                            <input type="text" name="vartotojoid" id="vartotojoid" class="form-control" pattern="[1-9]+[0-9]{0,5}" required placeholder="000"/>
+                            <input type="text" name="vartotojoid" id="vartotojoid" class="form-control" pattern="[1-9]+[0-9]{0,5}" min="0" required placeholder="000"/>
                             <label>Įveskite kiekį, kurį norite pervesti vartotojui:</label>
-                            <input type="text" name="sumaPervedimo" id="sumaPervedimo" class="form-control" pattern="[1-9]+[0-9]{0,5}" required placeholder="000"/>
+                            <input type="text" name="sumaPervedimo" id="sumaPervedimo" class="form-control" pattern="[1-9]+[0-9]{0,5}" min="0" required placeholder="000"/>
                         </div>  
                 </div>
                 <div class="modal-footer">

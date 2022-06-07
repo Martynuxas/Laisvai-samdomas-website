@@ -163,6 +163,7 @@ Route::post('submitKomentara',[App\Http\Controllers\KomentarasController::class,
 Route::get('/deleteKomentara/{id}', [App\Http\Controllers\KomentarasController::class, 'deleteKomentara']);
 Route::post('patvirtintiUzsakyma',[App\Http\Controllers\UzsakymaiController::class, 'patvirtintiUzsakyma']);
 Route::post('patvirtintiProgresa',[App\Http\Controllers\UzsakymaiController::class, 'patvirtintiProgresa']);
+Route::post('grazintiProgresa',[App\Http\Controllers\UzsakymaiController::class, 'grazintiProgresa']);
 Route::get('/konkursai', [App\Http\Controllers\KonkursasController::class, 'index'])->name('konkursai');
 Route::post('konkursoPasiulymas',[App\Http\Controllers\KonkursasController::class, 'konkursoSiulymas']);
 Route::get('konkursoKurimas',[App\Http\Controllers\KonkursasController::class, 'konkursoKurimas']);

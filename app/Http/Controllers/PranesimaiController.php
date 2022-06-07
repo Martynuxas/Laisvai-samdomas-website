@@ -30,7 +30,7 @@ class PranesimaiController extends Controller
 
         $vartotojas = Vartotojas::find($vartotojo_id);
         $elpastas = $vartotojas->email;
-        Mail::to("$elpastas")->send(new Notification());
+        //Mail::to("$elpastas")->send(new Notification());
         $pranesimas->save();
     }
     public static function getMessagesSum()
